@@ -14,7 +14,7 @@
                 header("location:../pupclinic/admin.php?page=landing_page");
             }
         }else{
-            header("location:../pupclinic/index.php?page=menu");
+            header("location:../pupclinic/index.php?page=landing_page");
         }
     ?>
 </head>

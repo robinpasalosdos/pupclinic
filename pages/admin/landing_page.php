@@ -7,6 +7,7 @@
 <a href="../pupclinic/php/ajax.php?action=logout">logout</a>
 <button onclick="redirectToRecords()">Records</button>
 <button onclick="redirectToUsers()">Users</button>
+<button onclick="redirectTo()">Real-Time Assessment</button>
 
 <script>
   function redirectToRecords() {
@@ -14,5 +15,8 @@
   }
   function redirectToUsers() {
     window.location.href = "../pupclinic/admin.php?page=users";
+  }
+  function redirectTo() {
+    window.location.href = "../pupclinic/admin.php?page=real_time_assessment";
   }
 </script>

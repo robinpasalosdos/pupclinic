@@ -65,7 +65,7 @@ Class Action {
 		foreach ($_SESSION as $key => $value) {
 			unset($_SESSION[$key]);
 		}
-		header("location:../index.php?page=menu");
+		header("location:../index.php?page=landing_page");
 	}
 
 	function student_register(){

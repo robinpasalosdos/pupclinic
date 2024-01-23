@@ -13,15 +13,10 @@
 <table>
     <thead>
         <tr>
-            <th>ID</th>
-            <th>UserType</th>
-            <th>Name</th>
-            <th>Email</th>
             <th>Height</th>
             <th>Heart Rate</th>
             <th>Oxygen</th>
             <th>Transaction no.</th>
-            <th>Action</th>
 
         </tr>
     </thead>
@@ -31,10 +26,11 @@
 
 
                 $filtervalues = $_GET['search'];
+                $id = $_SESSION['id'];
                 if($_GET['search'] == ""){
-                    $query = "SELECT * FROM records";
+                    $query = "SELECT * FROM records WHERE user_id=$id";
                 }else{
-                    $query = "SELECT * FROM records WHERE CONCAT(user_type,name,email,height,heart_rate,oxygen,transaction_no) LIKE '%$filtervalues%' ";
+                    $query = "SELECT * FROM records WHERE user_id = $id AND CONCAT(height, heart_rate, oxygen, transaction_no) LIKE '%$filtervalues%'";
                 }
                 $query_run = mysqli_query($conn, $query);
 
@@ -44,15 +40,10 @@
                     {
                         ?>
                         <tr>
-                            <td><?= $items['id']; ?></td>
-                            <td><?= $items['user_type']; ?></td>
-                            <td><?= $items['name']; ?></td>
-                            <td><?= $items['email']; ?></td>
                             <td><?= $items['height']; ?></td>
                             <td><?= $items['heart_rate']; ?></td>
                             <td><?= $items['oxygen']; ?></td>
-                            <td><?= $items['transaction_no']; ?></td>
-                            <td><a class="delete_record" href="javascript:void(0)" data-id="<?= $items['id'] ?>">Delete</a></td>  
+                            <td><?= $items['transaction_no']; ?></td> 
                         </tr>
                         <?php
                     }
@@ -70,22 +61,5 @@
     </tbody>
 </table>
 <script>
-    $('.delete_record').click(function(){
-        delete_user($(this).attr('data-id'))
-        location.reload()
-    })
-	function delete_user($id){
-		if (confirm("Do you want to delete?") == true) {
-			$.ajax({
-				url:'../pupclinic/php/ajax.php?action=delete_record',
-				method:'POST',
-				data:{id:$id},
-				success:function(resp){
-					if(resp==1){
-						alert("Data successfully deleted");
-					}
-				}
-			})
-		}
-	}
+
 </script>
