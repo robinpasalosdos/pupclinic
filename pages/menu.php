@@ -15,6 +15,6 @@
     window.location.href = "../pupclinic/index.php?page=registration_menu";
   }
   function redirectAsGuest() {
-    window.location.href = "../pupclinic/index.php?page=registration_menu";
+    window.location.href = "../pupclinic/index.php?page=guest_registration";
   }
 </script>

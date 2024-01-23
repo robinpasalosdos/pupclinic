@@ -91,6 +91,14 @@ Class Action {
 			return 1;
 	}
 	
+	function guest_register(){
+		extract($_POST);
+		$_SESSION['user'] = 'guest';
+		$_SESSION['name'] = $name;
+		$_SESSION['email'] = $email;
+		return 1;
+	}
+	
 	function get_height(){
 		exec('/usr/bin/python /var/www/html/pupclinic/hardware/height.py 2>&1', $output, $return_code);
 		echo "Output: " . implode("\n", $output);

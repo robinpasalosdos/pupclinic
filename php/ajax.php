@@ -37,6 +37,12 @@ if($action == 'faculty_register'){
 		echo $faculty_register;
 }
 
+if($action == 'guest_register'){
+	$guest_register = $crud->guest_register();
+	if($guest_register)
+		echo $guest_register;
+}
+
 if($action == 'save_height'){
 	$save_height = $crud->save_height();
 	if($save_height)
