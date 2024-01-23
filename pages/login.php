@@ -1,28 +1,28 @@
 <head>
     <title>Login</title>
-    <script>
 </head>
-<h1>Login as <?php echo $_GET['user']; ?></h1>
-<?php if($_GET['user'] == 'student' || $_GET['user'] == 'faculty' ): ?>
-	<form id="login">
+<div class="login-form">
+	<h1>Login as <?php echo $_GET['user']; ?></h1>
+	<?php if($_GET['user'] == 'student' || $_GET['user'] == 'faculty' ): ?>
+	    <form id="login">
 		<label>Email</label>
-		<input type="text" id="email" name="email" required autocomplete="off"><br>
+		<input type="text" id="email" name="email"><br>
 		<label>Password</label>
-		<input type="password" id="password" name="password" required autocomplete="off"><br>
+		<input type="password" id="password" name="password"><br>
 		<button>Login</button>
-	</form>
-<?php endif; ?>
-<?php if($_GET['user'] == 'admin'): ?>
-	<form id="login">
+	    </form>
+	<?php endif; ?>
+	<?php if($_GET['user'] == 'admin'): ?>
+	    <form id="login">
 		<label>Password</label>
-		<input type="password" id="password" name="password" required autocomplete="off"><br>
+		<input type="password" id="password" name="password"><br>
 		<button>Login</button>
-	</form>
-<?php endif; ?>
-
+	    </form>
+	<?php endif; ?>
+</div>
 <script>
 	var params = <?php echo json_encode($_GET)?>;
-    $('#login').submit(function(e){
+	$('#login').submit(function(e){
 		e.preventDefault()
 		$.ajax({
 			url:'../pupclinic/php/ajax.php?action='+params['user']+'_login',
@@ -46,27 +46,6 @@
 			}
 		})
 	})
-    </script>
-</head>
+</script>
 
-<body>
-    <div class="login-form">
-        <h1>Login as <?php echo $_GET['user']; ?></h1>
-        <?php if($_GET['user'] == 'student' || $_GET['user'] == 'faculty' ): ?>
-            <form id="login">
-                <label>Email</label>
-                <input type="text" id="email" name="email"><br>
-                <label>Password</label>
-                <input type="password" id="password" name="password"><br>
-                <button>Login</button>
-            </form>
-        <?php endif; ?>
-        <?php if($_GET['user'] == 'admin'): ?>
-            <form id="login">
-                <label>Password</label>
-                <input type="password" id="password" name="password"><br>
-                <button>Login</button>
-            </form>
-        <?php endif; ?>
-    </div>
-</body>
+

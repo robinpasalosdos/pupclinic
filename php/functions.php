@@ -135,34 +135,15 @@ Class Action {
 	}
 	
 	function save_height(){
+		
+		$user_type = $_SESSION['user'];
 		extract($_POST);
-		$_SESSION['height'] = $data;
-		return 1;
-
-	}
-	
-	function get_heart_rate(){
-		exec('/usr/bin/python /var/www/html/pupclinic/hardware/height.py 2>&1', $output, $return_code);
-		echo "Output: " . implode("\n", $output);
-		echo "\nReturn code: " . $return_code;
-		return $output;
-	}
-	
-	function save_heart_rate(){	
-		extract($_POST);
-		$_SESSION['heart_rate'] = $data;
-		return 1;
-	}
-	
-	function get_oxygen(){
-		exec('/usr/bin/python /var/www/html/pupclinic/hardware/height.py 2>&1', $output, $return_code);
-		echo "Output: " . implode("\n", $output);
-		echo "\nReturn code: " . $return_code;
-		return $output;
-	}
-	
-	function get_all_data(){
-		extract($_POST);	
+		$id = intval($_SESSION['id']);
+		$name = $_SESSION['name'];
+		$email = $_SESSION['email'];
+		$height = $data;
+		$heart_rate = "";
+		$oxygen = "";	
 		$transaction_no = 100001;
 		
 		$result = $this->db->query("SELECT id FROM records ORDER BY id DESC LIMIT 1;");
@@ -173,42 +154,80 @@ Class Action {
 				$transaction_no += $last_id;
 			}
 		}
-		
-		$_SESSION['transaction_no'] = $transaction_no;
-				
-		$data['user_type'] = $_SESSION['user'];
-		$data['id'] = intval($_SESSION['id']);
-		$data['name'] = $_SESSION['name'];
-		$data['email'] = $_SESSION['email'];
-		$data['height'] = $_SESSION['height'];
-		$data['heart_rate'] = $_SESSION['heart_rate'];
-		$data['oxygen'] = "";	
 
-		$prefix = "PUP";
-		$suffix = "CLI";
-		$data['transaction_no'] = $prefix . $transaction_no . $suffix;
-		return json_encode(array('status'=>1,"data"=>$data));
-	}
-	
-	function save_all_data(){
-		extract($_POST);
+
+		$save = $this->db->query("INSERT INTO records (user_id, user_type, name, email, height, heart_rate, oxygen, transaction_no) VALUES ($id, '$user_type', '$name', '$email', '$height', '$heart_rate', '$oxygen', '$transaction_no');");
+		$_SESSION['transaction_no'] = $transaction_no;
+		return 1;
+		
+		
 		$user_type = $_SESSION['user'];
+		extract($_POST);
 		$id = intval($_SESSION['id']);
 		$name = $_SESSION['name'];
 		$email = $_SESSION['email'];
-		$height = $_SESSION['height'];
-		$heart_rate = $_SESSION['heart_rate'];
+		$height = $data;
+		$heart_rate = "";
 		$oxygen = "";	
-		$transaction_no = $_SESSION['transaction_no'];
+		$transaction_no = 100001;
+		
+		$result = $this->db->query("SELECT id FROM records ORDER BY id DESC LIMIT 1;");
+		if ($result) {
+			$row = $result->fetch_assoc();
+			if ($row) {
+				$last_id = $row['id'];
+				$transaction_no += $last_id;
+			}
+		}
+
+
 		$save = $this->db->query("INSERT INTO records (user_id, user_type, name, email, height, heart_rate, oxygen, transaction_no) VALUES ($id, '$user_type', '$name', '$email', '$height', '$heart_rate', '$oxygen', '$transaction_no');");
-		$_SESSION['height'] = "";
-		$_SESSION['heart_rate'] = "";
-		$_SESSION['transaction_no'] = "";
-		return 1;
+		$_SESSION['transaction_no'] = $transaction_no;
+		return 1; 
+
+
+
 	}
 	
-	function delete_session_data(){
-		
+	function get_heart_rate(){
+		exec('/usr/bin/python /var/www/html/pupclinic/hardware/height.py 2>&1', $output, $return_code);
+		echo "Output: " . implode("\n", $output);
+		echo "\nReturn code: " . $return_code;
+		return $output;
+	}
+	
+	function save_heart_rate(){
+		extract($_POST);
+		$id = intval($_SESSION['id']);
+		$transaction_no = $_SESSION['transaction_no'];
+		$save = $this->db->query("UPDATE records SET heart_rate = '$data' WHERE transaction_no = $transaction_no;");
+		return $save;
+	}
+	
+	function get_oxygen(){
+		exec('/usr/bin/python /var/www/html/pupclinic/hardware/height.py 2>&1', $output, $return_code);
+		echo "Output: " . implode("\n", $output);
+		echo "\nReturn code: " . $return_code;
+		return $output;
+	}
+	
+	function get_all_data(){
+		extract($_POST);
+		$prefix = "PUP";
+		$suffix = "CLI";
+		$transaction_no = $_SESSION['transaction_no'];
+		$query = $this->db->query("SELECT * FROM records WHERE transaction_no = $transaction_no;");
+		if($query->num_rows > 0){
+			foreach ($query->fetch_array() as $key => $value){
+				if(!is_numeric($key)){
+					$data[$key] = $value;
+				}
+			}
+			$data['transaction_no'] = $prefix . $transaction_no . $suffix;
+			return json_encode(array('status'=>1,"data"=>$data));
+		}else{
+			return json_encode(array('status'=>0));
+		}
 	}
 	
 	function delete_record(){
