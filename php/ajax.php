@@ -108,3 +108,9 @@ if($action == 'delete_user'){
 	if($delete_user)
 		echo $delete_user;
 }
+if($action == 'create_initial_record'){
+	$create_initial_record = $crud->create_initial_record();
+	if($create_initial_record)
+		echo $create_initial_record;
+}
+

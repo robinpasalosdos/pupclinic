@@ -204,6 +204,7 @@ Class Action {
 		$_SESSION['height'] = "";
 		$_SESSION['heart_rate'] = "";
 		$_SESSION['transaction_no'] = "";
+		$delete = $this->db->query("DELETE FROM queue;");
 		return 1;
 	}
 	
@@ -226,8 +227,17 @@ Class Action {
 			return 1;
 		return $id;
 	}
-
-
+	
+	function create_initial_record(){
+		$id = intval($_SESSION['id']);
+		$result = $this->db->query("SELECT COUNT(*) AS count FROM queue");
+		$row = $result->fetch_assoc();
+		if ($row['count'] > 0) {
+			return 2;
+		} else {
+			$save = $this->db->query("INSERT INTO queue (id) VALUES ($id);");
+			return 1;
+		}
 		
-
+	}
 }
