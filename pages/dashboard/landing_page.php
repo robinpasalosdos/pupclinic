@@ -10,8 +10,8 @@
 
 
 <script>
-  function redirectTo() {
-    window.location.href = "../pupclinic/dashboard.php?page=get_height";
+  function redirectToYourRecords() {
+    window.location.href = "../pupclinic/dashboard.php?page=patient_records&search=";
   }
   $('#check_up').submit(function(e){
 		$.ajax({
