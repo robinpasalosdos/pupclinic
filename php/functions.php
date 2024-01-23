@@ -32,8 +32,11 @@ Class Action {
 		if($qry->num_rows > 0){
 			$row = $qry->fetch_assoc();
 			$id = $row['id'];
+			$name = $row['name'];
 			$_SESSION['user'] = 'faculty';
 			$_SESSION['id'] = $id;
+			$_SESSION['name'] = $name;
+			$_SESSION['email'] = $email;
 			return 1;
 		}else{
 			return 3;
@@ -46,8 +49,11 @@ Class Action {
 		if($qry->num_rows > 0){
 			$row = $qry->fetch_assoc();
 			$id = $row['id'];
+			$name = $row['name'];
 			$_SESSION['user'] = 'student';
 			$_SESSION['id'] = $id;
+			$_SESSION['name'] = $name;
+			$_SESSION['email'] = $email;
 			return 1;
 		}else{
 			return 3;
@@ -96,6 +102,7 @@ Class Action {
 		$_SESSION['user'] = 'guest';
 		$_SESSION['name'] = $name;
 		$_SESSION['email'] = $email;
+		$_SESSION['id'] = 0;
 		return 1;
 	}
 	
@@ -113,9 +120,11 @@ Class Action {
 	}
 	
 	function save_height(){
+		$user_type = $_SESSION['user'];
 		extract($_POST);
 		$id = intval($_SESSION['id']);
-		$user_type = $_SESSION['user'];
+		$name = $_SESSION['name'];
+		$email = $_SESSION['email'];
 		$height = $data;
 		$heart_rate = "";
 		$oxygen = "";	
@@ -130,14 +139,12 @@ Class Action {
 			}
 		}
 
-
-
-		$save = $this->db->query("INSERT INTO records (user_id, user_type, height, heart_rate, oxygen, transaction_no) VALUES ($id, '$user_type', '$height', '$heart_rate', '$oxygen', '$transaction_no');");
+		$save = $this->db->query("INSERT INTO records (user_id, user_type, name, email, height, heart_rate, oxygen, transaction_no) VALUES ($id, '$user_type', '$name', '$email', '$height', '$heart_rate', '$oxygen', '$transaction_no');");
 		if($save){
 			$_SESSION['transaction_no'] = $transaction_no;
-			return $save;
+			return $name;
 		}
-		
+
 	}
 	
 	function get_heart_rate(){

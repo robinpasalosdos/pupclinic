@@ -1,7 +1,7 @@
 <div class="main_container">
     <div class="container">
         <div class="index_lp_1">
-            <img alt="pup-logo" src="../pupclinic/assets/pup-logo.png">
+            <img alt="pup-logo" src="../pupclinic/assets/PUP-Logo.png">
         </div>
         <div class="index_lp_2">
             <h1>PUP CLINIC</h1>
