@@ -1,0 +1,35 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+	display: flex;
+	justify-content: center;
+}
+
+main{
+	display: flex;
+	justify-content: center;
+	height: 600px;
+	width: 1024px;
+	background-color: #eeeeee;
+}
+.container{
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+	background-color: #eeddee;
+}
+#get_height_button{
+	
+}
+
+.button_container{
+	display: flex;
+}
+
+#next{
+	display:none;
+}
