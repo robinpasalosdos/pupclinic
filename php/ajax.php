@@ -85,8 +85,26 @@ if($action == 'get_temp'){
 		echo $get_temp;
 }
 
+if($action == 'save_all_data'){
+	$save_all_data = $crud->save_all_data();
+	if($save_all_data)
+		echo $save_all_data;
+}
+
 if($action == 'get_all_data'){
 	$get_all_data = $crud->get_all_data();
 	if($get_all_data)
 		echo $get_all_data;
+}
+
+if($action == 'delete_record'){
+	$delete_record = $crud->delete_record();
+	if($delete_record)
+		echo $delete_record;
+}
+
+if($action == 'delete_user'){
+	$delete_user = $crud->delete_user();
+	if($delete_user)
+		echo $delete_user;
 }

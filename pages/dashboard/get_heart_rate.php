@@ -1,3 +1,8 @@
+<?php
+    if($_SESSION['height'] == ""){
+	header("location:../pupclinic/dashboard.php?page=landing_page");
+    }
+?>
 <div class="container">
     <h2>Get Heart Rate</h2>
     <p id="data2">-</p>
@@ -51,7 +56,9 @@
 				alert("An error occured");
 			    },
 			    success:function(resp){
-				location.href = '../pupclinic/dashboard.php?page=completion';
+				if(resp == 1){
+				    location.href = '../pupclinic/dashboard.php?page=completion';
+				}
 			    }
 			})
 			

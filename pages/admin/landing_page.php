@@ -5,11 +5,14 @@
     Admin Landing Page
 </h1>
 <a href="../pupclinic/php/ajax.php?action=logout">logout</a>
-<button onclick="redirectTo()">Records</button>
-
+<button onclick="redirectToRecords()">Records</button>
+<button onclick="redirectToUsers()">Users</button>
 
 <script>
-  function redirectTo() {
+  function redirectToRecords() {
     window.location.href = "../pupclinic/admin.php?page=records";
+  }
+  function redirectToUsers() {
+    window.location.href = "../pupclinic/admin.php?page=users";
   }
 </script>

@@ -22,7 +22,7 @@ Class Action {
 			$_SESSION['user'] = 'admin';
 			return 1;
 		}else{
-			return 3;
+			return 2;
 		}
 	}
 
@@ -78,9 +78,18 @@ Class Action {
 		$data .= ", year = '$year' ";
 		$data .= ", section = '$section' ";
 		$data .= ", password = '$password' ";
-		$save = $this->db->query("INSERT INTO users set ".$data);
-		if($save)
+		
+		$check = $this->db->query("SELECT email FROM users WHERE email='$email' LIMIT 1");
+		if(mysqli_num_rows($check) == 1){
+			return 2;
+		}else{
+			$save = $this->db->query("INSERT INTO users set ".$data);
+			if($save)
 			return 1;
+		}
+		
+		
+		
 	}
 	function faculty_register(){
 		extract($_POST);
@@ -92,9 +101,15 @@ Class Action {
 		$data .= ", year = '' ";
 		$data .= ", section = '' ";
 		$data .= ", password = '$password' ";
-		$save = $this->db->query("INSERT INTO users set ".$data);
-		if($save)
+		
+		$check = $this->db->query("SELECT email FROM users WHERE email='$email' LIMIT 1");
+		if(mysqli_num_rows($check) == 1){
+			return 2;
+		}else{
+			$save = $this->db->query("INSERT INTO users set ".$data);
+			if($save)
 			return 1;
+		}
 	}
 	
 	function guest_register(){
@@ -120,30 +135,9 @@ Class Action {
 	}
 	
 	function save_height(){
-		$user_type = $_SESSION['user'];
 		extract($_POST);
-		$id = intval($_SESSION['id']);
-		$name = $_SESSION['name'];
-		$email = $_SESSION['email'];
-		$height = $data;
-		$heart_rate = "";
-		$oxygen = "";	
-		$transaction_no = 100001;
-		
-		$result = $this->db->query("SELECT id FROM records ORDER BY id DESC LIMIT 1;");
-		if ($result) {
-			$row = $result->fetch_assoc();
-			if ($row) {
-				$last_id = $row['id'];
-				$transaction_no += $last_id;
-			}
-		}
-
-		$save = $this->db->query("INSERT INTO records (user_id, user_type, name, email, height, heart_rate, oxygen, transaction_no) VALUES ($id, '$user_type', '$name', '$email', '$height', '$heart_rate', '$oxygen', '$transaction_no');");
-		if($save){
-			$_SESSION['transaction_no'] = $transaction_no;
-			return $name;
-		}
+		$_SESSION['height'] = $data;
+		return 1;
 
 	}
 	
@@ -154,12 +148,10 @@ Class Action {
 		return $output;
 	}
 	
-	function save_heart_rate(){
+	function save_heart_rate(){	
 		extract($_POST);
-		$id = intval($_SESSION['id']);
-		$transaction_no = $_SESSION['transaction_no'];
-		$save = $this->db->query("UPDATE records SET heart_rate = '$data' WHERE transaction_no = $transaction_no;");
-		return $save;
+		$_SESSION['heart_rate'] = $data;
+		return 1;
 	}
 	
 	function get_oxygen(){
@@ -170,22 +162,69 @@ Class Action {
 	}
 	
 	function get_all_data(){
-		extract($_POST);
+		extract($_POST);	
+		$transaction_no = 100001;
+		
+		$result = $this->db->query("SELECT id FROM records ORDER BY id DESC LIMIT 1;");
+		if ($result) {
+			$row = $result->fetch_assoc();
+			if ($row) {
+				$last_id = $row['id'];
+				$transaction_no += $last_id;
+			}
+		}
+		
+		$_SESSION['transaction_no'] = $transaction_no;
+				
+		$data['user_type'] = $_SESSION['user'];
+		$data['id'] = intval($_SESSION['id']);
+		$data['name'] = $_SESSION['name'];
+		$data['email'] = $_SESSION['email'];
+		$data['height'] = $_SESSION['height'];
+		$data['heart_rate'] = $_SESSION['heart_rate'];
+		$data['oxygen'] = "";	
+
 		$prefix = "PUP";
 		$suffix = "CLI";
+		$data['transaction_no'] = $prefix . $transaction_no . $suffix;
+		return json_encode(array('status'=>1,"data"=>$data));
+	}
+	
+	function save_all_data(){
+		extract($_POST);
+		$user_type = $_SESSION['user'];
+		$id = intval($_SESSION['id']);
+		$name = $_SESSION['name'];
+		$email = $_SESSION['email'];
+		$height = $_SESSION['height'];
+		$heart_rate = $_SESSION['heart_rate'];
+		$oxygen = "";	
 		$transaction_no = $_SESSION['transaction_no'];
-		$query = $this->db->query("SELECT * FROM records WHERE transaction_no = $transaction_no;");
-		if($query->num_rows > 0){
-			foreach ($query->fetch_array() as $key => $value){
-				if(!is_numeric($key)){
-					$data[$key] = $value;
-				}
-			}
-			$data['transaction_no'] = $prefix . $transaction_no . $suffix;
-			return json_encode(array('status'=>1,"data"=>$data));
-		}else{
-			return json_encode(array('status'=>0));
-		}
+		$save = $this->db->query("INSERT INTO records (user_id, user_type, name, email, height, heart_rate, oxygen, transaction_no) VALUES ($id, '$user_type', '$name', '$email', '$height', '$heart_rate', '$oxygen', '$transaction_no');");
+		$_SESSION['height'] = "";
+		$_SESSION['heart_rate'] = "";
+		$_SESSION['transaction_no'] = "";
+		return 1;
+	}
+	
+	function delete_session_data(){
+		
+	}
+	
+	function delete_record(){
+		extract($_POST);
+		$delete = $this->db->query("DELETE FROM records where id = ".$id);
+		if($delete)
+			return 1;
+		return $id;
+	}
+	
+	function delete_user(){
+		extract($_POST);
+		$delete = $this->db->query("DELETE FROM users where id = ".$id);
+		if($delete)
+			return 1;
+		return $id;
 	}
 
 
