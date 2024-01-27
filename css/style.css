@@ -1,29 +1,67 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+:root {
+    --theme-color: #800;
+    --text-color: #444;
+    --font-style:  'Poppins','sans-serif';
+    --def-transition: ease 300ms;
+    --raisin-black-2: hsl(245, 16%, 16%);
+    --raisin-black-1: hsl(244, 17%, 19%);
+    --maroon: hsl(0, 100%, 25.1%);
+    --ghost-white-1: hsl(240, 100%, 99%);
+    --ghost-white-2: hsl(228, 50%, 96%);
+    --white-opacity: hsla(0, 0%, 100%, 0.5);
+    --independence: hsl(245, 17%, 27%);
+    --lavender-web: hsl(247, 69%, 95%);
+    --eerie-black: hsl(210, 11%, 15%);
+    --cool-gray: hsl(244, 17%, 61%);
+    --white: hsl(0, 0%, 100%);
+    /* --ff-quicksand: "Quicksand", sans-serif;
+    --ff-mulish: "Mulish", sans-serif; */
+    --box-shadow: 0 2rem 3rem rgba(132, 139, 200, 0.18);
+    --input-blur-color: rgba(0, 0, 0, 0.365);
+    --input-box-shadow: 3px 10px 25px 0px rgba(75, 78, 108, 0.582);
+    --input-transition: cubic-bezier(.2,.55,.23,.99) 500ms;
+    --background-blur-color: rgba(255, 255, 255, 0.546);
+    --background-blur-amount: blur(5px);
+    --background-box-shadow: 10px 20px 3em 0px rgba(112, 118, 162, 0.352);
+    --background-border-radius: 2em;
+    --top-background-border-radius: 2em 2em 0 0;
+    --top-background-linear-gradient: linear-gradient(58deg,#990606 0%, #b60000 80%);
+}
+
 *{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-body{
+body {
 	display: flex;
 	justify-content: center;
+    margin: 0;
 }
 
-.button_container{
+.button_container {
 	display: flex;
 	justify-content: center;
 	align-items: center;
 }
-main{
-	display: flex;
-	justify-content: center;
-	height: 600px;
-	width: 1024px;
+main {
+	display: block;
+    position: static;
+    height: 100vh;
+    width: 100%;
 	background-color: #eeeeee;
 }
 
 button {
-	background-color:#4f0007;
+	background-color: var(--theme-color);
+    border: none;
 	border-radius:16px;
 	cursor:pointer;
 	color:#dddddd;
@@ -33,7 +71,7 @@ button {
 }
 
 
-.index_lp_1{
+.index_lp_1 {
 	background-color: #dddddd;
 	height: 240px;
 	width: 400px;
@@ -54,7 +92,6 @@ button {
 	align-items: center;
 	flex-direction: column;
 	margin: 69px; 
-/*tite*/
 }
 .container{
 	display: flex;

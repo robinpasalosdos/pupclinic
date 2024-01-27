@@ -12,7 +12,8 @@
         if(isset($_SESSION['user'])){
             if($_SESSION['user'] == 'admin'){
                 header("location:../pupclinic/admin.php?page=landing_page");
-            }else{
+            }
+            else {
                 header("location:../pupclinic/dashboard.php?page=landing_page");
             }
         }
