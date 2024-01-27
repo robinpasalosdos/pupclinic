@@ -20,8 +20,7 @@
 </head>
 <body>
     <main>
-        <?php $page = isset($_GET['page']) ? $_GET['page'] :'landing_page'; ?>
-        <!-- wow babaero si robin -->
+        <?php $page = isset($_GET['page']) ? $_GET['page'] :'landing_page'; ?>  
        <?php include 'pages/admin/'.$page.'.php' ?>
     </main>
 </body>
