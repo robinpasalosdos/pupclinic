@@ -53,7 +53,8 @@ button {
 	display: flex;
 	align-items: center;
 	flex-direction: column;
-	margin: 60px;
+	margin: 69px; 
+/*tite*/
 }
 .container{
 	display: flex;
