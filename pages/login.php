@@ -1,6 +1,26 @@
 <head>
     <title>Login</title>
     <script>
+</head>
+<h1>Login as <?php echo $_GET['user']; ?></h1>
+<?php if($_GET['user'] == 'student' || $_GET['user'] == 'faculty' ): ?>
+	<form id="login">
+		<label>Email</label>
+		<input type="text" id="email" name="email" required autocomplete="off"><br>
+		<label>Password</label>
+		<input type="password" id="password" name="password" required autocomplete="off"><br>
+		<button>Login</button>
+	</form>
+<?php endif; ?>
+<?php if($_GET['user'] == 'admin'): ?>
+	<form id="login">
+		<label>Password</label>
+		<input type="password" id="password" name="password" required autocomplete="off"><br>
+		<button>Login</button>
+	</form>
+<?php endif; ?>
+
+<script>
 	var params = <?php echo json_encode($_GET)?>;
     $('#login').submit(function(e){
 		e.preventDefault()
@@ -12,13 +32,16 @@
 				console.log(err)
 			},
 			success:function(resp){
-				alert(resp)
 				if (resp == 1) {
 					location.href = 'dashboard.php?page=landing_page';
 				}
                 
                 else {
-					alert("Username or password is incorrect")
+					if(resp == 2){
+						alert("Password is incorrect!")
+					}else{
+						alert("Username or password is incorrect!")
+					}	
 				}
 			}
 		})

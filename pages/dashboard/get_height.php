@@ -51,8 +51,9 @@
 				alert("An error occured");
 			    },
 			    success:function(resp){
-				alert(resp);
-				location.href = '../pupclinic/dashboard.php?page=get_heart_rate';
+				if(resp == 1){
+				    location.href = '../pupclinic/dashboard.php?page=get_heart_rate';
+				}
 			    }
 			})
 			

@@ -1,11 +1,11 @@
 <?php if($_GET['user'] == 'student'): ?>
     <form id="register">
         <label for="student_no">Student Number</label><br>
-        <input type="text" id="student_no" name="student_no"><br>
+        <input type="text" id="student_no" name="student_no" required autocomplete="off"><br>
         <label for="name">Name</label><br>
-        <input type="text" id="name" name="name"><br>
+        <input type="text" id="name" name="name" required autocomplete="off"><br>
         <label for="course">Course</label><br>
-        <input type="text" id="course" name="course"><br>
+        <input type="text" id="course" name="course" required autocomplete="off"><br>
         <label for="year">Year</label>
         <select name="year" id="year" require>
                 
@@ -18,22 +18,22 @@
         </select><br>
         
         <label for="section">Section</label><br>
-        <input type="text" id="section" name="section"><br>
+        <input type="text" id="section" name="section" required autocomplete="off"><br>
         <label for="email">Email</label><br>
-        <input type="text" id="email" name="email"><br>
+        <input type="text" id="email" name="email" required autocomplete="off"><br>
         <label for="password">Password</label><br>
-        <input type="password" id="password" name="password"><br>
+        <input type="password" id="password" name="password" required autocomplete="off"><br>
         <button>Save</button>
     </form>
 <?php endif; ?>
 <?php if($_GET['user'] == 'faculty'): ?>
     <form id="register">   
         <label for="name">Name</label><br>
-        <input type="text" id="name" name="name"><br>
+        <input type="text" id="name" name="name" required autocomplete="off"><br>
         <label for="email">Email</label><br>
-        <input type="text" id="email" name="email"><br>
+        <input type="text" id="email" name="email" required autocomplete="off"><br>
         <label for="password">Password</label><br>
-        <input type="password" id="password" name="password"><br>
+        <input type="password" id="password" name="password" required autocomplete="off"><br>
         <button>Save</button>
     </form>
 <?php endif; ?>
@@ -53,6 +53,9 @@
                 if(resp == 1){
                         alert("Registered Successfully!");
                         location.href ='index.php?page=login&user='+params['user'];
+                }
+                if(resp == 2){
+                        alert("Email already exists!");
                 }
             }
         })

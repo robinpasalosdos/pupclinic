@@ -18,8 +18,7 @@
             },
             success:function(resp){
                 if(resp == 1){
-                        alert("Registered Successfully!");
-                        location.href ='dashboard.php?page=landing_page';
+		    location.href ='dashboard.php?page=landing_page';
                 }
             }
         })
