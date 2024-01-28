@@ -1,5 +1,5 @@
 <div class="main_container">
-    <img alt="pup-logo" src="../pupclinic/assets/pup-logo.png">
+    <img alt="pup-logo" src="../pupclinic/assets/PUP-Logo.png">
     <h1>PUP CLINIC</h1>
     <button onclick="redirectToLocation()">Start</button>
 </div>

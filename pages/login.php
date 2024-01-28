@@ -1,6 +1,5 @@
 <head>
     <title>Login</title>
-    <script src="jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 </head>
 <h1>Login as <?php echo $_GET['user']; ?></h1>
 <?php if($_GET['user'] == 'student' || $_GET['user'] == 'faculty' ): ?>
