@@ -46,6 +46,10 @@ main {
     overflow-y: auto;
 }
 
+h1 {
+    font-family: var(--def-font);
+}
+
 button {
 	background: var(--def-theme-color);
     height: 11rem;
@@ -168,12 +172,6 @@ button:hover {
         flex-direction: column;
         justify-content: center;
     }
-}
-@media (orientation: portrait) {
-    .login-form {
-        justify-content: center;
-    }
-
 }
 
 /* QHD SCREEN */
