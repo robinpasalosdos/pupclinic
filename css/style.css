@@ -5,23 +5,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
 :root {
-    --theme-color: #800;
-    --text-color: #444;
-    --font-style:  'Poppins','sans-serif';
+    --def-theme-color: #800;
+    --def-color: #444;
+    --def-font:  'Poppins','sans-serif';
     --def-transition: ease 300ms;
-    --raisin-black-2: hsl(245, 16%, 16%);
-    --raisin-black-1: hsl(244, 17%, 19%);
-    --maroon: hsl(0, 100%, 25.1%);
-    --ghost-white-1: hsl(240, 100%, 99%);
-    --ghost-white-2: hsl(228, 50%, 96%);
-    --white-opacity: hsla(0, 0%, 100%, 0.5);
-    --independence: hsl(245, 17%, 27%);
-    --lavender-web: hsl(247, 69%, 95%);
-    --eerie-black: hsl(210, 11%, 15%);
-    --cool-gray: hsl(244, 17%, 61%);
-    --white: hsl(0, 0%, 100%);
-    /* --ff-quicksand: "Quicksand", sans-serif;
-    --ff-mulish: "Mulish", sans-serif; */
+    --hover: rgb(164, 15, 15);
     --box-shadow: 0 2rem 3rem rgba(132, 139, 200, 0.18);
     --input-blur-color: rgba(0, 0, 0, 0.365);
     --input-box-shadow: 3px 10px 25px 0px rgba(75, 78, 108, 0.582);
@@ -34,15 +22,12 @@
     --top-background-linear-gradient: linear-gradient(58deg,#990606 0%, #b60000 80%);
 }
 
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+html {
+    scroll-behavior: smooth;
+    font-size: 16px;
 }
 
 body {
-	display: flex;
-	justify-content: center;
     margin: 0;
 }
 
@@ -51,72 +36,74 @@ body {
 	justify-content: center;
 	align-items: center;
 }
+
 main {
-	display: block;
-    position: static;
     height: 100vh;
     width: 100%;
 	background-color: #eeeeee;
 }
 
 button {
-	background: var(--theme-color);
+	background: var(--def-theme-color);
     border: none;
-	border-radius:16px;
+    width: 250px;
+	height: 150px;
+    margin: 2rem;
+	border-radius: 2rem;
 	cursor:pointer;
 	color:#dddddd;
 	font-size:32px;
-	height: 150px;
-    width: 250px;
+    font-family: var(--def-font);
     transition: 200ms;
 }
 
 button:hover {
-    background: var(--maroon);
-    transform: translateY(-5px) scale(1.02);
-    box-shadow: 10px 20px 3em 0px hsla(0, 32%, 45%, 0.525);
+    background: var(--hover);
+    transform: translateY(-2px) scale(1.01);
     color: #fffcfc;
 }
 
-.menu_container{
+.menu_container {
 	display: flex;
-	flex-direction: column;
-	gap: 20px;
+	flex-direction: row;
 }
 
-/* .main_container > div > div {
-    width: auto;
-} */
-
-.main_container > div > div img {
-    width: 100%;
-}
-
-.main_container{
-    display: flex;
+.main_container {
+    display: grid;
+    position: relative;
+    margin: auto;
+    height: 100%;
+    max-width: 1350px;
+    justify-content: space-evenly;
+    align-content: center;
     align-items: center;
-    flex-direction: column;
-    margin: 69px; 
+    justify-items: center;
 }
-.container{
+
+@media screen and (max-width: 639px) {
+    .main_container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        transition: var(--def-transition);
+    }
+}
+
+.main_container button {
+    grid-area: 1/2/3/3;
+}
+
+.main_container h1 {
+    font-family: var(--def-font);
+    text-align: center;
+}
+.main_container img {
+    width: 20rem;
+}
+
+.container {
     display: flex;
     gap: 4rem;
     margin-bottom: 4rem;
-}
-
-.index_lp_1 {
-	background-color: #dddddd;
-	height: 240px;
-	width: 400px;
-	justify-content: center;
-	align-items: center;
-	display: flex;
-}
-.index_lp_2{
-	height: 240px;
-	width: 400px;
-	justify-content: start;
-	align-items: center;
-	display: flex;
-	font-size: 40px;
 }
