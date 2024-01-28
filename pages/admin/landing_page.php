@@ -11,10 +11,10 @@
 
 <script>
   function redirectToRecords() {
-    window.location.href = "../pupclinic/admin.php?page=records";
+    window.location.href = "../pupclinic/admin.php?page=records&search=";
   }
   function redirectToUsers() {
-    window.location.href = "../pupclinic/admin.php?page=users";
+    window.location.href = "../pupclinic/admin.php?page=users&search=";
   }
   function redirectTo() {
     window.location.href = "../pupclinic/admin.php?page=real_time_assessment";
