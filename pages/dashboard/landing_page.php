@@ -12,6 +12,6 @@
     window.location.href = "../pupclinic/dashboard.php?page=get_height";
   }
   function redirectToYourRecords() {
-    window.location.href = "../pupclinic/dashboard.php?page=patient_records";
+    window.location.href = "../pupclinic/dashboard.php?page=patient_records&search=";
   }
 </script>
