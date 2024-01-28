@@ -1,10 +1,13 @@
-<form id="register">   
-	<label for="name">Name</label><br>
-	<input type="text" id="name" name="name"><br>
-	<label for="email">Email</label><br>
-	<input type="text" id="email" name="email"><br>
-	<button>Save</button>
-</form>
+<div class="login-form">
+	<h1>Hello Guest!</h1>
+    <form id="register">   
+        <label for="name">Name</label>
+        <input type="text" id="name" name="name"><br>
+        <label for="email">Email</label>
+        <input type="text" id="email" name="email"><br>
+        <button>Save</button>
+    </form>
+</div>
 <script>
     $('#register').submit(function(e){
         e.preventDefault()

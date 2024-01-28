@@ -4,13 +4,13 @@
 <div class="login-form">
 	<h1>Login as <?php echo $_GET['user']; ?></h1>
 	<?php if($_GET['user'] == 'student' || $_GET['user'] == 'faculty' ): ?>
-	    <form id="login">
-		<label>Email</label>
-		<input type="text" id="email" name="email"><br>
-		<label>Password</label>
-		<input type="password" id="password" name="password"><br>
-		<button>Login</button>
-	    </form>
+    <form id="login">
+        <label>Email</label>
+        <input type="text" id="email" name="email"><br>
+        <label>Password</label>
+        <input type="password" id="password" name="password"><br>
+        <button>Login</button>
+    </form>
 	<?php endif; ?>
 	<?php if($_GET['user'] == 'admin'): ?>
 	    <form id="login">

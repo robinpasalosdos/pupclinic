@@ -120,21 +120,21 @@ button:hover {
     flex-direction: column;
     justify-items: center;
     height: 80vh;
-    width: max-content;
+    width: 20rem;
     position: relative;
     align-content: space-evenly;
     margin: auto;
     font-family: var(--def-font);
 }
 
-.login-form form[id="login"] {
+.login-form form[id="login"], .login-form form[id="register"] {
     display: flex;
     flex-direction: column;
     justify-items: center;
     align-content: space-evenly;
 }
 
-.login-form form[id="login"] input {
+.login-form form[id="login"] input, .login-form form[id="register"] input {
     height: 2rem;
     border: none;
     background: #ffffff;
@@ -146,6 +146,10 @@ button:hover {
     height: 3em;
     width: 6em;
     margin: 0;
+}
+
+.main_container img {  /* use width: 100%; when it has parent*/
+    width: 20rem;
 }
 
 /* ----------- MEDIA QUERIES ----------- */
@@ -162,9 +166,11 @@ button:hover {
         justify-content: center;
     }
 }
+@media (orientation: portrait) {
+    .login-form {
+        justify-content: center;
+    }
 
-.main_container img {  /* use width: 100%; when it has parent*/
-    width: 20rem;
 }
 
 /* QHD SCREEN */
