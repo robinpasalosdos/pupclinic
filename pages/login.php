@@ -1,25 +1,6 @@
 <head>
     <title>Login</title>
-</head>
-<h1>Login as <?php echo $_GET['user']; ?></h1>
-<?php if($_GET['user'] == 'student' || $_GET['user'] == 'faculty' ): ?>
-	<form id="login">
-		<label>Email</label>
-		<input type="text" id="email" name="email"><br>
-		<label>Password</label>
-		<input type="password" id="password" name="password"><br>
-		<button>Login</button>
-	</form>
-<?php endif; ?>
-<?php if($_GET['user'] == 'admin'): ?>
-	<form id="login">
-		<label>Password</label>
-		<input type="password" id="password" name="password"><br>
-		<button>Login</button>
-	</form>
-<?php endif; ?>
-
-<script>
+    <script>
 	var params = <?php echo json_encode($_GET)?>;
     $('#login').submit(function(e){
 		e.preventDefault()
@@ -32,12 +13,37 @@
 			},
 			success:function(resp){
 				alert(resp)
-				if(resp == 1){
+				if (resp == 1) {
 					location.href = 'dashboard.php?page=landing_page';
-				}else{
+				}
+                
+                else {
 					alert("Username or password is incorrect")
 				}
 			}
 		})
 	})
-</script>
+    </script>
+</head>
+
+<body>
+    <div class="login-form">
+        <h1>Login as <?php echo $_GET['user']; ?></h1>
+        <?php if($_GET['user'] == 'student' || $_GET['user'] == 'faculty' ): ?>
+            <form id="login">
+                <label>Email</label>
+                <input type="text" id="email" name="email"><br>
+                <label>Password</label>
+                <input type="password" id="password" name="password"><br>
+                <button>Login</button>
+            </form>
+        <?php endif; ?>
+        <?php if($_GET['user'] == 'admin'): ?>
+            <form id="login">
+                <label>Password</label>
+                <input type="password" id="password" name="password"><br>
+                <button>Login</button>
+            </form>
+        <?php endif; ?>
+    </div>
+</body>

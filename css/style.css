@@ -38,6 +38,7 @@ body {
 }
 
 main {
+    position: absolute;
     height: 100vh;
     height: 100svh;
     width: 100%;
@@ -98,6 +99,48 @@ button:hover {
     padding: 1rem;
 }
 
+
+.main_container button {
+    grid-area: 1/2/3/3;
+}
+
+.main_container h1 {
+    font-family: var(--def-font);
+    text-align: center;
+}
+
+.container {
+    display: flex;
+    gap: 4rem;
+    margin-bottom: 4rem;
+}
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+    justify-items: center;
+    height: 80vh;
+    width: max-content;
+    position: relative;
+    align-content: space-evenly;
+    margin: auto;
+    font-family: var(--def-font);
+}
+
+.login-form form[id="login"] {
+    display: flex;
+    flex-direction: column;
+    justify-items: center;
+    align-content: space-evenly;
+}
+
+.login-form button {
+    height: 3em;
+    width: 6em;
+}
+
+/* ----------- MEDIA QUERIES ----------- */
+
 @media (orientation: portrait)  {
     .main_container {
         display: flex;
@@ -121,6 +164,7 @@ button:hover {
         height: 15rem;
         width: 21rem;
         font-size: 2.5em;
+    	border-radius: 2.5rem;
     }
 
     .main_container img {
@@ -135,8 +179,10 @@ button:hover {
         height: 15rem;
         width: 21rem;
         font-size: 1.5em;
+    	border-radius: 2.5rem;
     }
 }
+
 @media (orientation: landscape) and (min-width: 1440px) {
     .main_container, .menu_container {
         max-width: 150rem;
@@ -146,6 +192,7 @@ button:hover {
         height: 15rem;
         width: 21rem;
         font-size: 2.5em;
+    	border-radius: 2.5rem;
     }
 
     .main_container img {
@@ -160,15 +207,17 @@ button:hover {
         height: 15rem;
         width: 21rem;
         font-size: 1.5em;
+    	border-radius: 2.5rem;
     }
 }
 
-/* 4K  */
+/* 4K */
 @media (orientation: portrait) and (min-height: 2000px) {
     .main_container button {
         height: 20rem;
         width: 26rem;
         font-size: 2.25em;
+    	border-radius: 3rem;
     }
 
     .main_container img {
@@ -183,8 +232,10 @@ button:hover {
         height: 20rem;
         width: 26rem;
         font-size: 2.25em;
+    	border-radius: 3rem;
     }
 }
+
 @media (orientation: landscape) and (min-width: 2560px) {
     .main_container, .menu_container {
         max-width: 200rem;
@@ -194,6 +245,7 @@ button:hover {
         height: 20rem;
         width: 26rem;
         font-size: 2.25em;
+    	border-radius: 3rem;
     }
 
     .main_container img {
@@ -208,22 +260,6 @@ button:hover {
         height: 20rem;
         width: 26rem;
         font-size: 2.25em;
+    	border-radius: 3rem;
     }
-}
-
-
-
-.main_container button {
-    grid-area: 1/2/3/3;
-}
-
-.main_container h1 {
-    font-family: var(--def-font);
-    text-align: center;
-}
-
-.container {
-    display: flex;
-    gap: 4rem;
-    margin-bottom: 4rem;
 }
