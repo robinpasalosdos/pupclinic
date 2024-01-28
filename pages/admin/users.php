@@ -7,7 +7,7 @@
 
 <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="GET">
     <input type="hidden" name="page" value="<?php if(isset($_GET['page'])){echo $_GET['page']; } ?>">
-    <input type="text" name="search" required value="<?php if(isset($_GET['search'])){echo $_GET['search']; } ?>" placeholder="Search data">
+    <input type="text" name="search" value="<?php if(isset($_GET['search'])){echo $_GET['search']; } ?>" placeholder="Search data">
     <button type="submit">Search</button>
 </form>
 <button onclick="show_dialog()">Add User</button>
