@@ -2,11 +2,9 @@
     <title>Welcome</title>
 </head>
 
-<div class="main_container">
-    <div class="menu_container">
-        <button onclick="redirectToStudentLogin()">Student</button> 
-        <button onclick="redirectToFacultyLogin()">Faculty</button>
-    </div>
+<div class="menu_container">
+    <button onclick="redirectToStudentLogin()">Log in as Student</button> 
+    <button onclick="redirectToFacultyLogin()">Log in as Faculty</button>
 </div>
 
 <script>

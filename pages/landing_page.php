@@ -2,8 +2,7 @@
     <img alt="pup-logo" src="../pupclinic/assets/PUP-Logo.png">
     <h1>PUP CLINIC</h1>
     <button onclick="redirectToLocation()">Start</button>
-</div>
-    
+</div>   
 
 <script>
   function redirectToLocation() {

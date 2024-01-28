@@ -1,10 +1,7 @@
-<div class="main_container">
-    <div class="menu_container">
-        <button onclick="redirectToLoginMenu()">Do you have an existing account?</button>
-        
-        <button onclick="redirectToRegister()">Register</button>
-        <button onclick="redirectAsGuest()">Guest</button>
-    </div>
+<div class="menu_container">
+    <button onclick="redirectToLoginMenu()">Do you have an existing account?</button>
+    <button onclick="redirectToRegister()">Register</button>
+    <button onclick="redirectAsGuest()">Guest</button>
 </div>
 
 <script>
