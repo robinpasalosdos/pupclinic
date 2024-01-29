@@ -153,6 +153,7 @@ button:hover,
     background: #ffffff;
     border-radius: 0.5rem;
     padding: 0 .5rem 0 .5rem;
+    transition: var(--def-transition);
 }
 
 .login-form button {
@@ -187,7 +188,7 @@ button:hover,
     flex-direction: column;
     justify-items: center;
     height: min-content;
-    width: max-content;
+    width: 70vw;
     position: relative;
     align-content: space-evenly;
     margin: auto;
@@ -198,12 +199,12 @@ button:hover,
 .records-table button {
     height: 3em;
     width: 6em;
-    margin: 0;
+    margin: 0 0 0 1rem;
 }
 
 .records-table table {
     background: #ffffff;
-    width: 60vw;
+    width: 100%;
     height: min-content;
     margin: 2rem 0 0 0;
     padding: 1rem 1.5rem 1rem 1.5rem;
@@ -212,15 +213,36 @@ button:hover,
 }
 
 .records-table input {
-    height: 3em;
+    height: 3.5em;
+    width: 50%;
+    max-width: 25rem;
     margin: 0;
     border: none;
     background: #ffffff;
     border-radius: 1rem;
     padding: 0 .5rem 0 .5rem;
+    transition: var(--def-transition);
+
 }
 
-/* ----------- MEDIA QUERIES ----------- */
+/* ----------- Hover & Focus effects Input ----------- */
+.login-form form[id="login"] input:hover, 
+.login-form form[id="register"] input:hover,
+.login-form form[id="register"] select:hover,
+.records-table input:hover {
+    box-shadow: 0 .5rem 1rem rgba(132, 139, 200, 0.25);;
+}
+
+.login-form form[id="login"] input:focus, 
+.login-form form[id="register"] input:focus,
+.login-form form[id="register"] select:focus,
+.records-table input:focus {
+    box-shadow: none;
+}
+
+ /* ----------------------------------- *\
+/* ----------- MEDIA QUERIES ----------- *\
+\* ------------------------------------- */
 
 @media (orientation: portrait)  {
     .main_container {
@@ -235,7 +257,7 @@ button:hover,
     }
 }
 
-/* QHD SCREEN */
+/* ----------- QHD SCREEN ----------- */
 @media (orientation: portrait) and (min-height: 1000px) {
     .main_container button {
         height: 15rem;
@@ -288,7 +310,7 @@ button:hover,
     }
 }
 
-/* 4K */
+/* ----------- 4K ----------- */
 @media (orientation: portrait) and (min-height: 2000px) {
     .main_container button {
         height: 20rem;
@@ -339,4 +361,18 @@ button:hover,
         font-size: 2.25em;
     	border-radius: 3rem;
     }
+}
+
+/* --------------------------------- */
+
+@media (max-width: 700px) {
+    .records-table th,
+    .records-table td {
+        font-size: 60%;
+    }
+
+    .records-table table {
+        border-radius: 1.5rem 1.5rem 0 0;
+    }
+
 }
