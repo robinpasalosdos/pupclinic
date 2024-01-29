@@ -9,8 +9,9 @@
     --def-color: #444;
     --def-font:  'Poppins','sans-serif';
     --def-transition: cubic-bezier(.32,.11,.45,.99) 200ms;
+    --def-gradient-form: linear-gradient(180deg,#ffffff 80%, #eeeeee 100%);
     --hover: rgb(164, 15, 15);
-    --box-shadow: 0 2rem 3rem rgba(132, 139, 200, 0.23);
+    --box-shadow: -8px -48px 60px -40px rgba(0,0,0,0.12);
     --input-blur-color: rgba(0, 0, 0, 0.365);
     --input-box-shadow: 3px 10px 25px 0px rgba(75, 78, 108, 0.582);
     --input-transition: cubic-bezier(.2,.55,.23,.99) 500ms;
@@ -31,12 +32,6 @@ body {
     margin: 0;
 }
 
-.button_container {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-}
-
 main {
     position: absolute;
     height: 100%;
@@ -51,7 +46,7 @@ h1 {
 }
 
 button {
-	background: var(--def-theme-color);
+    background: var(--def-theme-color);
     height: 11rem;
     width: 18rem;
 	font-size: 1rem;
@@ -62,13 +57,20 @@ button {
 	color:#dddddd;
     box-shadow: var(--box-shadow);
     font-family: var(--def-font);
+    font-weight: 500;
     transition: var(--def-transition);
+}
+
+input, select {
+    font-size: 1rem;
+    font-family: var(--def-font);
+    font-weight: 600;
 }
 
 button:hover,
 .logout-button-a {
     background: var(--hover);
-    transform: translateY(-2px) scale(1.01);
+    transform: translateY(-1px) scale(1.01);
     color: #fffcfc;
 }
 
@@ -129,7 +131,8 @@ button:hover,
     flex-direction: column;
     justify-items: center;
     height: min-content;
-    width: 20rem;
+    width: 85%;
+    max-width: 25rem;
     position: relative;
     align-content: space-evenly;
     margin: auto;
@@ -139,10 +142,13 @@ button:hover,
 .login-form form[id="login"], 
 .login-form form[id="register"] {
     display: flex;
+    background: var(--def-gradient-form);
     flex-direction: column;
     justify-items: center;
     align-content: space-evenly;
-    padding: 0 0 2rem 0;
+    padding: 2rem 2rem 4rem 2rem;
+    border-radius: 2rem 2rem 0 0 ;
+    box-shadow: var(--box-shadow);
 }
 
 .login-form form[id="login"] input, 
@@ -150,10 +156,14 @@ button:hover,
 .login-form form[id="register"] select {
     height: 2rem;
     border: none;
-    background: #ffffff;
+    background: #f0ecec;
     border-radius: 0.5rem;
-    padding: 0 .5rem 0 .5rem;
+    padding: 0 .5rem 0 .5rem;       
     transition: var(--def-transition);
+}
+
+.login-form h1 {
+    margin-left: 1.5rem;
 }
 
 .login-form button {
@@ -188,7 +198,7 @@ button:hover,
     flex-direction: column;
     justify-items: center;
     height: min-content;
-    width: 70vw;
+    width: 85vw;
     position: relative;
     align-content: space-evenly;
     margin: auto;
@@ -203,11 +213,11 @@ button:hover,
 }
 
 .records-table table {
-    background: #ffffff;
+    background: var(--def-gradient-form);
     width: 100%;
     height: min-content;
     margin: 2rem 0 0 0;
-    padding: 1rem 1.5rem 1rem 1.5rem;
+    padding: 1rem 1.5rem 3rem 1.5rem;
     border-radius: 2rem 2rem 0 0;
     box-shadow: var(--box-shadow);
 }
