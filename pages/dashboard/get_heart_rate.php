@@ -12,7 +12,7 @@
 	    <button id="get_heart_rate_button">Get</button>
 	</form>
 	<form id="save_heart_rate">
-	    <button id="next">Finish</button>
+	    <button style="display: none;" id="next">Finish</button>
 	    <input style="display: none;" type="text" id="data" name="data"><br>
 	</form>
 	

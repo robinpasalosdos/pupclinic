@@ -1,5 +1,5 @@
 #overlay {
-	display: none;
+    display: none;
     position: fixed;
     top: 0;
     left: 0;
@@ -8,12 +8,23 @@
 }
 
 .dialog {
-	display: none;
-	background-color: #eeefee;
+    display: none;
+    background-color: #eeefee;
     position: fixed;
     top: 30%;
     left: 50%;
     transform: translate(-50%, -50%);
     height: fit-content;
     z-index: 3000;
+}
+
+.card, .queue_card{
+    background-color: #fffeee;
+    width: fit-content;
+}
+.card{
+    display: none;
+}
+#no_user{
+    display: none;
 }

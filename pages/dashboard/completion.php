@@ -12,10 +12,11 @@
 	<h1 id="oxygen"></h1>
 	<h2>transaction number:</h2>
 	<h2 id="transaction_no"></h2>
+	<button onclick="retry()">Retry</button>
 	<form id="save_all_data">
 	    <button id="save">Save and Exit</button>
 	</form>
-	<button onclick="retry()">Retry</button>
+	
 </div>
 <script>
 	function retry() {

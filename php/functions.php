@@ -200,7 +200,8 @@ Class Action {
 		$heart_rate = $_SESSION['heart_rate'];
 		$oxygen = "";	
 		$transaction_no = $_SESSION['transaction_no'];
-		$save = $this->db->query("INSERT INTO records (user_id, user_type, name, email, height, heart_rate, oxygen, transaction_no) VALUES ($id, '$user_type', '$name', '$email', '$height', '$heart_rate', '$oxygen', '$transaction_no');");
+		$assessment_status = 0;
+		$save = $this->db->query("INSERT INTO records (user_id, user_type, name, email, height, heart_rate, oxygen, transaction_no, assessment_status) VALUES ($id, '$user_type', '$name', '$email', '$height', '$heart_rate', '$oxygen', '$transaction_no', '$assessment_status');");
 		$_SESSION['height'] = "";
 		$_SESSION['heart_rate'] = "";
 		$_SESSION['transaction_no'] = "";
@@ -244,20 +245,17 @@ Class Action {
 	} 
 	
 	function display_ongoing_check_up(){
-		$result = $this->db->query("SELECT * FROM queue");
+		$result = $this->db->query("SELECT * FROM queue ORDER BY date DESC LIMIT 1;");
 		$row = $result->fetch_assoc();
-		if ($row['id'] > 0) {
-			$data['user_id'] = $row['id'];
-			$data['name'] = $row['name'];
-			$data['user_type'] = $row['user_type'];
-			return json_encode(array('status'=>1,"data"=>$data));
+		if ($row['name'] != "") {
+			return json_encode(array('status'=>1,"data"=>$row));
 		}else{
 			return json_encode(array('status'=>0));
 		}
 	}
 	
 	function delete_ongoing(){
-		$result = $this->db->query("DELETE FROM queue");
+		$result = $this->db->query("DELETE FROM queue WHERE name <> '';");
 		return 1;
 	}
 }

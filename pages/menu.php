@@ -1,5 +1,5 @@
 <div class="menu_container">
-    <button onclick="redirectToLoginMenu()">Do you have an existing account?</button>
+    <button onclick="redirectToLoginMenu()">Login</button>
     <button onclick="redirectToRegister()">Register</button>
     <button onclick="redirectAsGuest()">Guest</button>
 </div>
