@@ -244,20 +244,17 @@ Class Action {
 	} 
 	
 	function display_ongoing_check_up(){
-		$result = $this->db->query("SELECT * FROM queue");
+		$result = $this->db->query("SELECT * FROM queue ORDER BY date DESC LIMIT 1;");
 		$row = $result->fetch_assoc();
-		if ($row['id'] > 0) {
-			$data['user_id'] = $row['id'];
-			$data['name'] = $row['name'];
-			$data['user_type'] = $row['user_type'];
-			return json_encode(array('status'=>1,"data"=>$data));
+		if ($row['name'] != "") {
+			return json_encode(array('status'=>1,"data"=>$row));
 		}else{
 			return json_encode(array('status'=>0));
 		}
 	}
 	
 	function delete_ongoing(){
-		$result = $this->db->query("DELETE FROM queue");
+		$result = $this->db->query("DELETE FROM queue WHERE name <> '';");
 		return 1;
 	}
 }
