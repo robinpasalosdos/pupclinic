@@ -1,15 +1,12 @@
-<head>
-    
+<head>   
 </head>
-
-<h4>Records</h4>
-
-
-<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="GET">
-    <input type="hidden" name="page" value="<?php if(isset($_GET['page'])){echo $_GET['page']; } ?>">
-    <input type="text" name="search" value="<?php if(isset($_GET['search'])){echo $_GET['search']; } ?>" placeholder="Search data">
-    <button type="submit">Search</button>
-</form>
+<div class="records-table">
+    <h1>Records</h1>
+    <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="GET">
+        <input type="hidden" name="page" value="<?php if(isset($_GET['page'])){echo $_GET['page']; } ?>">
+        <input type="text" name="search" value="<?php if(isset($_GET['search'])){echo $_GET['search']; } ?>" placeholder="Search data">
+        <button type="submit">Search</button>
+    </form>
 <table>
     <thead>
         <tr>
@@ -17,7 +14,6 @@
             <th>Heart Rate</th>
             <th>Oxygen</th>
             <th>Transaction no.</th>
-
         </tr>
     </thead>
     <tbody>
@@ -60,6 +56,8 @@
         ?>
     </tbody>
 </table>
+</div>
+
 <script>
 
 </script>

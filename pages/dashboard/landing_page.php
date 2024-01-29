@@ -1,13 +1,13 @@
 <head>
     <title>Welcome</title>
 </head>
-<a href="../pupclinic/php/ajax.php?action=logout">logout</a>
-<form id="check_up">
-  <button>Initial Monitoring</button>
-</form>
-
-<button onclick="redirectToYourRecords()">View Your Records</button>
-
+<a class ="logout-button-a" href="../pupclinic/php/ajax.php?action=logout">logout</a>
+<div class="menu_container">
+    <form id="check_up">
+        <button>Initial Monitoring</button>
+    </form>
+    <button onclick="redirectToYourRecords()">View Your Records</button>
+</div>
 
 <script>
   function redirectToYourRecords() {

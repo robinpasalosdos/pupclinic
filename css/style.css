@@ -65,7 +65,8 @@ button {
     transition: var(--def-transition);
 }
 
-button:hover {
+button:hover,
+.logout-button-a {
     background: var(--hover);
     transform: translateY(-2px) scale(1.01);
     color: #fffcfc;
@@ -113,6 +114,10 @@ button:hover {
     text-align: center;
 }
 
+.main_container img {  /* use width: 100%; when it has parent*/
+    width: 20rem;
+}
+
 .container {
     display: flex;
     gap: 4rem;
@@ -123,7 +128,7 @@ button:hover {
     display: flex;
     flex-direction: column;
     justify-items: center;
-    height: 80vh;
+    height: min-content;
     width: 20rem;
     position: relative;
     align-content: space-evenly;
@@ -131,7 +136,8 @@ button:hover {
     font-family: var(--def-font);
 }
 
-.login-form form[id="login"], .login-form form[id="register"] {
+.login-form form[id="login"], 
+.login-form form[id="register"] {
     display: flex;
     flex-direction: column;
     justify-items: center;
@@ -155,8 +161,63 @@ button:hover {
     margin: 0;
 }
 
-.main_container img {  /* use width: 100%; when it has parent*/
-    width: 20rem;
+.logout-button-a {
+    position: absolute;
+    display: block;
+    padding: 1.5rem 0 0 0;
+    text-decoration: none;
+    text-align: center;
+    background: var(--def-theme-color);
+    height: 3em;
+    width: 8em;
+    font-size: 1rem;
+    border: none;
+    border-radius: 3rem;
+    margin: 1rem;
+    cursor: pointer;
+    color: #dddddd;
+    box-shadow: var(--box-shadow);
+    font-family: var(--def-font);
+    transition: var(--def-transition);
+    z-index: 1;
+}
+
+.records-table {
+    display: flex;
+    flex-direction: column;
+    justify-items: center;
+    height: min-content;
+    width: max-content;
+    position: relative;
+    align-content: space-evenly;
+    margin: auto;
+    text-align: left;
+    font-family: var(--def-font);
+}
+
+.records-table button {
+    height: 3em;
+    width: 6em;
+    margin: 0;
+}
+
+.records-table table {
+    background: #ffffff;
+    width: 60vw;
+    height: min-content;
+    margin: 2rem 0 0 0;
+    padding: 1rem 1.5rem 1rem 1.5rem;
+    border-radius: 2rem 2rem 0 0;
+    box-shadow: var(--box-shadow);
+}
+
+.records-table input {
+    height: 3em;
+    margin: 0;
+    border: none;
+    background: #ffffff;
+    border-radius: 1rem;
+    padding: 0 .5rem 0 .5rem;
 }
 
 /* ----------- MEDIA QUERIES ----------- */
