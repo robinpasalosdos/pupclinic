@@ -200,7 +200,8 @@ Class Action {
 		$heart_rate = $_SESSION['heart_rate'];
 		$oxygen = "";	
 		$transaction_no = $_SESSION['transaction_no'];
-		$save = $this->db->query("INSERT INTO records (user_id, user_type, name, email, height, heart_rate, oxygen, transaction_no) VALUES ($id, '$user_type', '$name', '$email', '$height', '$heart_rate', '$oxygen', '$transaction_no');");
+		$assessment_status = 0;
+		$save = $this->db->query("INSERT INTO records (user_id, user_type, name, email, height, heart_rate, oxygen, transaction_no, assessment_status) VALUES ($id, '$user_type', '$name', '$email', '$height', '$heart_rate', '$oxygen', '$transaction_no', '$assessment_status');");
 		$_SESSION['height'] = "";
 		$_SESSION['heart_rate'] = "";
 		$_SESSION['transaction_no'] = "";

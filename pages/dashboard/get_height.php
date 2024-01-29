@@ -6,7 +6,7 @@
             <button id="get_height_button">Get</button>
         </form>
         <form id="save_height">
-            <button id="next">Next</button>
+            <button style="display: none;" id="next">Next</button>
             <input style="display: none;" type="text" id="data" name="data"><br>
         </form>
     </div>
@@ -15,7 +15,7 @@
 <script>
     var params = <?php echo json_encode($_GET)?>;
     $('#get_height').submit(function(e){
-	$("#data2").text("Your height is being processed, please wait.");
+	$("#data2").text("Please wait...");
 	$("#get_height_button").hide();
 	$("#next").hide();
 	e.preventDefault()
@@ -36,7 +36,7 @@
 		    var data = parseInt(resp);
 		    if(data > 0 && data < 201){
 			$("#data").val(resp);
-			$("#data2").text(resp);
+			$("#data2").text(resp + " cm");
 			$("#get_height_button").show();
 			$("#get_height_button").text("Retry");
 			$("#next").show();

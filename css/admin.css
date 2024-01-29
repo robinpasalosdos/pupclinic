@@ -18,12 +18,13 @@
     z-index: 3000;
 }
 
-.card {
+.card, .queue_card{
     background-color: #fffeee;
     width: fit-content;
+}
+.card{
     display: none;
 }
-
 #no_user{
     display: none;
 }
