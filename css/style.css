@@ -268,12 +268,46 @@ button:hover,
     text-align: center;
 }
 
+.admin-container {
+    display: grid;
+    height: min-content;
+    width: 85%;
+    max-width: 65rem;
+    position: relative;
+    align-content: space-evenly;
+    margin: auto;
+    align-items: center;
+}
+
+.admin-menu {
+    grid-area: 2/1/3/3;
+    display: flex;
+    flex-direction: row;
+    background: var(--def-gradient-form);
+    justify-items: center;
+    align-content: space-evenly;
+    padding: 2rem 2rem 4rem 2rem;
+    border-radius: 2rem 2rem 0 0;
+    box-shadow: var(--box-shadow);
+}
+
+.admin-container h1 {
+    grid-area: 1/1/2/2;
+}
+.admin-container a {
+    grid-area: 1/2/2/3;
+    text-align: right;
+    text-decoration: none;
+    margin: 0 3rem 1rem 0;
+}
+
+
 /* ----------- Hover & Focus effects Input ----------- */
 .login-form form[id="login"] input:hover, 
 .login-form form[id="register"] input:hover,
 .login-form form[id="register"] select:hover,
 .records-table input:hover {
-    box-shadow: 0 .5rem 1rem rgba(132, 139, 200, 0.25);;
+    box-shadow: 0 .5rem 1rem rgba(164, 171, 232, 0.25);;
 }
 
 .login-form form[id="login"] input:focus, 
@@ -297,6 +331,10 @@ button:hover,
         display: flex;
         flex-direction: column;
         justify-content: center;
+    }
+
+    .admin-menu {
+        flex-direction: column;
     }
 }
 
