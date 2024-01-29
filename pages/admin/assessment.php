@@ -13,22 +13,28 @@
 			url:'../pupclinic/php/ajax.php?action=display_ongoing_check_up',
 			type:'POST',
 			data:$(this).serialize(),
+			dataType: 'json',
 			error:function(err){
 				console.log(err);
 				alert("An error occured");
 			},
 			success:function(resp){
-				resp = JSON.parse(resp)
-				if(resp.status == 1){
-					$("#name").html(resp.data.name)
-					$("#user_type").html(resp.data.user_type)
+				console.log(resp);
+				if (resp.status == 1) {
+					$("#name").html(resp.data.name);
+					$("#user_type").html(resp.data.user_type);
+				} else if (resp.status == 2) {
+					console.log(resp);
+				} else {
+					console.log("Unknown response status:", resp);
 				}
+
 			}
 		})
 	})
 	$('#delete_ongoing').submit(function(e){
 		$.ajax({
-			url:'../pupclinic/php/ajax.php?action=save_all_data',
+			url:'../pupclinic/php/ajax.php?action=delete_ongoing',
 			type:'POST',
 			data:$(this).serialize(),
 			error:function(err){
@@ -37,7 +43,7 @@
 			},
 			success:function(resp){
 				if(resp == 1){
-					location.href = '../pupclinic/dashboard.php?page=landing_page';
+					alert("Deleted!");
 				}
 			}
 		})

@@ -119,3 +119,9 @@ if($action == 'display_ongoing_check_up'){
 		echo $display_ongoing_check_up;
 }
 
+if($action == 'delete_ongoing'){
+	$delete_ongoing = $crud->delete_ongoing();
+	if($delete_ongoing)
+		echo $delete_ongoing;
+}
+
