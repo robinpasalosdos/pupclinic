@@ -24,6 +24,7 @@
 }
 
 html {
+    font-family: var(--def-font);
     scroll-behavior: smooth;
     font-size: 16px;
 }
@@ -118,12 +119,6 @@ button:hover,
 
 .main_container img {  /* use width: 100%; when it has parent*/
     width: 20rem;
-}
-
-.container {
-    display: flex;
-    gap: 4rem;
-    margin-bottom: 4rem;
 }
 
 .login-form {
@@ -232,7 +227,45 @@ button:hover,
     border-radius: 1rem;
     padding: 0 .5rem 0 .5rem;
     transition: var(--def-transition);
+    
+}
 
+.metrics-container {
+    background: var(--def-gradient-form);
+    display: grid;
+    height: min-content;
+    width: 85vw;
+    max-width: 40rem;
+    margin: auto;
+    margin-top: 3rem;
+    padding: 1.5rem 1rem 4rem 1rem ;
+    box-shadow: var(--box-shadow);
+    border-radius: 2rem 2rem 0 0 ;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    justify-items: center;
+    align-items: center;
+}
+
+.metrics-container button {
+    height: 4rem;
+    width: 8rem;
+    margin: 0.5rem;
+}
+
+.metrics-container > div {
+    display: flex;
+    flex-direction: row;
+    grid-area: 2/1/3/3;
+}
+
+.metrics-container p {
+    font-size: 2rem;
+    font-weight: 700;
+}
+
+.metrics-container h1 {
+    text-align: center;
 }
 
 /* ----------- Hover & Focus effects Input ----------- */

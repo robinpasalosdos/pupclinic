@@ -3,7 +3,7 @@
 	header("location:../pupclinic/dashboard.php?page=landing_page");
     }
 ?>
-<div class="container">
+<div class="metrics-container">
     <h2>Get Heart Rate</h2>
     <p id="data2">-</p>
     

@@ -3,14 +3,14 @@
 		header("location:../pupclinic/dashboard.php?page=landing_page");
 	}
 ?>
-<div id="container">
-	<h1>height:</h1>
-	<h2 id="height">--</h2><br>
-	<h1>heart rate:</h1>
-	<h2 id="heart_rate">--</h2><br>
-	<h1>oxygen:</h1>
-	<h2 id="oxygen"></h2><br>
-	<h1>transaction number:</h1>
+<div class="metrics-container">
+	<h2>height:</h2>
+	<h1 id="height">--</h1>
+	<h2>heart rate:</h2>
+	<h1 id="heart_rate">--</h1>
+	<h2>oxygen:</h2>
+	<h1 id="oxygen"></h1>
+	<h2>transaction number:</h2>
 	<h2 id="transaction_no"></h2>
 	<form id="save_all_data">
 	    <button id="save">Save and Exit</button>

@@ -1,18 +1,15 @@
-<div class="container">
+<div class="metrics-container">
     <h2>Height</h2>
     <p id="data2">-</p>
-    
-    <div class="button_container">
-	<form id="get_height">
-	    <button id="get_height_button">Get</button>
-	</form>
-	<form id="save_height">
-	    <button id="next">Next</button>
-	    <input style="display: none;" type="text" id="data" name="data"><br>
-	</form>
-	
+    <div>
+        <form id="get_height">
+            <button id="get_height_button">Get</button>
+        </form>
+        <form id="save_height">
+            <button id="next">Next</button>
+            <input style="display: none;" type="text" id="data" name="data"><br>
+        </form>
     </div>
-    
 </div>
 
 <script>
