@@ -230,14 +230,24 @@ Class Action {
 	
 	function create_initial_record(){
 		$id = intval($_SESSION['id']);
+		$name = $_SESSION['name'];
+		$user_type = $_SESSION['user'];
 		$result = $this->db->query("SELECT COUNT(*) AS count FROM queue");
 		$row = $result->fetch_assoc();
 		if ($row['count'] > 0) {
 			return 2;
 		} else {
-			$save = $this->db->query("INSERT INTO queue (id) VALUES ($id);");
+			$save = $this->db->query("INSERT INTO queue (id,name,user_type) VALUES ($id, '$name', '$user_type');");
 			return 1;
 		}
-		
+	}
+	
+	function display_ongoing_check_up(){
+		$result = $this->db->query("SELECT * FROM queue");
+		$row = $result->fetch_assoc();
+		$data['user_id'] = $row['id'];
+		$data['name'] = $row['name'];
+		$data['user_type'] = $row['user_type'];
+		return json_encode(array('status'=>1,"data"=>$data));
 	}
 }

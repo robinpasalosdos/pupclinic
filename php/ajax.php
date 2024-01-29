@@ -113,4 +113,9 @@ if($action == 'create_initial_record'){
 	if($create_initial_record)
 		echo $create_initial_record;
 }
+if($action == 'display_ongoing_check_up'){
+	$display_ongoing_check_up = $crud->display_ongoing_check_up();
+	if($display_ongoing_check_up)
+		echo $display_ongoing_check_up;
+}
 

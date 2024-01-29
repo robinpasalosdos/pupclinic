@@ -17,6 +17,6 @@
     window.location.href = "../pupclinic/admin.php?page=users&search=";
   }
   function redirectTo() {
-    window.location.href = "../pupclinic/admin.php?page=real_time_assessment";
+    window.location.href = "../pupclinic/admin.php?page=assessment";
   }
 </script>
