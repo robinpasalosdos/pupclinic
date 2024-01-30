@@ -28,7 +28,7 @@ Class Action {
 
 	function faculty_login(){
 		extract($_POST);
-		$qry = $this->db->query("SELECT * FROM users where email = '".$email."' and password = '".$password."' ");
+		$qry = $this->db->query("SELECT * FROM users where email = '$email' and password = '$password' and user_type = 'faculty' ");
 		if($qry->num_rows > 0){
 			$row = $qry->fetch_assoc();
 			$id = $row['id'];
@@ -45,7 +45,7 @@ Class Action {
 
 	function student_login(){
 		extract($_POST);
-		$qry = $this->db->query("SELECT * FROM users where email = '".$email."' and password = '".$password."' ");
+		$qry = $this->db->query("SELECT * FROM users where email = '$email' and password = '$password' and user_type = 'student' ");
 		if($qry->num_rows > 0){
 			$row = $qry->fetch_assoc();
 			$id = $row['id'];
@@ -200,12 +200,12 @@ Class Action {
 		$heart_rate = $_SESSION['heart_rate'];
 		$oxygen = "";	
 		$transaction_no = $_SESSION['transaction_no'];
-		$assessment_status = 0;
+		$assessment_status = 1;
 		$save = $this->db->query("INSERT INTO records (user_id, user_type, name, email, height, heart_rate, oxygen, transaction_no, assessment_status) VALUES ($id, '$user_type', '$name', '$email', '$height', '$heart_rate', '$oxygen', '$transaction_no', '$assessment_status');");
 		$_SESSION['height'] = "";
 		$_SESSION['heart_rate'] = "";
 		$_SESSION['transaction_no'] = "";
-		$delete = $this->db->query("DELETE FROM queue;");
+		$delete = $this->db->query("DELETE FROM queue WHERE name <> '';");
 		return 1;
 	}
 	
@@ -230,17 +230,17 @@ Class Action {
 	}
 	
 	function create_initial_record(){
-		/* $id = intval($_SESSION['id']);
+		$id = intval($_SESSION['id']);
 		$name = $_SESSION['name'];
 		$user_type = $_SESSION['user'];
 		$result = $this->db->query("SELECT COUNT(*) AS count FROM queue");
 		$row = $result->fetch_assoc();
-		if ($row['count'] > 0) {
+		if ($row['count'] > 1) {
 			return 2;
 		} else {
 			$save = $this->db->query("INSERT INTO queue (id,name,user_type) VALUES ($id, '$name', '$user_type');");
 			return 1;
-		} */
+		}
 		return 1;
 	} 
 	
@@ -258,4 +258,51 @@ Class Action {
 		$result = $this->db->query("DELETE FROM queue WHERE name <> '';");
 		return 1;
 	}
+	
+	function display_realtime_records(){
+
+		/* $query = "SELECT * FROM records WHERE assessment_status = 0;"; */
+		$query = "SELECT * FROM records;";  
+		$query_run = mysqli_query($this->db, $query);
+
+		$contents = "<table>
+						<thead>
+							<tr>
+								<th>Name</th>
+								<th>User Type</th>
+								<th>Height (cm)</th>
+								<th>Heart Rate</th>
+								<th>Oxygen</th>
+								<th>Transaction no.</th>
+								<th>Action</th>
+							</tr>
+						</thead>
+						<tbody>";
+
+		if(mysqli_num_rows($query_run) > 0)
+		{
+			foreach($query_run as $items)
+			{
+				$id = $items['id'];
+				$contents .= "<tr>
+								<td>{$items['name']}</td>
+								<td>{$items['user_type']}</td>
+								<td>{$items['height']}</td>
+								<td>{$items['heart_rate']}</td>
+								<td>{$items['oxygen']}</td>
+								<td>PUP-{$items['transaction_no']}-CLI</td>
+								<td><button class=\"assess\">Assess</button></td>
+							  </tr>";
+			}
+		}
+
+		$contents .= "</tbody>
+					</table>";
+		if ($query_run) {
+			return json_encode(array('status'=>1,"contents"=>$contents,"id"=>$id));
+		}else{
+			return json_encode(array('status'=>0));
+		}
+	}
+	
 }

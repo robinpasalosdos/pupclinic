@@ -125,3 +125,14 @@ if($action == 'delete_ongoing'){
 		echo $delete_ongoing;
 }
 
+if($action == 'assess'){
+	$assess = $crud->assess();
+	if($assess)
+		echo $assess;
+}
+
+if($action == 'display_realtime_records'){
+	$display_realtime_records = $crud->display_realtime_records();
+	if($display_realtime_records)
+		echo $display_realtime_records;
+}

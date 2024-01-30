@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../pupclinic/css/style.css">
+    <link rel="stylesheet" href="../pupclinic/css/admin.css">
     <script src="jquery-3.6.0.min.js"></script>
     <?php
         include('php/db_connect.php');
