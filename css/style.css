@@ -194,6 +194,7 @@ button:hover,
     justify-items: center;
     height: min-content;
     width: 85vw;
+    min-width: 25rem;
     position: relative;
     align-content: space-evenly;
     margin: auto;
@@ -270,28 +271,38 @@ button:hover,
 
 .admin-container {
     display: grid;
+    grid-template-columns: 1fr 1fr;
     height: min-content;
-    width: 85%;
+    width: 85vw;
     max-width: 65rem;
     position: relative;
     align-content: space-evenly;
     margin: auto;
     align-items: center;
+    justify-content: center;
 }
 
 .admin-menu {
     grid-area: 2/1/3/3;
     display: flex;
     flex-direction: row;
+    align-items: center;
     background: var(--def-gradient-form);
     justify-items: center;
+    justify-content: center;
     align-content: space-evenly;
-    padding: 2rem 2rem 4rem 2rem;
+    padding: 2rem 1rem 3rem 1rem;
     border-radius: 2rem 2rem 0 0;
     box-shadow: var(--box-shadow);
 }
 
+.admin-menu button {
+    height: 7rem;
+    width: 90%;
+}
+
 .admin-container h1 {
+    margin-left: 2rem;
     grid-area: 1/1/2/2;
 }
 .admin-container a {
@@ -335,6 +346,11 @@ button:hover,
 
     .admin-menu {
         flex-direction: column;
+    }
+
+    .admin-menu button {
+        height: 11rem;
+        width: 90%;
     }
 }
 
@@ -444,16 +460,61 @@ button:hover,
     }
 }
 
-/* --------------------------------- */
+/* ----------------- FOR TABLE ---------------- */
 
-@media (max-width: 700px) {
+@media (max-width: 800px) {
     .records-table th,
     .records-table td {
-        font-size: 60%;
+        font-size: 65%;
     }
 
     .records-table table {
         border-radius: 1.5rem 1.5rem 0 0;
+        margin-top: 1.5rem;
     }
 
+    .records-table h1 {
+        font-size: 1.5rem;
+    }
+
+    .records-table button,
+    .records-table input {
+        font-size: 0.75rem;
+    }
+
+    .records-table button {
+        margin-left: 1rem;
+    }
+}
+
+@media (max-width: 550px) {
+    .records-table th,
+    .records-table td {
+        font-size: 50%;
+    }
+
+    .records-table table {
+        border-radius: 1rem .5rem 0 0;
+        margin-top: 1rem;
+    }
+
+    .records-table h1 {
+        font-size: 1rem;
+    }
+    
+    .records-table button,
+    .records-table input {
+        font-size: 0.5rem;
+    }
+
+    .records-table button {
+        margin-left: 0.5rem;
+    }
+
+}
+@media (max-width: 25rem) {
+    .records-table h1,
+    .records-table input {
+        margin-left: 1rem;
+    }
 }
