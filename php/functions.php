@@ -128,17 +128,22 @@ Class Action {
 		return $output;
 	}
 	
+	function save_height(){
+		extract($_POST);
+		$_SESSION['height'] = $data;
+		return 1;
+	}
+	
 	function get_temp(){
 		$output = shell_exec('/usr/bin/python3 /var/www/html/pupclinic/hardware/temp.py 2>&1');
 		echo "Output: " . $output;
 		return $output;
 	}
 	
-	function save_height(){
+	function save_temp(){
 		extract($_POST);
-		$_SESSION['height'] = $data;
+		$_SESSION['temp'] = $data;
 		return 1;
-
 	}
 	
 	function get_heart_rate(){
@@ -161,6 +166,12 @@ Class Action {
 		return $output;
 	}
 	
+	function save_oxygen(){	
+		extract($_POST);
+		$_SESSION['oxygen'] = $data;
+		return 1;
+	}
+	
 	function get_all_data(){
 		extract($_POST);	
 		$transaction_no = 100001;
@@ -175,15 +186,14 @@ Class Action {
 		}
 		
 		$_SESSION['transaction_no'] = $transaction_no;
-				
 		$data['user_type'] = $_SESSION['user'];
 		$data['id'] = intval($_SESSION['id']);
 		$data['name'] = $_SESSION['name'];
 		$data['email'] = $_SESSION['email'];
 		$data['height'] = $_SESSION['height'];
+		$data['temp'] = $_SESSION['temp'];
 		$data['heart_rate'] = $_SESSION['heart_rate'];
-		$data['oxygen'] = "";	
-
+		$data['oxygen'] = $_SESSION['oxygen'];
 		$prefix = "PUP";
 		$suffix = "CLI";
 		$data['transaction_no'] = $prefix . $transaction_no . $suffix;
@@ -197,13 +207,16 @@ Class Action {
 		$name = $_SESSION['name'];
 		$email = $_SESSION['email'];
 		$height = $_SESSION['height'];
+		$temp = $_SESSION['temp'];
 		$heart_rate = $_SESSION['heart_rate'];
-		$oxygen = "";	
+		$oxygen = $_SESSION['oxygen'];	
 		$transaction_no = $_SESSION['transaction_no'];
 		$assessment_status = 1;
-		$save = $this->db->query("INSERT INTO records (user_id, user_type, name, email, height, heart_rate, oxygen, transaction_no, assessment_status) VALUES ($id, '$user_type', '$name', '$email', '$height', '$heart_rate', '$oxygen', '$transaction_no', '$assessment_status');");
+		$save = $this->db->query("INSERT INTO records (user_id, user_type, name, email, height, temp, heart_rate, oxygen, transaction_no, assessment_status) VALUES ($id, '$user_type', '$name', '$email', '$height', '$temp', '$heart_rate', '$oxygen', '$transaction_no', '$assessment_status');");
 		$_SESSION['height'] = "";
+		$_SESSION['temp'] = "";
 		$_SESSION['heart_rate'] = "";
+		$_SESSION['oxygen'] = "";
 		$_SESSION['transaction_no'] = "";
 		$delete = $this->db->query("DELETE FROM queue WHERE name <> '';");
 		return 1;
@@ -236,12 +249,11 @@ Class Action {
 		$result = $this->db->query("SELECT COUNT(*) AS count FROM queue");
 		$row = $result->fetch_assoc();
 		if ($row['count'] > 1) {
-			return 2;
+			return 1;
 		} else {
 			$save = $this->db->query("INSERT INTO queue (id,name,user_type) VALUES ($id, '$name', '$user_type');");
 			return 1;
 		}
-		return 1;
 	} 
 	
 	function display_ongoing_check_up(){

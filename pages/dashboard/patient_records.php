@@ -10,7 +10,9 @@
 <table>
     <thead>
         <tr>
+            <th>Date</th>
             <th>Height</th>
+            <th>Temperature</th>
             <th>Heart Rate</th>
             <th>Oxygen</th>
             <th>Transaction no.</th>
@@ -26,7 +28,7 @@
                 if($_GET['search'] == ""){
                     $query = "SELECT * FROM records WHERE user_id=$id";
                 }else{
-                    $query = "SELECT * FROM records WHERE user_id = $id AND CONCAT(height, heart_rate, oxygen, transaction_no) LIKE '%$filtervalues%'";
+                    $query = "SELECT * FROM records WHERE user_id = $id AND CONCAT(height, temp, heart_rate, oxygen, transaction_no, date_created) LIKE '%$filtervalues%'";
                 }
                 $query_run = mysqli_query($conn, $query);
 
@@ -36,7 +38,9 @@
                     {
                         ?>
                         <tr>
+                            <td><?= $items['date_created']; ?></td>
                             <td><?= $items['height']; ?></td>
+                            <td><?= $items['temp']; ?></td>
                             <td><?= $items['heart_rate']; ?></td>
                             <td><?= $items['oxygen']; ?></td>
                             <td><?= $items['transaction_no']; ?></td> 
