@@ -173,8 +173,7 @@ button:hover,
 }
 
 #overlay {
-    background: var(--background-blur-color);
-    backdrop-filter: var(--background-blur-amount);
+    background: #eaeaeac9;
     position: absolute;
     overflow: hidden;
     top: 0;
