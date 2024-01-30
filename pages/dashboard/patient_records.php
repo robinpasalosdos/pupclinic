@@ -7,55 +7,59 @@
         <input type="text" name="search" value="<?php if(isset($_GET['search'])){echo $_GET['search']; } ?>" placeholder="Search data">
         <button type="submit">Search</button>
     </form>
-    <table>
-        <thead>
-            <tr>
-                <th>Height</th>
-                <th>Heart Rate</th>
-                <th>Oxygen</th>
-                <th>Transaction no.</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php 
-                include('../pupclinic/php/db_connect.php');
+<table>
+    <thead>
+        <tr>
+            <th>Date</th>
+            <th>Height</th>
+            <th>Temperature</th>
+            <th>Heart Rate</th>
+            <th>Oxygen</th>
+            <th>Transaction no.</th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php 
+            include('../pupclinic/php/db_connect.php');
 
 
-                    $filtervalues = $_GET['search'];
-                    $id = $_SESSION['id'];
-                    if($_GET['search'] == ""){
-                        $query = "SELECT * FROM records WHERE user_id=$id";
-                    }else{
-                        $query = "SELECT * FROM records WHERE user_id = $id AND CONCAT(height, heart_rate, oxygen, transaction_no) LIKE '%$filtervalues%'";
-                    }
-                    $query_run = mysqli_query($conn, $query);
+                $filtervalues = $_GET['search'];
+                $id = $_SESSION['id'];
+                if($_GET['search'] == ""){
+                    $query = "SELECT * FROM records WHERE user_id=$id";
+                }else{
+                    $query = "SELECT * FROM records WHERE user_id = $id AND CONCAT(height, temp, heart_rate, oxygen, transaction_no, date_created) LIKE '%$filtervalues%'";
+                }
+                $query_run = mysqli_query($conn, $query);
 
-                    if(mysqli_num_rows($query_run) > 0)
-                    {
-                        foreach($query_run as $items)
-                        {
-                            ?>
-                            <tr>
-                                <td><?= $items['height']; ?></td>
-                                <td><?= $items['heart_rate']; ?></td>
-                                <td><?= $items['oxygen']; ?></td>
-                                <td><?= $items['transaction_no']; ?></td> 
-                            </tr>
-                            <?php
-                        }
-                    }
-                    else
+                if(mysqli_num_rows($query_run) > 0)
+                {
+                    foreach($query_run as $items)
                     {
                         ?>
-                            <tr>
-                                <td>No Record Found</td>
-                            </tr>
+                        <tr>
+                            <td><?= $items['date_created']; ?></td>
+                            <td><?= $items['height']; ?></td>
+                            <td><?= $items['temp']; ?></td>
+                            <td><?= $items['heart_rate']; ?></td>
+                            <td><?= $items['oxygen']; ?></td>
+                            <td><?= $items['transaction_no']; ?></td> 
+                        </tr>
                         <?php
                     }
-                
-            ?>
-        </tbody>
-    </table>
+                }
+                else
+                {
+                    ?>
+                        <tr>
+                            <td>No Record Found</td>
+                        </tr>
+                    <?php
+                }
+            
+        ?>
+    </tbody>
+</table>
 </div>
 
 <script>

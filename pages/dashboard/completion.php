@@ -8,6 +8,8 @@
 	<h1 id="height">--</h1>
 	<h2>heart rate:</h2>
 	<h1 id="heart_rate">--</h1>
+	<h2>temperature:</h2>
+	<h1 id="temp">--</h1>
 	<h2>oxygen:</h2>
 	<h1 id="oxygen"></h1>
 	<h2>transaction number:</h2>
@@ -34,7 +36,9 @@
 				resp = JSON.parse(resp)
 				if(resp.status == 1){
 					$("#height").html(resp.data.height)
+					$("#temp").html(resp.data.temp)
 					$("#heart_rate").html(resp.data.heart_rate)
+					$("#oxygen").html(resp.data.oxygen)
 					$("#transaction_no").html(resp.data.transaction_no)
 				}
 			}

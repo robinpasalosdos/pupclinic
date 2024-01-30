@@ -47,7 +47,7 @@
 				if(resp == 1){
 					location.href = '../pupclinic/dashboard.php?page=get_height';
 				}else{
-				    alert("Someone Using");
+				    alert("Error");
 				}
 			}
 		})

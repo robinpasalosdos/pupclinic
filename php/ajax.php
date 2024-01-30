@@ -43,16 +43,16 @@ if($action == 'guest_register'){
 		echo $guest_register;
 }
 
-if($action == 'save_height'){
-	$save_height = $crud->save_height();
-	if($save_height)
-		echo $save_height;
-}
-
 if($action == 'get_height'){
 	$get_height = $crud->get_height();
 	if($get_height)
 		echo $get_height;
+}
+
+if($action == 'save_height'){
+	$save_height = $crud->save_height();
+	if($save_height)
+		echo $save_height;
 }
 
 if($action == 'get_heart_rate'){
@@ -67,22 +67,28 @@ if($action == 'save_heart_rate'){
 		echo $save_heart_rate;
 }
 
-if($action == 'save_oxygen'){
-	$save_oxygen = $crud->save_oxygen();
-	if($save_oxygen)
-		echo $save_oxygen;
-}
-
 if($action == 'get_oxygen'){
 	$get_oxygen = $crud->get_oxygen();
 	if($get_oxygen)
 		echo $get_oxygen;
 }
 
+if($action == 'save_oxygen'){
+	$save_oxygen = $crud->save_oxygen();
+	if($save_oxygen)
+		echo $save_oxygen;
+}
+
 if($action == 'get_temp'){
 	$get_temp = $crud->get_temp();
 	if($get_temp)
 		echo $get_temp;
+}
+
+if($action == 'save_temp'){
+	$save_temp = $crud->save_temp();
+	if($save_temp)
+		echo $save_temp;
 }
 
 if($action == 'save_all_data'){

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Jan 30, 2024 at 12:36 AM
+-- Generation Time: Jan 30, 2024 at 06:22 PM
 -- Server version: 10.5.21-MariaDB-0+deb11u1
 -- PHP Version: 7.4.33
 
@@ -51,6 +51,13 @@ CREATE TABLE `queue` (
   `date` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `queue`
+--
+
+INSERT INTO `queue` (`id`, `name`, `user_type`, `date`) VALUES
+(0, '', '', '2024-01-30 01:55:36');
+
 -- --------------------------------------------------------
 
 --
@@ -64,6 +71,7 @@ CREATE TABLE `records` (
   `name` varchar(50) NOT NULL,
   `email` varchar(50) NOT NULL,
   `height` varchar(50) NOT NULL,
+  `temp` varchar(50) NOT NULL,
   `heart_rate` varchar(50) NOT NULL,
   `oxygen` varchar(50) NOT NULL,
   `transaction_no` int(11) NOT NULL,
@@ -71,6 +79,13 @@ CREATE TABLE `records` (
   `date_created` date NOT NULL DEFAULT current_timestamp(),
   `created_timestamp` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `records`
+--
+
+INSERT INTO `records` (`id`, `user_id`, `user_type`, `name`, `email`, `height`, `temp`, `heart_rate`, `oxygen`, `transaction_no`, `assessment_status`, `date_created`, `created_timestamp`) VALUES
+(1, 1, 'faculty', 'Robin', 'robin', '138', '138', '138', '138', 100001, 1, '2024-01-30', '2024-01-30 18:11:52');
 
 -- --------------------------------------------------------
 
@@ -91,6 +106,17 @@ CREATE TABLE `users` (
   `date_created` date NOT NULL DEFAULT current_timestamp(),
   `created_timestamp` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`id`, `user_type`, `name`, `email`, `student_no`, `course`, `year`, `section`, `password`, `date_created`, `created_timestamp`) VALUES
+(1, 'faculty', 'Robin', 'robin', '', '', '', '', '12345', '2024-01-30', '2024-01-30 00:59:54'),
+(2, 'faculty', 'Juan', 'juan', '', '', '', '', '12345', '2024-01-30', '2024-01-30 01:07:45'),
+(3, 'faculty', 'robert', 'robert', '', '', '', '', '1234', '2024-01-30', '2024-01-30 01:10:59'),
+(4, 'faculty', 'Juana', 'juana', '', '', '', '', '12345', '2024-01-30', '2024-01-30 01:18:35'),
+(5, 'faculty', 'Mark', 'mark', '', '', '', '', '12345', '2024-01-30', '2024-01-30 02:04:35');
 
 --
 -- Indexes for dumped tables
@@ -116,13 +142,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `records`
 --
 ALTER TABLE `records`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

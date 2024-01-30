@@ -1,8 +1,3 @@
-<?php
-    if($_SESSION['height'] == ""){
-	header("location:../pupclinic/dashboard.php?page=landing_page");
-    }
-?>
 <div class="metrics-container">
     <h2>Get Heart Rate</h2>
     <p id="data2">-</p>
@@ -12,7 +7,7 @@
 	    <button id="get_heart_rate_button">Get</button>
 	</form>
 	<form id="save_heart_rate">
-	    <button style="display: none;" id="next">Finish</button>
+	    <button style="display: none;" id="next">Next</button>
 	    <input style="display: none;" type="text" id="data" name="data"><br>
 	</form>
 	
@@ -57,7 +52,7 @@
 			    },
 			    success:function(resp){
 				if(resp == 1){
-				    location.href = '../pupclinic/dashboard.php?page=completion';
+				    location.href = '../pupclinic/dashboard.php?page=get_oxygen';
 				}
 			    }
 			})

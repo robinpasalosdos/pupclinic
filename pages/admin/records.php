@@ -15,9 +15,11 @@
                 <th>Name</th>
                 <th>Email</th>
                 <th>Height</th>
+                <th>Temperature</th>
                 <th>Heart Rate</th>
                 <th>Oxygen</th>
                 <th>Transaction no.</th>
+                <th>Date</th>
                 <th>Action</th>
             </tr>
         </thead>
@@ -45,9 +47,11 @@
                                 <td><?= $items['name']; ?></td>
                                 <td><?= $items['email']; ?></td>
                                 <td><?= $items['height']; ?></td>
+                                <td><?= $items['temp']; ?></td>
                                 <td><?= $items['heart_rate']; ?></td>
                                 <td><?= $items['oxygen']; ?></td>
                                 <td><?= $items['transaction_no']; ?></td>
+                                <td><?= $items['date_created']; ?></td>
                                 <td><a class="delete_record" href="javascript:void(0)" data-id="<?= $items['id'] ?>">Delete</a></td>  
                             </tr>
                             <?php
