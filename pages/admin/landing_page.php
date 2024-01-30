@@ -3,7 +3,7 @@
 </head>
 
 <div class="admin-container">
-    <h1>Admin Landing Page</h1>
+    <h1>Hello, Admin!</h1>
     <a href="../pupclinic/php/ajax.php?action=logout">logout</a>
     <div class="admin-menu">
         <button onclick="redirectToRecords()">Records</button>

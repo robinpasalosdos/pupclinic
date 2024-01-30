@@ -15,7 +15,7 @@
     --input-blur-color: rgba(0, 0, 0, 0.365);
     --input-box-shadow: 3px 10px 25px 0px rgba(75, 78, 108, 0.582);
     --input-transition: cubic-bezier(.2,.55,.23,.99) 500ms;
-    --background-blur-color: rgba(255, 255, 255, 0.546);
+    --background-blur-color: rgba(206, 206, 206, 0.546);
     --background-blur-amount: blur(5px);
     --background-box-shadow: 10px 20px 3em 0px rgba(112, 118, 162, 0.352);
     --background-border-radius: 2em;
@@ -135,7 +135,8 @@ button:hover,
 }
 
 .login-form form[id="login"], 
-.login-form form[id="register"] {
+.login-form form[id="register"],
+.floating-register form[id="register"] {
     display: flex;
     background: var(--def-gradient-form);
     flex-direction: column;
@@ -148,7 +149,9 @@ button:hover,
 
 .login-form form[id="login"] input, 
 .login-form form[id="register"] input,
-.login-form form[id="register"] select {
+.login-form form[id="register"] select,
+.floating-register form[id="register"] input,
+.floating-register form[id="register"] select {
     height: 2rem;
     border: none;
     background: #f0ecec;
@@ -157,14 +160,54 @@ button:hover,
     transition: var(--def-transition);
 }
 
+.floating-register h1, 
 .login-form h1 {
     margin-left: 1.5rem;
 }
 
-.login-form button {
+.login-form button,
+.floating-register button {
     height: 3em;
     width: 6em;
     margin: 0;
+}
+
+#overlay {
+    background: var(--background-blur-color);
+    backdrop-filter: var(--background-blur-amount);
+    position: absolute;
+    overflow: hidden;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100%;
+}
+
+.floating-container {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    margin: auto;
+    height: 100vh;
+    width: 100%;
+    pointer-events: none;
+    overflow-y: auto;
+}
+
+.floating-register {
+    display: flex;
+    margin: auto;
+    margin-top: 5vh;
+    flex-direction: column;
+    justify-items: center;
+    height: min-content;
+    width: 85%;
+    max-width: 25rem;
+    align-content: space-evenly;
+    font-family: var(--def-font);
+    pointer-events: all;
+
 }
 
 .logout-button-a {
@@ -194,6 +237,7 @@ button:hover,
     justify-items: center;
     height: min-content;
     width: 85vw;
+    min-width: 25rem;
     position: relative;
     align-content: space-evenly;
     margin: auto;
@@ -201,10 +245,14 @@ button:hover,
     font-family: var(--def-font);
 }
 
-.records-table button {
+.records-table form button {
     height: 3em;
     width: 6em;
     margin: 0 0 0 1rem;
+}
+
+.records-table form button:last-of-type {
+    width: 8em;
 }
 
 .records-table table {
@@ -212,7 +260,7 @@ button:hover,
     width: 100%;
     height: min-content;
     margin: 2rem 0 0 0;
-    padding: 1rem 1.5rem 3rem 1.5rem;
+    padding: 1.5rem 1.5rem 3rem 1.5rem;
     border-radius: 2rem 2rem 0 0;
     box-shadow: var(--box-shadow);
 }
@@ -270,28 +318,38 @@ button:hover,
 
 .admin-container {
     display: grid;
+    grid-template-columns: 1fr 1fr;
     height: min-content;
-    width: 85%;
+    width: 85vw;
     max-width: 65rem;
     position: relative;
     align-content: space-evenly;
     margin: auto;
     align-items: center;
+    justify-content: center;
 }
 
 .admin-menu {
     grid-area: 2/1/3/3;
     display: flex;
     flex-direction: row;
+    align-items: center;
     background: var(--def-gradient-form);
     justify-items: center;
+    justify-content: center;
     align-content: space-evenly;
-    padding: 2rem 2rem 4rem 2rem;
+    padding: 2rem 1rem 3rem 1rem;
     border-radius: 2rem 2rem 0 0;
     box-shadow: var(--box-shadow);
 }
 
+.admin-menu button {
+    height: 7rem;
+    width: 90%;
+}
+
 .admin-container h1 {
+    margin-left: 2rem;
     grid-area: 1/1/2/2;
 }
 .admin-container a {
@@ -300,7 +358,6 @@ button:hover,
     text-decoration: none;
     margin: 0 3rem 1rem 0;
 }
-
 
 /* ----------- Hover & Focus effects Input ----------- */
 .login-form form[id="login"] input:hover, 
@@ -335,6 +392,11 @@ button:hover,
 
     .admin-menu {
         flex-direction: column;
+    }
+
+    .admin-menu button {
+        height: 11rem;
+        width: 90%;
     }
 }
 
@@ -444,16 +506,61 @@ button:hover,
     }
 }
 
-/* --------------------------------- */
+/* ----------------- FOR TABLE ---------------- */
 
-@media (max-width: 700px) {
+@media (max-width: 800px) {
     .records-table th,
     .records-table td {
-        font-size: 60%;
+        font-size: 65%;
     }
 
     .records-table table {
         border-radius: 1.5rem 1.5rem 0 0;
+        margin-top: 1.5rem;
     }
 
+    .records-table h1 {
+        font-size: 1.5rem;
+    }
+
+    .records-table button,
+    .records-table input {
+        font-size: 0.75rem;
+    }
+
+    .records-table form button{
+        margin-left: 1rem;
+    }
+}
+
+@media (max-width: 550px) {
+    .records-table th,
+    .records-table td {
+        font-size: 50%;
+    }
+
+    .records-table table {
+        border-radius: 1rem .5rem 0 0;
+        margin-top: 1rem;
+    }
+
+    .records-table h1 {
+        font-size: 1rem;
+    }
+    
+    .records-table button,
+    .records-table input {
+        font-size: 0.5rem;
+    }
+
+    .records-table form button{
+        margin-left: 0.5rem;
+    }
+
+}
+@media (max-width: 25rem) {
+    .records-table h1,
+    .records-table input {
+        margin-left: 1rem;
+    }
 }
