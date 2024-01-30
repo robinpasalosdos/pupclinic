@@ -1,12 +1,14 @@
-
-<table class="queue_card"></table>
-<div id="card" class="card">
-	<p id="name">-</p>
-	<p id="user_type">-</p>
-	<p id="status_ongoing">Ongoing</p>
-	<button id="delete_ongoing">Remove</button>
+<div class="records-table">
+    <table class="queue_card"></table>
 </div>
-	
+<div id="card" class="card">
+    <div class="metrics-container">
+        <p id="name">-</p>
+        <p id="user_type">-</p>
+        <p id="status_ongoing">Ongoing</p>
+        <button id="delete_ongoing">Remove</button>
+    </div>
+</div>
 <script>
 	$(document).ready(function(){
 		var renderServe = setInterval(function(){

@@ -260,7 +260,7 @@ button:hover,
     width: 100%;
     height: min-content;
     margin: 2rem 0 0 0;
-    padding: 1.5rem 1.5rem 3rem 1.5rem;
+    padding: 1.5rem 2rem 3rem 2rem;
     border-radius: 2rem 2rem 0 0;
     box-shadow: var(--box-shadow);
 }
@@ -276,6 +276,21 @@ button:hover,
     padding: 0 .5rem 0 .5rem;
     transition: var(--def-transition);
     
+}
+
+.records-table th,
+.records-table td {
+    padding: 0 1rem 0 .5rem ;
+}
+
+.records-table th:nth-child(2n),
+.records-table td:nth-child(2n) {
+    background-color: #ffd1d1;
+}
+
+.records-table table[class="queue_card"] button {
+    height: 3rem;
+    width: 10rem;
 }
 
 .metrics-container {
@@ -530,6 +545,12 @@ button:hover,
 
     .records-table form button{
         margin-left: 1rem;
+    }
+
+    .records-table table[class="queue_card"] button {
+        height: 2rem;
+        width: 7rem;
+        font-size: .75rem;
     }
 }
 
