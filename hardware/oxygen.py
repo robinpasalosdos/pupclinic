@@ -6,9 +6,9 @@ if __name__ == '__main__':
     ser = serial.Serial('/dev/ttyACM0', 9600)
     ser.flush()
     time.sleep(2)
-    ser.write(b'h')
+    ser.write(b'o')
     start_time = time.time()
-    run_time = 3
+    run_time = 12
 
     while time.time() - start_time < run_time:
         if ser.in_waiting > 0:
@@ -19,5 +19,5 @@ if __name__ == '__main__':
             print(line)
             
 
-    ser.close() 
+    ser.close()
 

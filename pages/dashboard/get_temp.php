@@ -36,11 +36,18 @@
 		  dataType: 'text',
 		  success: function(resp) {
 		    console.log(resp);
-		    $("#data").val(resp);
-		    $("#data2").text(resp);
-		    $("#get_temp_button").show();
-		    $("#get_temp_button").text("Retry");
-		    $("#next").show();
+		    var data = parseInt(resp);
+		    if(data > 30 && data < 43){
+			$("#data").val(resp);
+			$("#data2").text(resp + " ℃");
+			$("#get_temp_button").show();
+			$("#get_temp_button").text("Retry");
+			$("#next").show();
+		    }else{
+			$("#data2").text("Please try again.");
+			$("#get_temp_button").show();
+			$("#get_temp_button").text("Retry");
+		    }
 		    $('#save_temp').submit(function(e){
 			$.ajax({
 			    url:'../pupclinic/php/ajax.php?action=save_temp',

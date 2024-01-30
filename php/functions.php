@@ -135,8 +135,9 @@ Class Action {
 	}
 	
 	function get_temp(){
-		$output = shell_exec('/usr/bin/python3 /var/www/html/pupclinic/hardware/temp.py 2>&1');
-		echo "Output: " . $output;
+		exec('/usr/bin/python /var/www/html/pupclinic/hardware/temp.py 2>&1', $output, $return_code);
+		echo "Output: " . implode("\n", $output);
+		echo "\nReturn code: " . $return_code;
 		return $output;
 	}
 	
@@ -147,7 +148,7 @@ Class Action {
 	}
 	
 	function get_heart_rate(){
-		exec('/usr/bin/python /var/www/html/pupclinic/hardware/height.py 2>&1', $output, $return_code);
+		exec('/usr/bin/python /var/www/html/pupclinic/hardware/heart_rate.py 2>&1', $output, $return_code);
 		echo "Output: " . implode("\n", $output);
 		echo "\nReturn code: " . $return_code;
 		return $output;
@@ -160,7 +161,7 @@ Class Action {
 	}
 	
 	function get_oxygen(){
-		exec('/usr/bin/python /var/www/html/pupclinic/hardware/height.py 2>&1', $output, $return_code);
+		exec('/usr/bin/python /var/www/html/pupclinic/hardware/oxygen.py 2>&1', $output, $return_code);
 		echo "Output: " . implode("\n", $output);
 		echo "\nReturn code: " . $return_code;
 		return $output;
@@ -283,8 +284,9 @@ Class Action {
 								<th>Name</th>
 								<th>User Type</th>
 								<th>Height (cm)</th>
-								<th>Heart Rate</th>
-								<th>Oxygen</th>
+								<th>Temp (℃)</th>
+								<th>Heart Rate (bpm)</th>
+								<th>Oxygen (%)</th>
 								<th>Transaction no.</th>
 								<th>Action</th>
 							</tr>
@@ -300,6 +302,7 @@ Class Action {
 								<td>{$items['name']}</td>
 								<td>{$items['user_type']}</td>
 								<td>{$items['height']}</td>
+								<td>{$items['temp']}</td>
 								<td>{$items['heart_rate']}</td>
 								<td>{$items['oxygen']}</td>
 								<td>PUP-{$items['transaction_no']}-CLI</td>

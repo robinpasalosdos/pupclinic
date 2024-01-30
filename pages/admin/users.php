@@ -51,12 +51,15 @@
                                 <td><?= $items['year']; ?></td>
                                 <td><?= $items['section']; ?></td>
                                 
-                                <td><a class="update_user" href="javascript:void(0)" data-id="<?= $items['id'] ?>" 
-                                data_user_type="<? $items['user_type'] ?>" data_name="<? $items['name'] ?>" data_email="<? $items['email'] ?>" 
-                                data_student_no="<? $items['student_no'] ?>" data_course="<? $items['course'] ?>" data_year="<? $items['year'] ?>" 
-                                data_section="<? $items['section'] ?>">Update</a></td>
+                                <td>
+                                    <a class="update_user" href="javascript:void(0)" data-id="<?= $items['id'] ?>" 
+                                    data_user_type="<? $items['user_type'] ?>" data_name="<? $items['name'] ?>" data_email="<? $items['email'] ?>" 
+                                    data_student_no="<? $items['student_no'] ?>" data_course="<? $items['course'] ?>" data_year="<? $items['year'] ?>" 
+                                    data_section="<? $items['section'] ?>">Update</a>
+                                    <a class="delete_user" href="javascript:void(0)" data-id="<?= $items['id'] ?>">Delete</a>
+                                </td>
                                 
-                                <td><a class="delete_user" href="javascript:void(0)" data-id="<?= $items['id'] ?>">Delete</a></td>
+                                
                                 
                             </tr>
                             <?php
@@ -78,8 +81,8 @@
 
 <div id="overlay" onclick="hide_dialog()"></div>
 
-<div class="floating-container">
-    <div class="floating-register" id="create_student_account">
+<div id="create_student_account" class="floating-container">
+    <div class="floating-register">
         <form id="register">
             <label for="student_no">Student Number</label><br>
             <input type="text" id="student_no" name="student_no"><br>
@@ -143,6 +146,7 @@
 				success:function(resp){
 					if(resp==1){
 						alert("Data successfully deleted");
+                        location.reload();
 					}
 				}
 			})

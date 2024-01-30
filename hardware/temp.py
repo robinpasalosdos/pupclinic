@@ -1,18 +1,23 @@
-#!/usr/bin/env python3
-import board
-import busio as io
-import adafruit_mlx90614
+#!/usr/bin/env python
+import serial
+import time
 
-from time import sleep
+if __name__ == '__main__':
+    ser = serial.Serial('/dev/ttyACM0', 9600)
+    ser.flush()
+    time.sleep(2)
+    ser.write(b't')
+    start_time = time.time()
+    run_time = 3
 
-i2c = io.I2C(board.SCL, board.SDA, frequency=100000)
-mlx = adafruit_mlx90614.MLX90614(i2c)
+    while time.time() - start_time < run_time:
+        if ser.in_waiting > 0:
+            line = ser.readline().decode('utf-8').rstrip()
+            file = open("/var/www/html/pupclinic/hardware/data.txt", "w")
+            file.write(line)
+            file.close()
+            print(line)
+            
 
-targetTemp = "{:.2f}".format(mlx.object_temperature)
+    ser.close() 
 
-sleep(2)
-
-file = open("/var/www/html/pupclinic/hardware/data.txt", "w")
-file.write(targetTemp)
-file.close()
-print(targetTemp)

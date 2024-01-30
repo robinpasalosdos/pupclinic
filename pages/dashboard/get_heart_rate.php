@@ -36,11 +36,18 @@
 		  dataType: 'text',
 		  success: function(resp) {
 		    console.log(resp);
-		    $("#data").val(resp);
-		    $("#data2").text(resp);
-		    $("#get_heart_rate_button").show();
-		    $("#get_heart_rate_button").text("Retry");
-		    $("#next").show();
+		    var data = parseInt(resp);
+		    if(data > 20 && data < 200){
+			$("#data").val(resp);
+			$("#data2").text(resp + " bpm");
+			$("#get_heart_rate_button").show();
+			$("#get_heart_rate_button").text("Retry");
+			$("#next").show();
+		    }else{
+			$("#data2").text("Please try again.");
+			$("#get_heart_rate_button").show();
+			$("#get_heart_rate_button").text("Retry");
+		    }
 		    $('#save_heart_rate').submit(function(e){
 			$.ajax({
 			    url:'../pupclinic/php/ajax.php?action=save_heart_rate',

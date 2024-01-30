@@ -19,5 +19,5 @@ if __name__ == '__main__':
             print(line)
             
 
-    ser.close()  # Close the serial port after 5 seconds
+    ser.close()
 

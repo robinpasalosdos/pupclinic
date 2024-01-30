@@ -11,10 +11,10 @@
     <thead>
         <tr>
             <th>Date</th>
-            <th>Height</th>
-            <th>Temperature</th>
-            <th>Heart Rate</th>
-            <th>Oxygen</th>
+            <th>Height (cm)</th>
+            <th>Temperature (℃)</th>
+            <th>Heart Rate (bpm)</th>
+            <th>Oxygen (%)</th>
             <th>Transaction no.</th>
         </tr>
     </thead>

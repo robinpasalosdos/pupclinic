@@ -36,11 +36,18 @@
 		  dataType: 'text',
 		  success: function(resp) {
 		    console.log(resp);
-		    $("#data").val(resp);
-		    $("#data2").text(resp);
-		    $("#get_oxygen_button").show();
-		    $("#get_oxygen_button").text("Retry");
-		    $("#next").show();
+		    var data = parseInt(resp);
+		    if(data > 0 && data < 101){
+			$("#data").val(resp);
+			$("#data2").text(resp + " %");
+			$("#get_oxygen_button").show();
+			$("#get_oxygen_button").text("Retry");
+			$("#next").show();
+		    }else{
+			$("#data2").text("Please try again.");
+			$("#get_oxygen_button").show();
+			$("#get_oxygen_button").text("Retry");
+		    }
 		    $('#save_oxygen').submit(function(e){
 			$.ajax({
 			    url:'../pupclinic/php/ajax.php?action=save_oxygen',

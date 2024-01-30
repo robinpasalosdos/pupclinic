@@ -1,4 +1,4 @@
-<div class="records-table">
+ <div class="records-table">
     <table class="queue_card"></table>
 </div>
 <div id="card" class="card">
@@ -49,6 +49,22 @@
 				}
 			})
 		},1000)
+	})
+	$('#delete_ongoing').click(function(e){
+		$.ajax({
+			url:'../pupclinic/php/ajax.php?action=delete_ongoing',
+			type:'POST',
+			data:$(this).serialize(),
+			error:function(err){
+				console.log(err);
+				alert("An error occured");
+			},
+			success:function(resp){
+				if(resp == 1){
+					location.reload();
+				}
+			}
+		})
 	})
 
 </script>
