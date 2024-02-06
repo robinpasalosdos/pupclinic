@@ -1,9 +1,10 @@
 <?php
 session_start();
 ini_set('display_errors', 1);
+use PHPMailer\PHPMailer\PHPMailer;
 Class Action {
 	private $db;
-
+	
 	public function __construct() {
 		ob_start();
    	include 'db_connect.php';
@@ -17,7 +18,7 @@ Class Action {
 
 	function admin_login(){
 		extract($_POST);
-		$qry = $this->db->query("SELECT * FROM admin where password = '".$password."' ");
+		$qry = $this->db->query("SELECT * FROM admin where password = '".md5($password)."' ");
 		if($qry->num_rows > 0){
 			$_SESSION['user'] = 'admin';
 			return 1;
@@ -28,7 +29,7 @@ Class Action {
 
 	function faculty_login(){
 		extract($_POST);
-		$qry = $this->db->query("SELECT * FROM users where email = '$email' and password = '$password' and user_type = 'faculty' ");
+		$qry = $this->db->query("SELECT * FROM users where email = '$email' and password = '".md5($password)."' and user_type = 'faculty' ");
 		if($qry->num_rows > 0){
 			$row = $qry->fetch_assoc();
 			$id = $row['id'];
@@ -45,7 +46,7 @@ Class Action {
 
 	function student_login(){
 		extract($_POST);
-		$qry = $this->db->query("SELECT * FROM users where email = '$email' and password = '$password' and user_type = 'student' ");
+		$qry = $this->db->query("SELECT * FROM users where email = '$email' and password = '".md5($password)."' and user_type = 'student' ");
 		if($qry->num_rows > 0){
 			$row = $qry->fetch_assoc();
 			$id = $row['id'];
@@ -70,46 +71,43 @@ Class Action {
 
 	function student_register(){
 		extract($_POST);
-		$data = "user_type = 'student' ";
-		$data .= ", name = '$name' ";
-		$data .= ", email = '$email' ";
-		$data .= ", student_no = '$student_no' ";
-		$data .= ", course = '$course' ";
-		$data .= ", year = '$year' ";
-		$data .= ", section = '$section' ";
-		$data .= ", password = '$password' ";
-		
-		$check = $this->db->query("SELECT email FROM users WHERE email='$email' LIMIT 1");
-		if(mysqli_num_rows($check) == 1){
+		$name = $_SESSION['name'];
+		$birthday = $_SESSION['birthday'];
+		$sex = $_SESSION['sex'];
+		$student_no = $_SESSION['student_no'];
+		$course = $_SESSION['course'];
+		$year = $_SESSION['year'];
+		$section = $_SESSION['section'];
+		$email = $_SESSION['email'];
+		$password = $_SESSION['password'];
+		if($_SESSION['code'] != $code){
 			return 2;
 		}else{
-			$save = $this->db->query("INSERT INTO users set ".$data);
-			if($save)
-			return 1;
+			$save = $this->db->query("INSERT INTO users (user_type, name, birthday, sex, email, student_no, course, year, section, password) VALUES ('student', '$name', '$birthday', '$sex', '$email', '$student_no', '$course', '$year', '$section', '".md5($password)."')");
+			if($save){
+				session_destroy();
+				return 1;
+			}
 		}
-		
-		
-		
 	}
 	function faculty_register(){
 		extract($_POST);
-		$data = "user_type = 'faculty' ";
-		$data .= ", name = '$name' ";
-		$data .= ", email = '$email' ";
-		$data .= ", student_no = '' ";
-		$data .= ", course = '' ";
-		$data .= ", year = '' ";
-		$data .= ", section = '' ";
-		$data .= ", password = '$password' ";
-		
-		$check = $this->db->query("SELECT email FROM users WHERE email='$email' LIMIT 1");
-		if(mysqli_num_rows($check) == 1){
+		$name = $_SESSION['name'];
+		$birthday = $_SESSION['birthday'];
+		$sex = $_SESSION['sex'];
+		$email = $_SESSION['email'];
+		$password = $_SESSION['password'];
+		if($_SESSION['code'] != $code){
 			return 2;
 		}else{
-			$save = $this->db->query("INSERT INTO users set ".$data);
-			if($save)
-			return 1;
+			$save = $this->db->query("INSERT INTO users (user_type, name, birthday, sex, email, student_no, course, year, section, password) VALUES ('faculty', '$name', '$birthday', '$sex', '$email', '', '', '', '', '".md5($password)."')");
+			if($save){
+				session_destroy();
+				return 1;
+			}
+			
 		}
+		
 	}
 	
 	function guest_register(){
@@ -119,6 +117,31 @@ Class Action {
 		$_SESSION['email'] = $email;
 		$_SESSION['id'] = 0;
 		return 1;
+	}
+
+	function add_user(){
+		extract($_POST);
+		if($password != $password2){
+			return 3;
+		}else{
+			$check = $this->db->query("SELECT email FROM users WHERE email='$email' LIMIT 1");
+			if(mysqli_num_rows($check) == 1){
+				return 2;
+			}else{
+				if($user_type == 'student'){
+					$save = $this->db->query("INSERT INTO users (user_type, name, birthday, sex, email, student_no, course, year, section, password) VALUES ('student', '$name', '$birthday', '$sex', '$email', '$student_no', '$course', '$year', '$section', '".md5($password)."')");
+					if($save){
+						return 1;
+					}
+				}else{
+					$save = $this->db->query("INSERT INTO users (user_type, name, birthday, sex, email, student_no, course, year, section, password) VALUES ('faculty', '$name', '$birthday', '$sex', '$email', '', '', '', '', '".md5($password)."')");
+					if($save){
+						return 1;
+					}
+				}
+				
+			}
+		}
 	}
 	
 	function get_height(){
@@ -223,10 +246,6 @@ Class Action {
 		return 1;
 	}
 	
-	function delete_session_data(){
-		
-	}
-	
 	function delete_record(){
 		extract($_POST);
 		$delete = $this->db->query("DELETE FROM records where id = ".$id);
@@ -317,6 +336,191 @@ Class Action {
 			return json_encode(array('status'=>1,"contents"=>$contents,"id"=>$id));
 		}else{
 			return json_encode(array('status'=>0));
+		}
+	}
+	function send_otp(){
+		extract($_POST);
+		require 'vendor/phpmailer/phpmailer/src/Exception.php';
+		require 'vendor/phpmailer/phpmailer/src/PHPMailer.php';
+		require 'vendor/phpmailer/phpmailer/src/SMTP.php';
+		require 'vendor/autoload.php';
+		if($password != $password2){
+			return 3;
+		}else{
+			$check = $this->db->query("SELECT email FROM users WHERE email='$email' LIMIT 1");
+			if(mysqli_num_rows($check) == 1){
+				return 2;
+			}else{
+				$_SESSION['register'] = $user;
+				$_SESSION['name'] = $name;
+				$_SESSION['birthday'] = $birthday;
+				$_SESSION['sex'] = $sex;
+				if($user == 'student'){
+					$_SESSION['student_no'] = $student_no;
+					$_SESSION['course'] = $course;
+					$_SESSION['year'] = $year;
+					$_SESSION['section'] = $section;
+				}
+				$_SESSION['email'] = $email;
+				$_SESSION['password'] = $password;
+				$randOtpNum = rand(100000, 999999);
+				$randOtp = strval($randOtpNum);
+				$_SESSION['code'] = $randOtp;
+				
+				$mail = new PHPMailer();
+				$subject = 'OTP';
+				$message = "Your Code: $randOtp";
+				$emailStr = strval($email);
+				$messageStr = strval($message);
+				
+				$mail->IsSMTP();
+				$mail->Mailer = "smtp";
+				$mail->SMTPDebug  = 1;  
+				$mail->SMTPAuth   = TRUE;
+				$mail->SMTPSecure = "tls";
+				$mail->Port       = 587;
+				$mail->Host       = "smtp.gmail.com";
+				$mail->Username   = "pupclinic01@gmail.com";
+				$mail->Password   = "yrpb rdmp apec ymku";
+				$mail->IsHTML(true);
+				$mail->AddAddress("$emailStr", "You");
+				$mail->SetFrom("pupclinic01@gmail.com", "PUPClinic");
+				$mail->Subject = $subject;
+				$mail->MsgHTML($messageStr); 
+				if(!$mail->Send()) {
+					return 0;
+				} else {
+					return 1;
+				}	
+			}
+		}
+		
+	}
+
+	function forgot_password1(){
+		extract($_POST);
+		$check = $this->db->query("SELECT email FROM users WHERE email='$email' LIMIT 1");
+		if(mysqli_num_rows($check) == 1){
+			$_SESSION['email'] = $email;
+			return $this->send_code($email);
+		}else{
+			return 2;
+		}
+	}
+
+	function forgot_password2(){
+		extract($_POST);
+		if($_SESSION['code'] == $code){
+			return 1;
+		}else{
+			return 2;
+		}
+	}
+
+	function forgot_password3(){
+		extract($_POST);
+		$email = $_SESSION['email'];
+		if($password == $password2){
+			$update = $this->db->query("UPDATE users SET password = '$password' WHERE email = '$email';");
+			if($update){
+				$result = $this->db->query("SELECT user_type FROM users WHERE email = '$email';");
+				$row = $result->fetch_assoc();
+				session_destroy();
+				return $row['user_type'];
+			}else{
+				return 0;
+			}
+
+		}else{
+			return 2;
+		}
+	}
+
+	function update_user(){
+		extract($_POST);
+		if($u_password == $u_password2){
+			if($u_password == ""){
+				$u_password = $u_password3;
+			}else{
+				$u_password = md5($u_password3);
+			}
+			if($u_user_type == 'student'){
+				$update = $this->db->query("UPDATE users 
+				SET name = '$u_name', 
+					birthday = '$u_birthday', 
+					sex = '$u_sex', 
+					student_no = '$u_student_no', 
+					course = '$u_course', 
+					year = '$u_year', 
+					section = '$u_section', 
+					password = '$u_password' 
+				WHERE id = ".intval($u_id).";");
+				if($update){
+					return 1;
+				}else{
+					return 0;
+				}
+			}else{
+				$update = $this->db->query("UPDATE users 
+				SET name = '$u_name', 
+					birthday = '$u_birthday', 
+					sex = '$u_sex',
+					password = '$u_password' 
+				WHERE id = ".intval($u_id).";");
+				if($update){
+					return 1;
+				}else{
+					return 0;
+				}
+			}
+				
+			
+			
+		}else{
+			return 2;
+		}
+	}
+
+	function send_code($email){
+		$subject = "OTP";
+		$randOtpNum = rand(100000, 999999);
+		$randOtp = strval($randOtpNum);
+		$message = "Your Code: $randOtp";
+		$resp = $this->send_email($subject, $email, $message);
+		if(substr($resp, -1) == "1"){
+			$_SESSION['code'] = $randOtp;
+			return 1;
+		}else{
+			return 0;
+		}
+	}
+
+	function send_email($subject, $email, $message){
+		require 'vendor/phpmailer/phpmailer/src/Exception.php';
+		require 'vendor/phpmailer/phpmailer/src/PHPMailer.php';
+		require 'vendor/phpmailer/phpmailer/src/SMTP.php';
+		require 'vendor/autoload.php';
+		$mail = new PHPMailer();
+		$emailStr = strval($email);
+		$messageStr = strval($message);
+		$mail->IsSMTP();
+		$mail->Mailer = "smtp";
+		$mail->SMTPDebug  = 1;  
+		$mail->SMTPAuth   = TRUE;
+		$mail->SMTPSecure = "tls";
+		$mail->Port       = 587;
+		$mail->Host       = "smtp.gmail.com";
+		$mail->Username   = "pupclinic01@gmail.com";
+		$mail->Password   = "yrpb rdmp apec ymku";
+		$mail->IsHTML(true);
+		$mail->AddAddress("$emailStr", "You");
+		$mail->SetFrom("pupclinic01@gmail.com", "PUPClinic");
+		$mail->Subject = $subject;
+		$mail->MsgHTML($messageStr); 
+		if(!$mail->Send()) {
+			return 0;
+		} else {
+			return 1;
 		}
 	}
 	

@@ -5,9 +5,9 @@
 
 <script>
   function redirectToStudentRegistration() {
-    window.location.href = "../pupclinic/index.php?page=registration&user=student";
+    window.location.href = "../pupclinic/index.php?page=data_privacy&user=student";
   }
   function redirectToFacultyRegistration() {
-    window.location.href = "../pupclinic/index.php?page=registration&user=faculty";
+    window.location.href = "../pupclinic/index.php?page=data_privacy&user=faculty";
   }
 </script>
