@@ -281,8 +281,12 @@ Class Action {
 		$user_type = $_SESSION['user'];
 		$result = $this->db->query("SELECT user_id FROM queue where id = $id;");
 		if($result->num_rows < 1){
-			
+			$save = $this->db->query("INSERT INTO queue (user_id, name, user_type) VALUES ($id, '$name', '$user_type');");
+			if($save){
+			return 1;
 		}	
+		}
+			
 	}
 	
 	function display_ongoing_check_up(){
