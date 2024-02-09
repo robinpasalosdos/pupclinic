@@ -20,9 +20,10 @@
     <a class ="logout-button-a" href="../pupclinic/php/ajax.php?action=logout">logout</a>
     <div class="menu_container">
       <form id="check_up">
-	  <button >Initial Monitoring</button>
+	      <button >Initial Monitoring</button>
       </form>
-    <button onclick="redirectToYourRecords()">View Your Records</button>
+      <button onclick="redirectToYourRecords()">View Your Records</button>
+      <button onclick="redirectToYourProfile()">Profile</button>
     </div>
     <?php
   }
@@ -30,8 +31,9 @@
 <script>
   function redirectToYourRecords() {
     window.location.href = "../pupclinic/dashboard.php?page=patient_records&search=";
-
-
+  }
+  function redirectToYourProfile() {
+    window.location.href = "../pupclinic/dashboard.php?page=profile";
   }
   $('#check_up').submit(function(e){
 		$.ajax({

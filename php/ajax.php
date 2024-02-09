@@ -179,3 +179,9 @@ if($action == 'update_user'){
 		echo $update_user;
 }
 
+if($action == 'upload_profile_pic'){
+	$upload_profile_pic = $crud->upload_profile_pic();
+	if($upload_profile_pic)
+		echo $upload_profile_pic;
+}
+

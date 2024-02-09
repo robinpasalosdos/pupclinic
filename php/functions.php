@@ -83,7 +83,8 @@ Class Action {
 		if($_SESSION['code'] != $code){
 			return 2;
 		}else{
-			$save = $this->db->query("INSERT INTO users (user_type, name, birthday, sex, email, student_no, course, year, section, password) VALUES ('student', '$name', '$birthday', '$sex', '$email', '$student_no', '$course', '$year', '$section', '".md5($password)."')");
+			$hashed_password = md5($password);
+			$save = $this->db->query("INSERT INTO users (user_type, name, birthday, sex, email, student_no, course, year, section, password, pic) VALUES ('student', '$name', '$birthday', '$sex', '$email', '$student_no', '$course', '$year', '$section', '$hashed_password', 'default.png')");
 			if($save){
 				session_destroy();
 				return 1;
@@ -100,7 +101,8 @@ Class Action {
 		if($_SESSION['code'] != $code){
 			return 2;
 		}else{
-			$save = $this->db->query("INSERT INTO users (user_type, name, birthday, sex, email, student_no, course, year, section, password) VALUES ('faculty', '$name', '$birthday', '$sex', '$email', '', '', '', '', '".md5($password)."')");
+			$hashed_password = md5($password);
+			$save = $this->db->query("INSERT INTO users (user_type, name, birthday, sex, email, student_no, course, year, section, password, pic) VALUES ('faculty', '$name', '$birthday', '$sex', '$email', '', '', '', '', '$hashed_password', 'default.png')");
 			if($save){
 				session_destroy();
 				return 1;
@@ -112,11 +114,22 @@ Class Action {
 	
 	function guest_register(){
 		extract($_POST);
-		$_SESSION['user'] = 'guest';
-		$_SESSION['name'] = $name;
-		$_SESSION['email'] = $email;
-		$_SESSION['id'] = 0;
-		return 1;
+		$save = $this->db->query("INSERT INTO guest (name, birthday, sex, email, assessment_access) VALUES ('$name', '$birthday', '$sex', '$email', 0)");
+		if($save){
+			$_SESSION['user'] = 'guest';
+			$_SESSION['name'] = $name;
+			$_SESSION['email'] = $email;
+			$_SESSION['sex'] = $sex;
+			$_SESSION['birthday'] = $birthday;
+			$result = $this->db->query("SELECT id FROM guest ORDER BY id DESC LIMIT 1;");
+			if ($result) {
+				$row = $result->fetch_assoc();
+				if ($row) {
+					$_SESSION['id'] = $row['id'];
+				}
+			}
+			return 1;
+		}
 	}
 
 	function add_user(){
@@ -266,15 +279,11 @@ Class Action {
 		$id = intval($_SESSION['id']);
 		$name = $_SESSION['name'];
 		$user_type = $_SESSION['user'];
-		$result = $this->db->query("SELECT COUNT(*) AS count FROM queue");
-		$row = $result->fetch_assoc();
-		if ($row['count'] > 1) {
-			return 1;
-		} else {
-			$save = $this->db->query("INSERT INTO queue (id,name,user_type) VALUES ($id, '$name', '$user_type');");
-			return 1;
-		}
-	} 
+		$result = $this->db->query("SELECT user_id FROM queue where id = $id;");
+		if($result->num_rows < 1){
+			
+		}	
+	}
 	
 	function display_ongoing_check_up(){
 		$result = $this->db->query("SELECT * FROM queue ORDER BY date DESC LIMIT 1;");
@@ -340,61 +349,40 @@ Class Action {
 	}
 	function send_otp(){
 		extract($_POST);
-		require 'vendor/phpmailer/phpmailer/src/Exception.php';
-		require 'vendor/phpmailer/phpmailer/src/PHPMailer.php';
-		require 'vendor/phpmailer/phpmailer/src/SMTP.php';
-		require 'vendor/autoload.php';
 		if($password != $password2){
 			return 3;
 		}else{
-			$check = $this->db->query("SELECT email FROM users WHERE email='$email' LIMIT 1");
-			if(mysqli_num_rows($check) == 1){
-				return 2;
-			}else{
-				$_SESSION['register'] = $user;
-				$_SESSION['name'] = $name;
-				$_SESSION['birthday'] = $birthday;
-				$_SESSION['sex'] = $sex;
-				if($user == 'student'){
-					$_SESSION['student_no'] = $student_no;
-					$_SESSION['course'] = $course;
-					$_SESSION['year'] = $year;
-					$_SESSION['section'] = $section;
+			if (!preg_match('/[A-Z]/', $password) || !preg_match('/[0-9]/', $password) || strlen($password) < 8) {
+				return 4;
+			}else {
+				if (strpos($email, '@') === false || strpos($email, '.') === false) {
+					return 5;
+				}else{
+					$check = $this->db->query("SELECT email FROM users WHERE email='$email' LIMIT 1");
+					if(mysqli_num_rows($check) == 1){
+						return 2;
+					}else{
+						$_SESSION['register'] = $user;
+						$_SESSION['name'] = $name;
+						$_SESSION['birthday'] = $birthday;
+						$_SESSION['sex'] = $sex;
+						if($user == 'student'){
+							$_SESSION['student_no'] = $student_no;
+							$_SESSION['course'] = $course;
+							$_SESSION['year'] = $year;
+							$_SESSION['section'] = $section;
+						}
+						$_SESSION['email'] = $email;
+						$_SESSION['password'] = $password;
+						$randOtpNum = rand(100000, 999999);
+						$randOtp = strval($randOtpNum);
+						$_SESSION['code'] = $randOtp;
+						$_SESSION['email'] = $email;
+						return $this->send_code($email);
+					}
 				}
-				$_SESSION['email'] = $email;
-				$_SESSION['password'] = $password;
-				$randOtpNum = rand(100000, 999999);
-				$randOtp = strval($randOtpNum);
-				$_SESSION['code'] = $randOtp;
-				
-				$mail = new PHPMailer();
-				$subject = 'OTP';
-				$message = "Your Code: $randOtp";
-				$emailStr = strval($email);
-				$messageStr = strval($message);
-				
-				$mail->IsSMTP();
-				$mail->Mailer = "smtp";
-				$mail->SMTPDebug  = 1;  
-				$mail->SMTPAuth   = TRUE;
-				$mail->SMTPSecure = "tls";
-				$mail->Port       = 587;
-				$mail->Host       = "smtp.gmail.com";
-				$mail->Username   = "pupclinic01@gmail.com";
-				$mail->Password   = "yrpb rdmp apec ymku";
-				$mail->IsHTML(true);
-				$mail->AddAddress("$emailStr", "You");
-				$mail->SetFrom("pupclinic01@gmail.com", "PUPClinic");
-				$mail->Subject = $subject;
-				$mail->MsgHTML($messageStr); 
-				if(!$mail->Send()) {
-					return 0;
-				} else {
-					return 1;
-				}	
 			}
 		}
-		
 	}
 
 	function forgot_password1(){
@@ -516,12 +504,54 @@ Class Action {
 		$mail->AddAddress("$emailStr", "You");
 		$mail->SetFrom("pupclinic01@gmail.com", "PUPClinic");
 		$mail->Subject = $subject;
-		$mail->MsgHTML($messageStr); 
+		$mail->MsgHTML($messageStr);
+		if (!filter_var($emailStr, FILTER_VALIDATE_EMAIL)) {
+			return 6;
+		} 
 		if(!$mail->Send()) {
 			return 0;
 		} else {
 			return 1;
 		}
 	}
+
+	function upload_profile_pic(){
+		if(isset($_FILES["image"]["name"])){
+			$email = $_POST["profileEmail"];
+			$name = $_POST["profileName"];
+	
+			$imageName = $_FILES["image"]["name"];
+			$imageSize = $_FILES["image"]["size"];
+			$tmpName = $_FILES["image"]["tmp_name"];
+	
+			$validImageExtension = ['jpg', 'jpeg', 'png'];
+			$imageExtension = explode('.', $imageName);
+			$imageExtension = strtolower(end($imageExtension));
+			if (!in_array($imageExtension, $validImageExtension)){
+				echo "diff";
+			}
+			elseif ($imageSize > 1200000){
+				echo "max";
+			}
+			else{
+				$newImageName = $name . " - " . date("Y.m.d") . " - " . date("h.i.sa") . '.' . $imageExtension;
+				$destinationDirectory = 'profile_pic/';
+	
+				if (!file_exists($destinationDirectory)) {
+					mkdir($destinationDirectory, 0777, true);
+					chmod($destinationDirectory, 0777);
+				}
+	
+				if(move_uploaded_file($tmpName, $destinationDirectory . $newImageName)) {
+					$query = "UPDATE users SET pic = '$newImageName' WHERE email = '$email'";
+					mysqli_query($this->db, $query);
+					echo 0;
+				} else {
+					echo "Error uploading file.";
+				}
+			}
+		}
+	}
+	
 	
 }
