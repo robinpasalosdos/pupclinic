@@ -135,12 +135,16 @@ CREATE TABLE `users` (
   `name` varchar(50) NOT NULL,
   `birthday` varchar(50) NOT NULL,
   `sex` varchar(50) NOT NULL,
+  `birthday` varchar(50) NOT NULL,
+  `sex` varchar(50) NOT NULL,
   `email` varchar(50) NOT NULL,
   `student_no` varchar(50) NOT NULL,
   `course` varchar(50) NOT NULL,
   `year` varchar(50) NOT NULL,
   `section` varchar(50) NOT NULL,
   `password` varchar(50) NOT NULL,
+  `assessment_access` int(11) NOT NULL,
+  `pic` varchar(100) NOT NULL,
   `assessment_access` int(11) NOT NULL,
   `pic` varchar(100) NOT NULL,
   `date_created` date NOT NULL DEFAULT current_timestamp(),
@@ -172,6 +176,21 @@ ALTER TABLE `queue`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `guest`
+--
+ALTER TABLE `guest`
+  ADD PRIMARY KEY (`id`);
+
+--
+<<<<<<< HEAD
+-- Indexes for table `queue`
+--
+ALTER TABLE `queue`
+  ADD PRIMARY KEY (`id`);
+
+--
+=======
+>>>>>>> dd5f70e0663364c8bdaa1d74738ace2e8bb2aecc
 -- Indexes for table `records`
 --
 ALTER TABLE `records`

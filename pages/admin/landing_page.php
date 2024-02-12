@@ -8,7 +8,8 @@
     <div class="admin-menu">
         <button onclick="redirectToRecords()">Records</button>
         <button onclick="redirectToUsers()">Users</button>
-        <button onclick="redirectTo()">Real-Time Assessment</button>
+        <button onclick="redirectToRTA()">Real-Time Assessment</button>
+        <button onclick="redirectToPA()">Post-Assessment</button>
     </div>
 </div>
 <script>
@@ -18,7 +19,10 @@
   function redirectToUsers() {
     window.location.href = "../pupclinic/admin.php?page=users&search=";
   }
-  function redirectTo() {
+  function redirectToRTA() {
     window.location.href = "../pupclinic/admin.php?page=assessment";
+  }
+  function redirectToPA() {
+    window.location.href = "../pupclinic/admin.php?page=post_assessment";
   }
 </script>
