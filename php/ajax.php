@@ -185,3 +185,9 @@ if($action == 'upload_profile_pic'){
 		echo $upload_profile_pic;
 }
 
+if($action == 'give_access'){
+	$give_access = $crud->give_access();
+	if($give_access)
+		echo $give_access;
+}
+

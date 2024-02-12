@@ -36,10 +36,10 @@
     window.location.href = "../pupclinic/dashboard.php?page=profile";
   }
   $('#check_up').submit(function(e){
+    e.preventDefault()
 		$.ajax({
 			url:'../pupclinic/php/ajax.php?action=create_initial_record',
 			type:'POST',
-			data:$(this).serialize(),
 			error:function(err){
 				console.log(err);
 				alert("An error occured");
@@ -49,7 +49,7 @@
 				if(resp == 1){
 					location.href = '../pupclinic/dashboard.php?page=get_height';
 				}else{
-				    alert("Error");
+          location.href = '../pupclinic/dashboard.php?page=get_height';
 				}
 			}
 		})

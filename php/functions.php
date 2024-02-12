@@ -167,7 +167,7 @@ Class Action {
 	function save_height(){
 		extract($_POST);
 		$_SESSION['height'] = $data;
-		return 1;
+		return $this->update_queue_data($data, "height");
 	}
 	
 	function get_temp(){
@@ -180,7 +180,7 @@ Class Action {
 	function save_temp(){
 		extract($_POST);
 		$_SESSION['temp'] = $data;
-		return 1;
+		return $this->update_queue_data($data, "temp");
 	}
 	
 	function get_heart_rate(){
@@ -193,7 +193,7 @@ Class Action {
 	function save_heart_rate(){	
 		extract($_POST);
 		$_SESSION['heart_rate'] = $data;
-		return 1;
+		return $this->update_queue_data($data, "heart_rate");
 	}
 	
 	function get_oxygen(){
@@ -206,7 +206,30 @@ Class Action {
 	function save_oxygen(){	
 		extract($_POST);
 		$_SESSION['oxygen'] = $data;
-		return 1;
+		return $this->update_queue_data($data, "oxygen");
+	}
+
+	function update_queue_data($data, $vital_sign){
+		$id = $_SESSION['id'];
+		$user_type = $_SESSION['user'];
+		if($user_type == "guest"){
+			$update = $this->db->query("UPDATE queue 
+				SET ".$vital_sign." = '$data'
+				WHERE user_id = $id
+				AND user_type = 'guest';");
+			if($update){
+				return 1;
+			}
+		}else{
+			$update = $this->db->query("UPDATE queue 
+				SET ".$vital_sign." = '$data' 
+				WHERE user_id = $id
+				AND (user_type = 'student'
+				OR user_type = 'faculty');");
+			if($update){
+				return 1;
+			}
+		}
 	}
 	
 	function get_all_data(){
@@ -279,12 +302,20 @@ Class Action {
 		$id = intval($_SESSION['id']);
 		$name = $_SESSION['name'];
 		$user_type = $_SESSION['user'];
-		$result = $this->db->query("SELECT user_id FROM queue where id = $id;");
+		$result = $this->db->query("SELECT user_id FROM queue where user_id = $id AND (user_type = 'student' OR user_type = 'faculty')");
 		if($result->num_rows < 1){
 			$save = $this->db->query("INSERT INTO queue (user_id, name, user_type) VALUES ($id, '$name', '$user_type');");
 			if($save){
 			return 1;
-		}	
+			}	
+		}else{
+			$result = $this->db->query("SELECT user_id FROM queue where user_id = $id and user_type = 'guest'");
+			if($result->num_rows < 1){
+				$save = $this->db->query("INSERT INTO queue (user_id, name, user_type) VALUES ($id, '$name', '$user_type');");
+				if($save){
+					return 1;
+				}
+			}
 		}
 			
 	}
@@ -303,6 +334,29 @@ Class Action {
 		$result = $this->db->query("DELETE FROM queue WHERE name <> '';");
 		return 1;
 	}
+
+	function give_access() {
+		extract($_POST);
+		$id = $_POST['id'];
+	
+		// Update the timestamp of the row
+		$sqlUpdateTimestamp = "UPDATE queue SET created_timestamp = CURRENT_TIMESTAMP WHERE id = $id";
+		if ($this->db->query($sqlUpdateTimestamp) === TRUE) {
+			echo "Timestamp successfully updated.";
+	
+			// Reorder the rows by updating the sequence numbers
+			$sqlReorder = "SET @seq := 0;
+						   UPDATE queue SET sequence_number = (@seq := @seq + 1) ORDER BY created_timestamp DESC;";
+			if ($this->db->multi_query($sqlReorder) === TRUE) {
+				// Success message
+			} else {
+				echo "Error reordering rows: " . $this->db->error;
+			}
+		} else {
+			echo "Error updating timestamp: " . $this->db->error;
+		}
+	}
+	
 	
 	function display_realtime_records(){
 
