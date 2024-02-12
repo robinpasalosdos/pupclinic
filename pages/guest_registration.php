@@ -3,6 +3,14 @@
     <form id="register">   
         <label for="name">Name</label>
         <input type="text" id="name" name="name"><br>
+        <label for="birthday">Birthday</label>
+        <input type="date" id="birthday" name="birthday" required autocomplete="off"><br>
+        <label for="sex">Sex</label>
+        <select name="sex" id="sex" required>
+            <option value="" disabled selected>Select your gender</option>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+        </select><br>
         <label for="email">Email</label>
         <input type="text" id="email" name="email"><br>
         <button>Save</button>

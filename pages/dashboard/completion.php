@@ -45,6 +45,7 @@
 		})
 	})
 	$('#save_all_data').submit(function(e){
+		e.preventDefault()
 		$.ajax({
 			url:'../pupclinic/php/ajax.php?action=save_all_data',
 			type:'POST',

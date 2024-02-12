@@ -11,6 +11,7 @@
         <input type="password" id="password" name="password"><br>
         <button>Login</button>
     </form>
+	<button id="forgot_password">Forgot Password?</button>
 	<?php endif; ?>
 	<?php if($_GET['user'] == 'admin'): ?>
 	    <form id="login">
@@ -45,6 +46,9 @@
 				}
 			}
 		})
+	})
+	$('#forgot_password').click(function(e){
+		window.location.href = "../pupclinic/index.php?page=forgot_password1";
 	})
 </script>
 

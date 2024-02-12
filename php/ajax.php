@@ -142,3 +142,52 @@ if($action == 'display_realtime_records'){
 	if($display_realtime_records)
 		echo $display_realtime_records;
 }
+
+if($action == 'send_otp'){
+	$send_otp = $crud->send_otp();
+	if($send_otp)
+		echo $send_otp;
+}
+
+if($action == 'forgot_password1'){
+	$forgot_password1 = $crud->forgot_password1();
+	if($forgot_password1)
+		echo $forgot_password1;
+}
+
+if($action == 'forgot_password2'){
+	$forgot_password2 = $crud->forgot_password2();
+	if($forgot_password2)
+		echo $forgot_password2;
+}
+
+if($action == 'forgot_password3'){
+	$forgot_password3 = $crud->forgot_password3();
+	if($forgot_password3)
+		echo $forgot_password3;
+}
+
+if($action == 'add_user'){
+	$add_user = $crud->add_user();
+	if($add_user)
+		echo $add_user;
+}
+
+if($action == 'update_user'){
+	$update_user = $crud->update_user();
+	if($update_user)
+		echo $update_user;
+}
+
+if($action == 'upload_profile_pic'){
+	$upload_profile_pic = $crud->upload_profile_pic();
+	if($upload_profile_pic)
+		echo $upload_profile_pic;
+}
+
+if($action == 'give_access'){
+	$give_access = $crud->give_access();
+	if($give_access)
+		echo $give_access;
+}
+

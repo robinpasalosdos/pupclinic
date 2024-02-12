@@ -20,7 +20,6 @@
                 <th>Oxygen</th>
                 <th>Transaction no.</th>
                 <th>Date</th>
-                <th>Action</th>
             </tr>
         </thead>
         <tbody>
@@ -51,8 +50,7 @@
                                 <td><?= $items['heart_rate']; ?></td>
                                 <td><?= $items['oxygen']; ?></td>
                                 <td><?= $items['transaction_no']; ?></td>
-                                <td><?= $items['date_created']; ?></td>
-                                <td><a class="delete_record" href="javascript:void(0)" data-id="<?= $items['id'] ?>">Delete</a></td>  
+                                <td><?= $items['date_created']; ?></td> 
                             </tr>
                             <?php
                         }
@@ -70,23 +68,4 @@
         </tbody>
     </table>
 </div>
-<script>
-    $('.delete_record').click(function(){
-        delete_user($(this).attr('data-id'))
-        location.reload()
-    })
-	function delete_user($id){
-		if (confirm("Do you want to delete?") == true) {
-			$.ajax({
-				url:'../pupclinic/php/ajax.php?action=delete_record',
-				method:'POST',
-				data:{id:$id},
-				success:function(resp){
-					if(resp==1){
-						alert("Data successfully deleted");
-					}
-				}
-			})
-		}
-	}
-</script>
+
