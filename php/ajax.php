@@ -191,3 +191,8 @@ if($action == 'give_access'){
 		echo $give_access;
 }
 
+if($action == 'remove_queue'){
+	$remove_queue = $crud->remove_queue();
+	if($remove_queue)
+		echo $remove_queue;
+}

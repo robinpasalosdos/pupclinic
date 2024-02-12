@@ -40,6 +40,7 @@ function displayPrioritySection() {
                 }
             }
             echo "</div>";
+            echo "<button class='btn btn-primary removeButton' data-id='" . $row['id'] . "'>Remove</button>";
             echo "</div>";
         }
     } else {
@@ -49,27 +50,30 @@ function displayPrioritySection() {
 
 function displayQueueSection() {
     global $conn;
-    $sql0 = "SELECT * FROM queue WHERE assessment_access = 0";
+    $sql0 = "SELECT * FROM queue WHERE assessment_access = 0 ORDER BY discomfort_rate DESC";
     $queue = $conn->query($sql0);
     if ($queue->num_rows > 0) {
+        $noPriorityRows = checkIfNoPriorityRows();
         while($row = $queue->fetch_assoc()) {
             echo "<div class='card'>";
             echo "<div class='card-body'>";
             echo "<h5 class='card-title'>ID: " . $row['id'] . "</h5>";
             echo "<p class='card-text'>Name: " . $row['name'] . "</p>";
             echo "<p class='card-text'>User Type: " . $row['user_type'] . "</p>";
-            echo "<button class='btn btn-primary updateButton' data-id='" . $row['id'] . "' data-user_id='" . $row['user_id'] . "'>Update</button>";
+
+            $disableButton = checkIfNoPriorityRows() ? '' : 'disabled';
+
+            echo "<button class='btn btn-primary accessButton' data-id='" . $row['id'] . "' data-user_id='" . $row['user_id'] . "' $disableButton>Give Access</button>";
+            echo "<button class='btn btn-primary removeButton' data-id='" . $row['id'] . "'>Remove</button>";
             echo "</div>";
             echo "</div>";
-            // If no rows have assessment_access = 1, update the first row's assessment_access from 0 to 1
-            if (checkIfNoPriorityRows()) {
-                updateFirstRowToPriority();
-            }
         }
     } else {
         echo "<p>No one is in line</p>";
     }
 }
+
+
 
 function checkIfNoPriorityRows() {
     global $conn;
@@ -103,7 +107,7 @@ $(document).ready(function(){
 
     refreshData();
 
-    $(document).on('click', '.updateButton', function(){
+    $(document).on('click', '.accessButton', function(){
         var id = $(this).data('id');
         var user_id = $(this).data('user_id');
         var data = {
@@ -119,5 +123,22 @@ $(document).ready(function(){
             }
         });
     });
+
+    function remove_queue($id){
+		if (confirm("Do you want to delete?") == true) {
+			$.ajax({
+				url:'../pupclinic/php/ajax.php?action=remove_queue',
+				method:'POST',
+				data:{id:$id},
+				success:function(resp){
+                    console.log(resp);
+				}
+			})
+		}
+	}
+
+    $(document).on('click', '.removeButton', function(){
+        remove_queue($(this).attr('data-id'))
+    })
 });
 </script>

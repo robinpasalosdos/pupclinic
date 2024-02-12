@@ -84,7 +84,7 @@ Class Action {
 			return 2;
 		}else{
 			$hashed_password = md5($password);
-			$save = $this->db->query("INSERT INTO users (user_type, name, birthday, sex, email, student_no, course, year, section, password, pic) VALUES ('student', '$name', '$birthday', '$sex', '$email', '$student_no', '$course', '$year', '$section', '$hashed_password', 'default.png')");
+			$save = $this->db->query("INSERT INTO users (user_type, name, birthday, sex, email, student_no, course, year, section, password, assessment_access, pic) VALUES ('student', '$name', '$birthday', '$sex', '$email', '$student_no', '$course', '$year', '$section', '$hashed_password', 0, 'default.png')");
 			if($save){
 				session_destroy();
 				return 1;
@@ -102,7 +102,7 @@ Class Action {
 			return 2;
 		}else{
 			$hashed_password = md5($password);
-			$save = $this->db->query("INSERT INTO users (user_type, name, birthday, sex, email, student_no, course, year, section, password, pic) VALUES ('faculty', '$name', '$birthday', '$sex', '$email', '', '', '', '', '$hashed_password', 'default.png')");
+			$save = $this->db->query("INSERT INTO users (user_type, name, birthday, sex, email, student_no, course, year, section, password, assessment_access, pic) VALUES ('faculty', '$name', '$birthday', '$sex', '$email', '', '', '', '', '$hashed_password', 0, 'default.png')");
 			if($save){
 				session_destroy();
 				return 1;
@@ -338,22 +338,12 @@ Class Action {
 	function give_access() {
 		extract($_POST);
 		$id = $_POST['id'];
+		$sql = "UPDATE queue SET assessment_access = 1 WHERE id = $id";
 	
-		// Update the timestamp of the row
-		$sqlUpdateTimestamp = "UPDATE queue SET created_timestamp = CURRENT_TIMESTAMP WHERE id = $id";
-		if ($this->db->query($sqlUpdateTimestamp) === TRUE) {
-			echo "Timestamp successfully updated.";
-	
-			// Reorder the rows by updating the sequence numbers
-			$sqlReorder = "SET @seq := 0;
-						   UPDATE queue SET sequence_number = (@seq := @seq + 1) ORDER BY created_timestamp DESC;";
-			if ($this->db->multi_query($sqlReorder) === TRUE) {
-				// Success message
-			} else {
-				echo "Error reordering rows: " . $this->db->error;
-			}
+		if ($this->db->query($sql) === TRUE) {
+			echo "1";
 		} else {
-			echo "Error updating timestamp: " . $this->db->error;
+			echo "Error updating record: " . $this->db->error;
 		}
 	}
 	
@@ -609,6 +599,14 @@ Class Action {
 				}
 			}
 		}
+	}
+
+	function remove_queue(){
+		extract($_POST);
+		$delete = $this->db->query("DELETE FROM queue where id = ".$id);
+		if($delete)
+			return 1;
+		return $id;
 	}
 	
 	
