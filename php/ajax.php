@@ -196,3 +196,9 @@ if($action == 'remove_queue'){
 	if($remove_queue)
 		echo $remove_queue;
 }
+
+if($action == 'save_discomfort_rate'){
+	$save_discomfort_rate = $crud->save_discomfort_rate();
+	if($save_discomfort_rate)
+		echo $save_discomfort_rate;
+}

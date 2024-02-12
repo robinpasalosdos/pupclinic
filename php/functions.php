@@ -608,6 +608,32 @@ Class Action {
 			return 1;
 		return $id;
 	}
-	
-	
+
+	function save_discomfort_rate(){
+		extract($_POST);
+		$id = intval($_SESSION['id']);
+		$name = $_SESSION['name'];
+		$user_type = $_SESSION['user'];
+		$result = $this->db->query("SELECT user_id FROM queue where user_id = $id AND (user_type = 'student' OR user_type = 'faculty')");
+		if($result->num_rows < 1){
+			$save = $this->db->query(
+				"INSERT INTO queue (user_id, name, user_type, height, heart_rate, oxygen, temp, assessment_access, discomfort_rate) 
+				VALUES ($id, '$name', '$user_type', '', '', '', '', 0, $discomfort_rate);"
+			);
+			if($save){
+			return 1;
+			}	
+		}else{
+			$result = $this->db->query("SELECT user_id FROM queue where user_id = $id and user_type = 'guest'");
+			if($result->num_rows < 1){
+				$save = $this->db->query(
+					"INSERT INTO queue (user_id, name, user_type, height, heart_rate, oxygen, temp, assessment_access, discomfort_rate) 
+					VALUES ($id, '$name', '$user_type', '', '', '', '', 0, $discomfort_rate);"
+				);
+				if($save){
+					return 1;
+				}
+			}
+		}
+	}
 }
