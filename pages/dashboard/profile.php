@@ -2,13 +2,14 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    
+<div class="electronic-health-record">   
     <?php
         if (isset($_SESSION['user'])){
             $id = $_SESSION['id'];
             $res = mysqli_query($conn, "SELECT * FROM users WHERE id = $id");
             if (mysqli_num_rows($res) > 0) {
                 $user = mysqli_fetch_assoc($res) ?>
+            <div>
                 <form class="form" id = "form" action="" enctype="multipart/form-data" method="post">
                     <div class="upload">
                         <?php
@@ -39,11 +40,13 @@
                 <label>Year</label>
                 <input type="text" value="<?=$user['year']?>" name="year" id="year" autocomplete="off" disabled required>
                 <label>Section</label>
-                <input type="text" value="<?=$user['section']?>" name="section" id="section" autocomplete="off" disabled required>  
+                <input type="text" value="<?=$user['section']?>" name="section" id="section" autocomplete="off" disabled required>
+            </div>
     <?php }
             $res = mysqli_query($conn, "SELECT * FROM records WHERE user_id = $id ORDER BY created_timestamp DESC LIMIT 1");
             if (mysqli_num_rows($res) > 0) {
                 $record = mysqli_fetch_assoc($res) ?>   
+            <div>
                 <label>Height</label>
                 <input type="text" value="<?=$record['height']?>" name="height" id="height" autocomplete="off" disabled required>
                 <label>Temperature</label>
@@ -52,7 +55,9 @@
                 <input type="text" value="<?=$record['heart_rate']?>" name="heart_rate" id="heart_rate" autocomplete="off" disabled required> 
                 <label>Oxygen</label>
                 <input type="text" value="<?=$record['oxygen']?>" name="oxygen" id="oxygen" autocomplete="off" disabled required>
+            </div>            
     <?php }}?> 
+</div>
 </body>
 <script>
     document.getElementById("image").onchange = function(){

@@ -10,8 +10,8 @@
         <label>Password</label>
         <input type="password" id="password" name="password"><br>
         <button>Login</button>
+        <button id="forgot_password">Forgot Password?</button>
     </form>
-	<button id="forgot_password">Forgot Password?</button>
 	<?php endif; ?>
 	<?php if($_GET['user'] == 'admin'): ?>
 	    <form id="login">

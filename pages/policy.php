@@ -19,7 +19,7 @@
 <input type="checkbox" id="checkbox" name="checkbox">
 <p>I agree&nbsp;<a href="#" id="privacyLink">to the data privacy agreement</a></p>
 <button id="proceed_button" disabled>Continue</button>
-<div style="display: none;" class="dialog-box" id="dialog"> <!-- nakadialog -->
+<div style="display: none;" class="dialog-box" id="dialog">
     <h1>Data Protection and Privacy Regulation</h1> 
     
     <h2>Introduction</h2>
