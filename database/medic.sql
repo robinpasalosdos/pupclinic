@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 12, 2024 at 11:10 AM
+-- Generation Time: Feb 13, 2024 at 08:22 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.0.25
 
@@ -82,16 +82,9 @@ CREATE TABLE `queue` (
   `oxygen` varchar(50) NOT NULL,
   `temp` varchar(50) NOT NULL,
   `assessment_access` int(11) NOT NULL,
-  `created_timestamp` datetime NOT NULL DEFAULT current_timestamp(),
-  `sequence_number` int(11) NOT NULL
+  `discomfort_rate` int(11) NOT NULL,
+  `created_timestamp` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `queue`
---
-
-INSERT INTO `queue` (`id`, `user_id`, `name`, `user_type`, `height`, `heart_rate`, `oxygen`, `temp`, `assessment_access`, `created_timestamp`, `sequence_number`) VALUES
-(18, 24, 'Robin Pasalosdos', 'faculty', '', '', '', '', 1, '2024-02-11 18:03:01', 4);
 
 -- --------------------------------------------------------
 
@@ -153,7 +146,8 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `user_type`, `name`, `birthday`, `sex`, `email`, `student_no`, `course`, `year`, `section`, `password`, `assessment_access`, `pic`, `date_created`, `created_timestamp`) VALUES
 (19, 'student', 'Robin Pasalosdos', '2024-02-15', 'Male', 'robinpasalosdos@gmail.com', '2019-XXXXX-MN-0', 'BSCoE', '5', '6', '202cb962ac59075b964b07152d234b70', 0, 'default.png', '2024-02-07', '2024-02-07 23:56:14'),
-(24, 'faculty', 'robin', '2024-02-16', 'Male', 'rawbean09@gmail.com', '', '', '', '', '8f3ba5fd2beac46774ceba7798b4e2c4', 1, 'default.png', '2024-02-09', '2024-02-09 01:05:59');
+(24, 'faculty', 'robin', '2024-02-16', 'Male', 'rawbean09@gmail.com', '', '', '', '', '8f3ba5fd2beac46774ceba7798b4e2c4', 0, 'default.png', '2024-02-09', '2024-02-09 01:05:59'),
+(26, 'student', 'desu', '2000-08-30', 'Male', 'jasutindono@gmail.com', '2019-05473-MN-0', 'BSCPE', '4', '3', 'fb32aaf975d84397f650b994973c0b78', 0, 'desu - 2024.02.12 - 03.26.37pm.jpg', '2024-02-12', '2024-02-12 22:25:50');
 
 --
 -- Indexes for dumped tables
@@ -197,7 +191,7 @@ ALTER TABLE `guest`
 -- AUTO_INCREMENT for table `queue`
 --
 ALTER TABLE `queue`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
 -- AUTO_INCREMENT for table `records`
@@ -209,7 +203,7 @@ ALTER TABLE `records`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
