@@ -202,3 +202,9 @@ if($action == 'save_discomfort_rate'){
 	if($save_discomfort_rate)
 		echo $save_discomfort_rate;
 }
+
+if($action == 'assessment'){
+	$assessment = $crud->assessment();
+	if($assessment)
+		echo $assessment;
+}

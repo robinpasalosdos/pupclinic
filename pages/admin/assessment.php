@@ -11,7 +11,7 @@ $conn->close();
 
 function displayPrioritySection() {
     global $conn;
-    $sql1 = "SELECT * FROM queue WHERE assessment_access = 1";
+    $sql1 = "SELECT * FROM queue WHERE assessment_access = 1 OR assessment_access = 2";
     $prio = $conn->query($sql1);
     if ($prio->num_rows > 0) {
         while($row = $prio->fetch_assoc()) {
@@ -19,22 +19,26 @@ function displayPrioritySection() {
             echo "<div class='card-body'>";
             echo "<h5 class='card-title'>Name: " . $row['name'] . "</h5>";
             echo "<p class='card-text'>UserType: " . $row['user_type'] . "</p>";
-            if ($row['height'] == ""){
-                echo "<p class='card-text'>Getting Height...</p>";
-            } else {
-                echo "<p class='card-text'>Height: " . $row['height'] . "</p>";
-                if ($row['temp'] == ""){
-                    echo "<p class='card-text'>Getting Temperature...</p>";
+            $sql2 = "SELECT * FROM queue WHERE assessment_access = 2";
+            $prio2 = $conn->query($sql2);
+            if ($prio2->num_rows > 0) {
+                if ($row['height'] == ""){
+                    echo "<p class='card-text'>Getting Height...</p>";
                 } else {
-                    echo "<p class='card-text'>Temp: " . $row['temp'] . "</p>";
-                    if ($row['heart_rate'] == ""){
-                        echo "<p class='card-text'>Getting Heart Rate...</p>";
+                    echo "<p class='card-text'>Height: " . $row['height'] . "</p>";
+                    if ($row['temp'] == ""){
+                        echo "<p class='card-text'>Getting Temperature...</p>";
                     } else {
-                        echo "<p class='card-text'>Heart Rate: " . $row['heart_rate'] . "</p>";
-                        if ($row['oxygen'] == ""){
-                            echo "<p class='card-text'>Getting Oxygen Rate...</p>";
+                        echo "<p class='card-text'>Temp: " . $row['temp'] . "</p>";
+                        if ($row['heart_rate'] == ""){
+                            echo "<p class='card-text'>Getting Heart Rate...</p>";
                         } else {
-                            echo "<p class='card-text'>Oxygen Rate: " . $row['oxygen'] . "</p>";
+                            echo "<p class='card-text'>Heart Rate: " . $row['heart_rate'] . "</p>";
+                            if ($row['oxygen'] == ""){
+                                echo "<p class='card-text'>Getting Oxygen Rate...</p>";
+                            } else {
+                                echo "<p class='card-text'>Oxygen Rate: " . $row['oxygen'] . "</p>";
+                            }
                         }
                     }
                 }

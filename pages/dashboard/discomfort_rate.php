@@ -47,7 +47,7 @@
 			},
 			success:function(resp){
 				console.log(resp);
-				if(resp == 1){
+				if(resp == 1 || resp == 0){
 					location.href = '../pupclinic/dashboard.php?page=access_check';
 				}
 			}
