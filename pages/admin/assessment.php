@@ -60,16 +60,16 @@ function displayQueueSection() {
         $noPriorityRows = checkIfNoPriorityRows();
         while($row = $queue->fetch_assoc()) {
             echo "<div class='card'>";
-            echo "<div class='card-body'>";
-            echo "<h5 class='card-title'>ID: " . $row['id'] . "</h5>";
-            echo "<p class='card-text'>Name: " . $row['name'] . "</p>";
-            echo "<p class='card-text'>User Type: " . $row['user_type'] . "</p>";
+                echo "<div class='card-body'>";
+                    echo "<h5 class='card-title'>ID: " . $row['id'] . "</h5>";
+                    echo "<p class='card-text'>Name: " . $row['name'] . "</p>";
+                    echo "<p class='card-text'>User Type: " . $row['user_type'] . "</p>";
 
-            $disableButton = checkIfNoPriorityRows() ? '' : 'disabled';
+                    $disableButton = checkIfNoPriorityRows() ? '' : 'disabled';
 
-            echo "<button class='btn btn-primary accessButton' data-id='" . $row['id'] . "' data-user_id='" . $row['user_id'] . "' $disableButton>Give Access</button>";
-            echo "<button class='btn btn-primary removeButton' data-id='" . $row['id'] . "'>Remove</button>";
-            echo "</div>";
+                    echo "<button class='btn btn-primary accessButton' data-id='" . $row['id'] . "' data-user_id='" . $row['user_id'] . "' $disableButton>Give Access</button>";
+                    echo "<button class='btn btn-primary removeButton' data-id='" . $row['id'] . "'>Remove</button>";
+                echo "</div>";
             echo "</div>";
         }
     } else {

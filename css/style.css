@@ -503,7 +503,8 @@ button:hover {
 .policy-container button,
 .assessment-container button,
 .dialog-box button,
-#priority button{
+#priority button,
+.card button{
     height: 4rem;
     width: 14rem;
 }
@@ -561,7 +562,7 @@ button:hover {
     margin: auto;
 }
 
-#priority {
+#priority, .card {
     background: var(--def-gradient-form);
     display: flex;
     height: min-content;
@@ -575,12 +576,6 @@ button:hover {
     justify-items: start;
     align-items: center;
 }
-
-#priority button {
-
-}
-
-
 
 #backToPreviousPage {
     position: absolute;

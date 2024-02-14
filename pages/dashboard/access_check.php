@@ -7,7 +7,8 @@
   {
     ?>
     <div class="assessment-container">
-        <h3>Your assessment access is pending approval from the admin. Please wait for further instructions.</h3>
+        <h3>Your assessment access is pending approval from the admin.</h3>
+        <h3>Please wait for further instructions.</h3>
     </div>
     <?php
   }
