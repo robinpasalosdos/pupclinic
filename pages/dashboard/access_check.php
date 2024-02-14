@@ -23,7 +23,7 @@ function display(){
 
     echo "<h3>Your assessment access has been granted.</h3>";
     echo "<h3> You can proceed with the assessment now.</h3>";
-    echo "<button id='proceed'>Proceed to Assessment</button>";
+    echo "<button class='proceed'>Proceed to Assessment</button>";
 
   }
 }
@@ -43,7 +43,7 @@ function display(){
         });
     }
     refreshData();
-    $("#proceed").click(function(){
+    $(document).on('click', '.proceed', function(){
         $.ajax({
             url:'../pupclinic/php/ajax.php?action=assessment',
             method:'POST',
