@@ -4,8 +4,8 @@
 <body>
 <div class="electronic-health-record">   
     <?php
-        if (isset($_SESSION['user'])){
-            $id = $_SESSION['id'];
+        if (isset($_GET['user'])){
+            $id = $_GET['user'];
             $res = mysqli_query($conn, "SELECT * FROM users WHERE id = $id");
             if (mysqli_num_rows($res) > 0) {
                 $user = mysqli_fetch_assoc($res) ?>

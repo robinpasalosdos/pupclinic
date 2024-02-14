@@ -1,3 +1,5 @@
+<h2>User Options</h2>
+<p>Please select one of the following options:</p>
 <div class="menu_container">
     <button onclick="redirectToLoginMenu()">Login</button>
     <button onclick="redirectToRegister()">Register</button>

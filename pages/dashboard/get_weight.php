@@ -1,11 +1,11 @@
 <div class="metrics-container">
-    <h2>Height</h2>
+    <h2>Weight</h2>
     <p id="data2">-</p>
     <div>
-        <form id="get_height">
-            <button id="get_height_button">Get</button>
+        <form id="get_weight">
+            <button id="get_weight_button">Get</button>
         </form>
-        <form id="save_height">
+        <form id="save_weight">
             <button style="display: none;" id="next">Next</button>
             <input style="display: none;" type="text" id="data" name="data"><br>
         </form>
@@ -14,13 +14,13 @@
 
 <script>
     var params = <?php echo json_encode($_GET)?>;
-    $('#get_height').submit(function(e){
+    $('#get_weight').submit(function(e){
 		e.preventDefault()
 		$("#data2").text("Please wait...");
-		$("#get_height_button").hide();
+		$("#get_weight_button").hide();
 		$("#next").hide();
 		$.ajax({
-			url:'../pupclinic/php/ajax.php?action=get_height',
+			url:'../pupclinic/php/ajax.php?action=get_weight',
 			method:'POST',
 			data:$(this).serialize(),
 			error:err=>{
@@ -37,19 +37,19 @@
 				if(data > 0 && data < 201){
 				$("#data").val(resp);
 				$("#data2").text(resp + " cm");
-				$("#get_height_button").show();
-				$("#get_height_button").text("Retry");
+				$("#get_weight_button").show();
+				$("#get_weight_button").text("Retry");
 				$("#next").show();
 				}else{
 				$("#data2").text("Please try again.");
-				$("#get_height_button").show();
-				$("#get_height_button").text("Retry");
+				$("#get_weight_button").show();
+				$("#get_weight_button").text("Retry");
 				}
 				
-				$('#save_height').submit(function(e){
+				$('#save_weight').submit(function(e){
 					e.preventDefault()
 					$.ajax({
-						url:'../pupclinic/php/ajax.php?action=save_height',
+						url:'../pupclinic/php/ajax.php?action=save_weight',
 						type:'POST',
 						data:$(this).serialize(),
 						error:function(err){
@@ -59,7 +59,7 @@
 						success:function(resp){
 							console.log(resp);
 							if(resp == 1){
-								location.href = '../pupclinic/dashboard.php?page=get_weight';
+								location.href = '../pupclinic/dashboard.php?page=get_temp';
 							}else{
 								alert(resp);
 							}

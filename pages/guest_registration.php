@@ -1,5 +1,6 @@
 <div class="login-form">
-	<h1>Hello Guest!</h1>
+    <h1>Guest Registration Form</h1>
+    <p>Please fill in the following details to register as a guest:</p>
     <form id="register">   
         <label for="name">Name</label>
         <input type="text" id="name" name="name"><br>

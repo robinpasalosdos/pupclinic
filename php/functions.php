@@ -136,24 +136,34 @@ Class Action {
 		extract($_POST);
 		if($password != $password2){
 			return 3;
-		}else{
-			$check = $this->db->query("SELECT email FROM users WHERE email='$email' LIMIT 1");
-			if(mysqli_num_rows($check) == 1){
-				return 2;
-			}else{
-				if($user_type == 'student'){
-					$save = $this->db->query("INSERT INTO users (user_type, name, birthday, sex, email, student_no, course, year, section, password) VALUES ('student', '$name', '$birthday', '$sex', '$email', '$student_no', '$course', '$year', '$section', '".md5($password)."')");
-					if($save){
-						return 1;
-					}
+		}
+		else{
+			if (!preg_match('/[A-Z]/', $password) || !preg_match('/[0-9]/', $password) || strlen($password) < 8) {
+				return 4;
+			}else {
+				if (strpos($email, '@') === false || strpos($email, '.') === false) {
+					return 5;
 				}else{
-					$save = $this->db->query("INSERT INTO users (user_type, name, birthday, sex, email, student_no, course, year, section, password) VALUES ('faculty', '$name', '$birthday', '$sex', '$email', '', '', '', '', '".md5($password)."')");
-					if($save){
-						return 1;
+					$check = $this->db->query("SELECT email FROM users WHERE email='$email' LIMIT 1");
+					if(mysqli_num_rows($check) == 1){
+						return 2;
+					}else{
+						if($user_type == 'student'){
+							$save = $this->db->query("INSERT INTO users (user_type, name, birthday, sex, email, student_no, course, year, section, password, assessment_access, pic) VALUES ('student', '$name', '$birthday', '$sex', '$email', '$student_no', '$course', '$year', '$section', '".md5($password)."', 0, 'default.png')");
+							if($save){
+								return 1;
+							}
+						}else{
+							$save = $this->db->query("INSERT INTO users (user_type, name, birthday, sex, email, student_no, course, year, section, password, assessment_access, pic) VALUES ('faculty', '$name', '$birthday', '$sex', '$email', '', '', '', '', '".md5($password)."', 0, 'default.png')");
+							if($save){
+								return 1;
+							}
+						}
+						
 					}
 				}
-				
 			}
+			
 		}
 	}
 	
@@ -170,6 +180,18 @@ Class Action {
 		return $this->update_queue_data($data, "height");
 	}
 	
+	function get_weight(){
+		exec('/usr/bin/python /var/www/html/pupclinic/hardware/height.py 2>&1', $output, $return_code);
+		echo "Output: " . implode("\n", $output);
+		echo "\nReturn code: " . $return_code;
+		return $output;
+	}
+	
+	function save_weight(){
+		extract($_POST);
+		$_SESSION['weight'] = $data;
+		return $this->update_queue_data($data, "weight");
+	}
 	function get_temp(){
 		exec('/usr/bin/python /var/www/html/pupclinic/hardware/temp.py 2>&1', $output, $return_code);
 		echo "Output: " . implode("\n", $output);
@@ -244,13 +266,17 @@ Class Action {
 				$transaction_no += $last_id;
 			}
 		}
-		
+		$height = intval($_SESSION['height']);
+		$height_m = $height / 100;
+		$weight = intval($_SESSION['weight']);
 		$_SESSION['transaction_no'] = $transaction_no;
 		$data['user_type'] = $_SESSION['user'];
 		$data['id'] = intval($_SESSION['id']);
 		$data['name'] = $_SESSION['name'];
 		$data['email'] = $_SESSION['email'];
-		$data['height'] = $_SESSION['height'];
+		$data['height'] = $height;
+		$data['weight'] = $weight;
+		$data['bmi'] = number_format($weight/($height_m * $height_m), 2);
 		$data['temp'] = $_SESSION['temp'];
 		$data['heart_rate'] = $_SESSION['heart_rate'];
 		$data['oxygen'] = $_SESSION['oxygen'];
@@ -266,19 +292,22 @@ Class Action {
 		$id = intval($_SESSION['id']);
 		$name = $_SESSION['name'];
 		$email = $_SESSION['email'];
-		$height = $_SESSION['height'];
+		$height = intval($_SESSION['height']);
+		$height_m = $height / 100;
+		$weight = intval($_SESSION['weight']);
+		$bmi = number_format($weight/($height_m * $height_m), 2);
 		$temp = $_SESSION['temp'];
 		$heart_rate = $_SESSION['heart_rate'];
 		$oxygen = $_SESSION['oxygen'];	
 		$transaction_no = $_SESSION['transaction_no'];
 		$assessment_status = 1;
-		$save = $this->db->query("INSERT INTO records (user_id, user_type, name, email, height, temp, heart_rate, oxygen, transaction_no, assessment_status) VALUES ($id, '$user_type', '$name', '$email', '$height', '$temp', '$heart_rate', '$oxygen', '$transaction_no', '$assessment_status');");
+		$save = $this->db->query("INSERT INTO records (user_id, user_type, name, email, height, weight, bmi, temp, heart_rate, oxygen, transaction_no, assessment_status) VALUES ($id, '$user_type', '$name', '$email', '$height', '$weight', '$bmi', '$temp', '$heart_rate', '$oxygen', '$transaction_no', '$assessment_status');");
 		$_SESSION['height'] = "";
 		$_SESSION['temp'] = "";
 		$_SESSION['heart_rate'] = "";
 		$_SESSION['oxygen'] = "";
 		$_SESSION['transaction_no'] = "";
-		$delete = $this->db->query("DELETE FROM queue WHERE name <> '';");
+		$delete = $this->db->query("DELETE FROM queue WHERE user_id = $id;");
 		return 1;
 	}
 	

@@ -4,15 +4,19 @@
 	}
 ?>
 <div class="metrics-container">
-	<h2>height:</h2>
+	<h2>Height:</h2>
 	<h1 id="height">--</h1>
-	<h2>temperature:</h2>
+	<h2>Weight:</h2>
+	<h1 id="weight">--</h1>
+	<h2>BMI:</h2>
+	<h1 id="bmi">--</h1>
+	<h2>Temperature:</h2>
 	<h1 id="temp">--</h1>
-	<h2>heart rate:</h2>
+	<h2>Heart Rate:</h2>
 	<h1 id="heart_rate">--</h1>
-	<h2>oxygen:</h2>
+	<h2>Oxygen:</h2>
 	<h1 id="oxygen"></h1>
-	<h2>transaction number:</h2>
+	<h2>Transaction Number:</h2>
 	<h2 id="transaction_no"></h2>
 	<button onclick="retry()">Retry</button>
 	<form id="save_all_data">
@@ -36,6 +40,8 @@
 				resp = JSON.parse(resp)
 				if(resp.status == 1){
 					$("#height").html(resp.data.height + " cm")
+					$("#weight").html(resp.data.weight + " kg")
+					$("#bmi").html(resp.data.bmi + " kg/m²")
 					$("#temp").html(resp.data.temp + " ℃")
 					$("#heart_rate").html(resp.data.heart_rate + " bpm")
 					$("#oxygen").html(resp.data.oxygen + " %")
@@ -61,4 +67,5 @@
 			}
 		})
 	})
+	
 </script>

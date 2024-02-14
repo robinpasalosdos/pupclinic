@@ -21,6 +21,7 @@
                 <th>Course</th>
                 <th>Year</th>
                 <th>Section</th>
+                <th>Date Created</th>
                 <th>Action</th>
 
             </tr>
@@ -54,7 +55,7 @@
                                 <td><?= $items['course']; ?></td>
                                 <td><?= $items['year']; ?></td>
                                 <td><?= $items['section']; ?></td>
-                                
+                                <td><?= date('M d, Y', strtotime($items['date_created'])); ?></td>
                                 <td>
                                     <a class="update_user_button" href="javascript:void(0)" data_id="<?= $items['id'] ?>" 
                                     data_user_type="<?= $items['user_type'] ?>" data_name="<?= $items['name'] ?>" data_birthday="<?= $items['birthday'] ?>" 
@@ -62,6 +63,7 @@
                                     data_student_no="<?= $items['student_no'] ?>" data_course="<?= $items['course'] ?>" data_year="<?= $items['year'] ?>" 
                                     data_section="<?= $items['section'] ?>" data_password="<?= $items['password'] ?>">Update</a>
                                     <a class="delete_user" href="javascript:void(0)" data-id="<?= $items['id'] ?>">Delete</a>
+                                    <a class="view_profile" href="javascript:void(0)" data-id="<?= $items['id'] ?>">View Profile</a>
                                 </td>
                                 
                                 
@@ -177,6 +179,9 @@
     $('.delete_user').click(function(){
         delete_user($(this).attr('data-id'))
     })
+    $('.view_profile').click(function(){
+        location.href = "../pupclinic/admin.php?page=profile&user=" + $(this).attr('data-id');
+    })
 
     $('.update_user_button').click(function(){
         $('#update_user_container').css('display', 'block');
@@ -255,6 +260,12 @@
                 }
                 if(resp == 3){
                     alert("Password didn't match!");
+                }
+                if(resp == 4){
+                    alert("Password must contain at least one uppercase letter, one digit, and be at least 8 characters long.");
+                }
+                if(resp == 5){
+                    alert("Invalid email!");
                 }
             }
         })

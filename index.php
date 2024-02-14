@@ -22,8 +22,20 @@
 </head>
 <body>
     <main>
+        <?php
+        if ($_GET['page'] != 'landing_page'){?>
+            <img src="../pupclinic/assets/back.png" id="backToPreviousPage">
+        <?php
+        }?>
         <?php $page = isset($_GET['page']) ? $_GET['page'] :'landing_page'; ?>
         <?php include 'pages/'.$page.'.php' ?>
+        <script>
+            $(document).ready(function() {
+                $('#backToPreviousPage').click(function() {
+                    window.history.back();
+                });
+            });
+        </script>
     </main>
 </body>
 </html>

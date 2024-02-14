@@ -23,6 +23,6 @@
     window.location.href = "../pupclinic/admin.php?page=assessment";
   }
   function redirectToPA() {
-    window.location.href = "../pupclinic/admin.php?page=post_assessment";
+    window.location.href = "../pupclinic/admin.php?page=post_assessment&search=";
   }
 </script>

@@ -55,6 +55,18 @@ if($action == 'save_height'){
 		echo $save_height;
 }
 
+if($action == 'get_weight'){
+	$get_weight = $crud->get_weight();
+	if($get_weight)
+		echo $get_weight;
+}
+
+if($action == 'save_weight'){
+	$save_weight = $crud->save_weight();
+	if($save_weight)
+		echo $save_weight;
+}
+
 if($action == 'get_heart_rate'){
 	$get_heart_rate = $crud->get_heart_rate();
 	if($get_heart_rate)
