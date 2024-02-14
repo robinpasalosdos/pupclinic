@@ -95,7 +95,7 @@ button:hover,
     border-radius: 2rem 2rem 0 0 ;
     box-shadow: var(--box-shadow);
     margin: auto;
-    margin-top: 10%;
+    margin-top: 20vh;
     height: min-content;
     width: min-content;
     justify-content: space-evenly;
@@ -230,15 +230,15 @@ button:hover,
 .logout-button-a {
     position: absolute;
     display: block;
-    padding: 1.5rem 0 0 0;
+    padding: 1rem 0 0 0;
     text-decoration: none;
     text-align: center;
     background: var(--def-theme-color);
-    height: 3em;
-    width: 8em;
+    height: 2.5em;
+    width: 7em;
     font-size: 1rem;
     border: none;
-    border-radius: 3rem;
+    border-radius: 2rem;
     margin: 1rem;
     cursor: pointer;
     color: #dddddd;
@@ -253,11 +253,12 @@ button:hover,
     flex-direction: column;
     justify-items: center;
     height: min-content;
-    width: 85vw;
+    width: 92vw;
     min-width: 25rem;
     position: relative;
     align-content: space-evenly;
     margin: auto;
+    margin-top: 11vh;
     text-align: left;
     font-family: var(--def-font);
 }
@@ -277,7 +278,7 @@ button:hover,
     width: 100%;
     height: min-content;
     margin: 2rem 0 0 0;
-    padding: 1.5rem 2rem 3rem 2rem;
+    padding: 1.5rem 1rem 3rem 1rem;
     border-radius: 2rem 2rem 0 0;
     box-shadow: var(--box-shadow);
 }
@@ -395,6 +396,7 @@ button:hover,
     display: flex;
     flex-direction: row;
     justify-content: center;
+    margin-top: 11vh;
 }
 
 .electronic-health-record > div {
@@ -413,6 +415,15 @@ button:hover,
     margin: 2%;
     margin-top: 7vh;
     font-family: var(--def-font);
+}
+
+#backToPreviousPage {
+    position: absolute;
+    height: 2rem;
+    width: 2rem;
+    top: 20px;
+    left: 20px;
+    cursor: pointer;
 }
 
 /* ----------- Hover & Focus effects Input ----------- */
@@ -570,10 +581,10 @@ button:hover,
 
 @media (max-width: 800px) {
     .menu_container button {
-        height: 6rem;
-        width: 10rem;
+        height: 9rem;
+        width: 12rem;
         font-size: 1rem;
-        border-radius: 1.25rem;
+        border-radius: 1.5rem;
     }
 
     .records-table th,
@@ -637,12 +648,3 @@ button:hover,
         margin-left: 1rem;
     }
 }
-
-#backToPreviousPage {
-    position: absolute;
-    top: 20px;
-    left: 20px;
-    cursor: pointer;
-}
-
-
