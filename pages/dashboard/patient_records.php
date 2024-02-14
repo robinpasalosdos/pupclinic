@@ -12,6 +12,8 @@
         <tr>
             <th>Date</th>
             <th>Height (cm)</th>
+            <th>Weight (kg)</th>
+            <th>BMI (kg/m²)</th>
             <th>Temperature (℃)</th>
             <th>Heart Rate (bpm)</th>
             <th>Oxygen (%)</th>
@@ -40,6 +42,8 @@
                         <tr>
                             <td><?= $items['date_created']; ?></td>
                             <td><?= $items['height']; ?></td>
+                            <td><?= $items['weight']; ?></td>
+                            <td><?= $items['bmi']; ?></td>
                             <td><?= $items['temp']; ?></td>
                             <td><?= $items['heart_rate']; ?></td>
                             <td><?= $items['oxygen']; ?></td>

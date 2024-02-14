@@ -20,8 +20,10 @@
                         <div class="round">
                             <input type="hidden" name="email" id="profileEmail" value="<?php echo $user['email']; ?>">
                             <input type="hidden" name="name" id="profileName" value="<?php echo $name; ?>">
-                            <input type="file" name="image" id = "image" accept=".jpg, .jpeg, .png">
-                        <i class = "fa fa-camera" style = "color: #fff;"></i>
+                            <label for="image">
+                                Upload
+                            </label>
+                            <input type="file" name="image" id = "image" style="display: none;" accept=".jpg, .jpeg, .png">
                         </div>
                     </div>
                 </form>   
@@ -56,6 +58,10 @@
             <div>
                 <label>Height</label>
                 <input type="text" value="<?=$record['height']?>" name="height" id="height" autocomplete="off" disabled required>
+                <label>Weight</label>
+                <input type="text" value="<?=$record['weight']?>" name="weight" id="weight" autocomplete="off" disabled required>
+                <label>BMI</label>
+                <input type="text" value="<?=$record['bmi']?>" name="bmi" id="bmi" autocomplete="off" disabled required>
                 <label>Temperature</label>
                 <input type="text" value="<?=$record['temp']?>" name="temp" id="temp" autocomplete="off" disabled required> 
                 <label>Heart Rate</label>
