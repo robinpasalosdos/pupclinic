@@ -1,24 +1,14 @@
 <head>
     <title>Data Protection and Privacy Regulation</title>
 </head>
-<style>
-    /* Style for the dialog box */
-    .dialog-box {
-      display: none;
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      background-color: #fff;
-      padding: 20px;
-      border: 1px solid #ccc;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.2);
-      z-index: 9999;
-    }
-</style>
-<input type="checkbox" id="checkbox" name="checkbox">
-<p>I agree&nbsp;<a href="#" id="privacyLink">to the data privacy agreement</a></p>
-<button id="proceed_button" disabled>Continue</button>
+
+<div class="policy-container">
+    <div>
+        <input type="checkbox" id="checkbox" name="checkbox">
+        <p>I agree&nbsp;<a href="#" id="privacyLink">to the data privacy agreement</a></p>
+    </div>
+    <button id="proceed_button" disabled>Continue</button>
+</div>
 <div style="display: none;" class="dialog-box" id="dialog">
     <h1>Data Protection and Privacy Regulation</h1> 
     

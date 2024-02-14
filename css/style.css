@@ -68,8 +68,7 @@ input, select {
     font-weight: 600;
 }
 
-button:hover,
-.logout-button-a {
+button:hover {
     background: var(--hover);
     transform: translateY(-1px) scale(1.01);
     color: #fffcfc;
@@ -87,6 +86,23 @@ button:hover,
     justify-items: center;
 }
 
+.main-menu {
+    display: flex;
+    flex-direction: column;
+    width: min-content;
+    margin: auto;
+    margin-top: 14vh;
+}
+
+.main-menu h2, .main-menu p {
+    margin: 0 0 2rem 3vw;
+}
+
+.main-menu h2 {
+    margin-bottom: 0;
+}
+
+
 .menu_container {
     display: flex;
     position: relative;
@@ -95,7 +111,6 @@ button:hover,
     border-radius: 2rem 2rem 0 0 ;
     box-shadow: var(--box-shadow);
     margin: auto;
-    margin-top: 20vh;
     height: min-content;
     width: min-content;
     justify-content: space-evenly;
@@ -230,22 +245,27 @@ button:hover,
 .logout-button-a {
     position: absolute;
     display: block;
-    padding: 1rem 0 0 0;
+    /* padding: 1rem 0 0 0; */
     text-decoration: none;
     text-align: center;
-    background: var(--def-theme-color);
-    height: 2.5em;
-    width: 7em;
+    /* background: var(--def-theme-color); */
+    /* height: 2.5em;
+    width: 7em; */
     font-size: 1rem;
+    font-weight: 800;
     border: none;
     border-radius: 2rem;
     margin: 1rem;
     cursor: pointer;
-    color: #dddddd;
-    box-shadow: var(--box-shadow);
-    font-family: var(--def-font);
+    color: #313131;
+    /* box-shadow: var(--box-shadow);
+    font-family: var(--def-font); */
     transition: var(--def-transition);
     z-index: 1;
+}
+
+.logout-button-a:hover {
+    text-decoration: underline;
 }
 
 .records-table {
@@ -353,11 +373,12 @@ button:hover,
     display: grid;
     grid-template-columns: 1fr 1fr;
     height: min-content;
-    width: 85vw;
+    width: 95vw;
     max-width: 65rem;
     position: relative;
     align-content: space-evenly;
     margin: auto;
+    margin-top: 10vh;
     align-items: center;
     justify-content: center;
 }
@@ -379,6 +400,8 @@ button:hover,
 .admin-menu button {
     height: 7rem;
     width: 90%;
+    border-radius: 1.5rem;
+    margin: 0.5rem;
 }
 
 .admin-container h1 {
@@ -389,9 +412,13 @@ button:hover,
     grid-area: 1/2/2/3;
     text-align: right;
     text-decoration: none;
+    font-weight: 800;
     margin: 0 3rem 1rem 0;
 }
 
+.admin-container a:hover {
+    text-decoration: underline;
+}
 .electronic-health-record {
     display: flex;
     flex-direction: row;
@@ -416,6 +443,81 @@ button:hover,
     margin-top: 7vh;
     font-family: var(--def-font);
 }
+
+.policy-container {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    background: var(--def-gradient-form);
+    padding: 2rem 2rem 4rem 2rem;
+    border-radius: 2rem 2rem 0 0 ;
+    box-shadow: var(--box-shadow);
+    margin: auto;
+    margin-top: 15vh;
+    height: min-content;
+    width: max-content;
+    align-items: center;
+}
+
+.policy-container div {
+    display: flex;
+}
+.policy-container input {
+    margin: 1rem;
+}
+
+.policy-container button,
+.dialog-box button {
+    height: 4rem;
+    width: 14rem;
+}
+
+.dialog-box {
+    display: none;
+    position: relative;
+    margin-top: 20%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height: max-content;
+    width: 90%;
+    background-color: #fff;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 2rem;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.discomfort-container {
+    display: flex;
+    position: relative;
+    background: var(--def-gradient-form);
+    padding: 2rem 2rem 4rem 2rem;
+    border-radius: 2rem 2rem 0 0 ;
+    box-shadow: var(--box-shadow);
+    margin: auto;
+    height: min-content;
+    width: max-content;
+    justify-content: space-evenly;
+    align-items: center;
+    justify-items: center;
+}
+
+.discomfort-container input[type="submit"] {
+    background: var(--def-theme-color);
+    height: 4rem;
+    width: 100%;
+	font-size: 1rem;
+    border: none;
+	border-radius: 2rem;
+	cursor:pointer;
+	color:#dddddd;
+    box-shadow: var(--box-shadow);
+    font-family: var(--def-font);
+    font-weight: 500;
+    transition: var(--def-transition);
+}
+
 
 #backToPreviousPage {
     position: absolute;

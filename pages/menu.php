@@ -1,11 +1,11 @@
-<div class="menu-tooltip">
-<h2>User Options</h2>
-<p>Please select one of the following options:</p>
-</div>
-<div class="menu_container">
-    <button onclick="redirectToLoginMenu()">Login</button>
-    <button onclick="redirectToRegister()">Register</button>
-    <button onclick="redirectAsGuest()">Guest</button>
+<div class="main-menu">
+    <h2>User Options</h2>
+    <p>Please select one of the following options:</p>
+    <div class="menu_container">
+        <button onclick="redirectToLoginMenu()">Login</button>
+        <button onclick="redirectToRegister()">Register</button>
+        <button onclick="redirectAsGuest()">Guest</button>
+    </div>
 </div>
 
 <script>

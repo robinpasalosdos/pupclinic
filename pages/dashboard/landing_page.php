@@ -18,10 +18,14 @@
   }else{
     ?>
     <a class ="logout-button-a" href="../pupclinic/php/ajax.php?action=logout">logout</a>
-    <div class="menu_container">
-      <button onclick="redirectToAssessment()">Initial Monitoring</button>
-      <button onclick="redirectToYourRecords()">View Your Records</button>
-      <button onclick="redirectToYourProfile()">Profile</button>
+    <div class="main-menu">
+        <h2>Welcome to PupClinic Dashboard</h2>
+        <p>Manage your health and records efficiently.</p>
+        <div class="menu_container">
+        <button onclick="redirectToAssessment()">Initial Monitoring</button>
+        <button onclick="redirectToYourRecords()">View Your Records</button>
+        <button onclick="redirectToYourProfile()">Profile</button>
+        </div>
     </div>
     <?php
   }
