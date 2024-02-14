@@ -6,7 +6,9 @@
   if(mysqli_num_rows($result) > 0)
   {
     ?>
-    <p>Please wait for admin approval</p>
+    <div class="assessment-container">
+        <h3>Your assessment access is pending approval from the admin. Please wait for further instructions.</h3>
+    </div>
     <?php
   }
   $query = "SELECT assessment_access FROM users WHERE id = $id AND assessment_access = 1;";
@@ -14,8 +16,13 @@
   if(mysqli_num_rows($result) > 0)
   {
     ?>
-    <p>You have an access</p>
-    <button id="proceed">Proceed</button>
+
+<div class="assessment-container">
+    <h3>Your assessment access has been granted.</h3>
+    <h3> You can proceed with the assessment now.</h3>
+    <button id="proceed">Proceed to Assessment</button>
+  </div>
+
     <?php
   }
 ?>

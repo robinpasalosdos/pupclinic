@@ -17,7 +17,7 @@ function displayPrioritySection() {
         while($row = $prio->fetch_assoc()) {
             echo "<div class='card'>";
             echo "<div class='card-body'>";
-            echo "<h5 class='card-title'>Name: " . $row['name'] . "</h5>";
+            echo "<h2 class='card-title'>Name: " . $row['name'] . "</h2>";
             echo "<p class='card-text'>UserType: " . $row['user_type'] . "</p>";
             $sql2 = "SELECT * FROM queue WHERE assessment_access = 2";
             $prio2 = $conn->query($sql2);
@@ -48,7 +48,7 @@ function displayPrioritySection() {
             echo "</div>";
         }
     } else {
-        echo "<p>No one used the machine. Choose one from below if there's someone queued to be given access to using the machine.</p>";
+        echo "<div class='center-p'><p>No one used the machine. Choose one from below if there's someone queued to be given access to using the machine.</p></div>";
     }
 }
 
@@ -73,7 +73,7 @@ function displayQueueSection() {
             echo "</div>";
         }
     } else {
-        echo "<p>No one is in line</p>";
+        echo "<div class='center-p'><p>No one is in line</p></div>";
     }
 }
 
