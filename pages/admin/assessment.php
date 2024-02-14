@@ -25,19 +25,23 @@ function displayPrioritySection() {
                 if ($row['height'] == ""){
                     echo "<p class='card-text'>Getting Height...</p>";
                 } else {
-                    echo "<p class='card-text'>Height: " . $row['height'] . "</p>";
-                    if ($row['temp'] == ""){
-                        echo "<p class='card-text'>Getting Temperature...</p>";
+                    if ($row['weight'] == ""){
+                        echo "<p class='card-text'>Getting Height...</p>";
                     } else {
-                        echo "<p class='card-text'>Temp: " . $row['temp'] . "</p>";
-                        if ($row['heart_rate'] == ""){
-                            echo "<p class='card-text'>Getting Heart Rate...</p>";
+                        echo "<p class='card-text'>Height: " . $row['height'] . "</p>";
+                        if ($row['temp'] == ""){
+                            echo "<p class='card-text'>Getting Temperature...</p>";
                         } else {
-                            echo "<p class='card-text'>Heart Rate: " . $row['heart_rate'] . "</p>";
-                            if ($row['oxygen'] == ""){
-                                echo "<p class='card-text'>Getting Oxygen Rate...</p>";
+                            echo "<p class='card-text'>Temp: " . $row['temp'] . "</p>";
+                            if ($row['heart_rate'] == ""){
+                                echo "<p class='card-text'>Getting Heart Rate...</p>";
                             } else {
-                                echo "<p class='card-text'>Oxygen Rate: " . $row['oxygen'] . "</p>";
+                                echo "<p class='card-text'>Heart Rate: " . $row['heart_rate'] . "</p>";
+                                if ($row['oxygen'] == ""){
+                                    echo "<p class='card-text'>Getting Oxygen Rate...</p>";
+                                } else {
+                                    echo "<p class='card-text'>Oxygen Rate: " . $row['oxygen'] . "</p>";
+                                }
                             }
                         }
                     }
