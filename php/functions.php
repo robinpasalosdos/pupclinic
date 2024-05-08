@@ -71,46 +71,56 @@ Class Action {
 
 	function student_register(){
 		extract($_POST);
-		$name = $_SESSION['name'];
-		$birthday = $_SESSION['birthday'];
-		$sex = $_SESSION['sex'];
-		$student_no = $_SESSION['student_no'];
-		$course = $_SESSION['course'];
-		$year = $_SESSION['year'];
-		$section = $_SESSION['section'];
-		$email = $_SESSION['email'];
-		$password = $_SESSION['password'];
-		if($_SESSION['code'] != $code){
-			return 2;
+		if($password != $password2){
+			return 3;
 		}else{
-			$hashed_password = md5($password);
-			$save = $this->db->query("INSERT INTO users (user_type, name, birthday, sex, email, student_no, course, year, section, password, assessment_access, pic) VALUES ('student', '$name', '$birthday', '$sex', '$email', '$student_no', '$course', '$year', '$section', '$hashed_password', 0, 'default.png')");
-			if($save){
-				session_destroy();
-				return 1;
+			if (!preg_match('/[A-Z]/', $password) || !preg_match('/[0-9]/', $password) || strlen($password) < 8) {
+				return 4;
+			}else {
+				if (strpos($email, '@') === false || strpos($email, '.') === false) {
+					return 5;
+				}else{
+					$check = $this->db->query("SELECT email FROM users WHERE email='$email' LIMIT 1");
+					if(mysqli_num_rows($check) == 1){
+						return 2;
+					}else{
+						$hashed_password = md5($password);
+						$save = $this->db->query("INSERT INTO users (user_type, name, birthday, sex, email, student_no, course, year, section, password, assessment_access, pic) VALUES ('student', '$name', '$birthday', '$sex', '$email', '$student_no', '$course', '$year', '$section', '$hashed_password', 0, 'default.png')");
+						if($save){
+							return 1;
+						}
+					}
+				}
 			}
-		}
-	}
-	function faculty_register(){
-		extract($_POST);
-		$name = $_SESSION['name'];
-		$birthday = $_SESSION['birthday'];
-		$sex = $_SESSION['sex'];
-		$email = $_SESSION['email'];
-		$password = $_SESSION['password'];
-		if($_SESSION['code'] != $code){
-			return 2;
-		}else{
-			$hashed_password = md5($password);
-			$save = $this->db->query("INSERT INTO users (user_type, name, birthday, sex, email, student_no, course, year, section, password, assessment_access, pic) VALUES ('faculty', '$name', '$birthday', '$sex', '$email', '', '', '', '', '$hashed_password', 0, 'default.png')");
-			if($save){
-				session_destroy();
-				return 1;
-			}
-			
 		}
 		
 	}
+	function faculty_register(){
+		extract($_POST);
+		if($password != $password2){
+			return 3;
+		}else{
+			if (!preg_match('/[A-Z]/', $password) || !preg_match('/[0-9]/', $password) || strlen($password) < 8) {
+				return 4;
+			}else {
+				if (strpos($email, '@') === false || strpos($email, '.') === false) {
+					return 5;
+				}else{
+					$check = $this->db->query("SELECT email FROM users WHERE email='$email' LIMIT 1");
+					if(mysqli_num_rows($check) == 1){
+						return 2;
+					}else{
+						$hashed_password = md5($password);
+						$save = $this->db->query("INSERT INTO users (user_type, name, birthday, sex, email, student_no, course, year, section, password, assessment_access, pic) VALUES ('faculty', '$name', '$birthday', '$sex', '$email', '', '', '', '', '$hashed_password', 0, 'default.png')");
+						if($save){
+							return 1;
+						}	
+					}
+				}
+			}
+		}
+	}
+	
 	
 	function guest_register(){
 		extract($_POST);
