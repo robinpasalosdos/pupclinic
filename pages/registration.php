@@ -60,7 +60,6 @@
             <input type="password" id="password2" name="password2" placeholder="Re-enter your password" required autocomplete="off"><br>
             <input type="text" id="user" name="user" value="<?php echo $_GET['user']; ?>" style="display: none;"><br>
             <button type="submit" id="submit_button">Next</button>
-
         </form>
     </div>
 <?php endif; ?>
@@ -69,7 +68,7 @@
     $('#register').submit(function(e){
         e.preventDefault()
         $.ajax({
-            url:'../pupclinic/php/ajax.php?action=send_otp',
+            url:'../pupclinic/php/ajax.php?action='+params['user']+'_register',
             method:'POST',
             data:$(this).serialize(),
             error:function(err){
@@ -79,7 +78,7 @@
             success:function(resp){
                 console.log(resp);
                 if(resp.slice(-1) == 1){
-                    location.href = '../pupclinic/index.php?page=verify&user='+params['user'];
+                    location.href = '../pupclinic/index.php?page=login&user='+params['user'];
                 }
                 if(resp == 2){
                     alert("Email already exists!");
