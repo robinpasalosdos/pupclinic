@@ -36,7 +36,7 @@
 				var data = parseInt(resp);
 				if(data > 0 && data < 201){
 				$("#data").val(resp);
-				$("#data2").text(resp + " cm");
+				$("#data2").text(resp + " kg");
 				$("#get_weight_button").show();
 				$("#get_weight_button").text("Retry");
 				$("#next").show();

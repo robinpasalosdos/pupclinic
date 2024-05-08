@@ -168,10 +168,9 @@ Class Action {
 	}
 	
 	function get_height(){
-		exec('/usr/bin/python /var/www/html/pupclinic/hardware/height.py 2>&1', $output, $return_code);
-		echo "Output: " . implode("\n", $output);
-		echo "\nReturn code: " . $return_code;
-		return $output;
+		$output = shell_exec('sudo /usr/bin/python3 /var/www/html/pupclinic/hardware/height.py');
+		echo $output;
+
 	}
 	
 	function save_height(){
@@ -181,10 +180,8 @@ Class Action {
 	}
 	
 	function get_weight(){
-		exec('/usr/bin/python /var/www/html/pupclinic/hardware/height.py 2>&1', $output, $return_code);
-		echo "Output: " . implode("\n", $output);
-		echo "\nReturn code: " . $return_code;
-		return $output;
+		$output = shell_exec('sudo /usr/bin/python3 /var/www/html/pupclinic/hardware/temp.py');
+		echo $output;
 	}
 	
 	function save_weight(){
@@ -193,10 +190,8 @@ Class Action {
 		return $this->update_queue_data($data, "weight");
 	}
 	function get_temp(){
-		exec('/usr/bin/python /var/www/html/pupclinic/hardware/temp.py 2>&1', $output, $return_code);
-		echo "Output: " . implode("\n", $output);
-		echo "\nReturn code: " . $return_code;
-		return $output;
+		$output = shell_exec('sudo /usr/bin/python3 /var/www/html/pupclinic/hardware/temp.py');
+		echo $output;
 	}
 	
 	function save_temp(){
@@ -219,10 +214,8 @@ Class Action {
 	}
 	
 	function get_oxygen(){
-		exec('/usr/bin/python /var/www/html/pupclinic/hardware/oxygen.py 2>&1', $output, $return_code);
-		echo "Output: " . implode("\n", $output);
-		echo "\nReturn code: " . $return_code;
-		return $output;
+		$output = shell_exec('sudo /usr/bin/python3 /var/www/html/pupclinic/hardware/oxygen.py');
+		echo $output;
 	}
 	
 	function save_oxygen(){	
