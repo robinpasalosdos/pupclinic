@@ -1,23 +1,27 @@
 #!/usr/bin/env python
-import serial
+import max30102
+import hrcalc
 import time
+import statistics
+import sys
+from time import sleep
 
-if __name__ == '__main__':
-    ser = serial.Serial('/dev/ttyACM0', 9600)
-    ser.flush()
-    time.sleep(2)
-    ser.write(b'o')
-    start_time = time.time()
-    run_time = 12
+m = max30102.MAX30102()
 
-    while time.time() - start_time < run_time:
-        if ser.in_waiting > 0:
-            line = ser.readline().decode('utf-8').rstrip()
-            file = open("/var/www/html/pupclinic/hardware/data.txt", "w")
-            file.write(line)
-            file.close()
-            print(line)
-            
+hr2 = 0
+sp2 = 0
 
-    ser.close()
-
+data = []
+while len(data) < 40:
+	red, ir = m.read_sequential()
+	hr,hrb,sp,spb = hrcalc.calc_hr_and_spo2(ir, red)
+	data.append(round(sp))
+	print(data)
+	time.sleep(.1)
+filtered_data = [num for num in data if num > 0]
+oxygen = str(statistics.mode(filtered_data))
+file = open("/var/www/html/pupclinic/hardware/data.txt", "w")
+file.write(oxygen)
+file.close()
+print(oxygen)
+sys.exit()

@@ -1,23 +1,43 @@
 #!/usr/bin/env python
-import serial
 import time
+import sys
+import statistics
+import board
+import busio as io
+import adafruit_mlx90614
+from time import sleep
+import RPi.GPIO as GPIO
+buzzer = 22
+GPIO.setmode(GPIO.BCM)
+GPIO.setup(buzzer, GPIO.OUT)
+GPIO.output(buzzer, False)
+i2c = io.I2C(board.SCL, board.SDA, frequency=100000)
+mlx = adafruit_mlx90614.MLX90614(i2c)
 
-if __name__ == '__main__':
-    ser = serial.Serial('/dev/ttyACM0', 9600)
-    ser.flush()
-    time.sleep(2)
-    ser.write(b't')
-    start_time = time.time()
-    run_time = 3
-
-    while time.time() - start_time < run_time:
-        if ser.in_waiting > 0:
-            line = ser.readline().decode('utf-8').rstrip()
-            file = open("/var/www/html/pupclinic/hardware/data.txt", "w")
-            file.write(line)
-            file.close()
-            print(line)
-            
-
-    ser.close() 
-
+data = []
+GPIO.output(buzzer, True)
+time.sleep(.2)
+GPIO.output(buzzer, False)
+while len(data) < 40:
+	targetTemp = mlx.object_temperature
+	data.append(round(targetTemp,1))
+	time.sleep(.1)
+temp = str(statistics.mode(data))
+file = open("/var/www/html/pupclinic/hardware/data.txt", "w")
+file.write(temp)
+file.close()
+print(temp)
+time.sleep(.2)
+GPIO.output(buzzer, True)
+time.sleep(.2)
+GPIO.output(buzzer, False)
+time.sleep(.2)
+GPIO.output(buzzer, True)
+time.sleep(.2)
+GPIO.output(buzzer, False)
+time.sleep(.2)
+GPIO.output(buzzer, True)
+time.sleep(.2)
+GPIO.output(buzzer, False)
+GPIO.cleanup()
+sys.exit()

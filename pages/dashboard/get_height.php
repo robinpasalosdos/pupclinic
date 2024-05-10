@@ -23,6 +23,7 @@
 			console.log(err)
 			},
 			success:function(resp){
+				console.log(resp);
 			$.ajax({
 			url: '../pupclinic/hardware/data.txt?t=' + new Date().getTime(),
 			type: 'GET',
