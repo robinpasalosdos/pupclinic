@@ -1,3 +1,14 @@
+<?php
+    $id = $_SESSION['id'];
+    $query = "SELECT * FROM users WHERE id = $id AND assessment_access = 1;";
+    $result = mysqli_query($conn, $query);
+    
+    if(mysqli_num_rows($result) > 0)
+    {
+        header("location:../pupclinic/dashboard.php?page=access_check");
+    }
+	
+?>
 <div class="main-menu">
     <h2>Discomfort Rate</h2>
     <p>Please select the level of discomfort you are experiencing based on the scale provided below.</p>

@@ -186,8 +186,8 @@ Class Action {
 	
 	function save_height(){
 		extract($_POST);
-		$_SESSION['height'] = $data;
-		return $this->update_queue_data($data, "height");
+		$_SESSION['height'] = $resp;
+		return $this->update_queue_data($resp, "height");
 	}
 	
 	function get_weight(){

@@ -50,7 +50,7 @@ function display(){
             success:function(response){
                 console.log(response);
                 if(response == 1){
-                    location.href = '../pupclinic/dashboard.php?page=get_height';
+                    location.href = '../pupclinic/dashboard.php?page=get_heart_rate';
                 }
             }
         }); 

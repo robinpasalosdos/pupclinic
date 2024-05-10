@@ -10,6 +10,7 @@
             <input style="display: none;" type="text" id="data" name="data"><br>
         </form>
     </div>
+	<p> Carefully stand on the weighing scale and observe for atleast 10 seconds. </p>
 </div>
 
 <script>
@@ -59,7 +60,7 @@
 						success:function(resp){
 							console.log(resp);
 							if(resp == 1){
-								location.href = '../pupclinic/dashboard.php?page=get_temp';
+								location.href = '../pupclinic/dashboard.php?page=completion';
 							}else{
 								alert(resp);
 							}

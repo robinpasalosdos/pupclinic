@@ -1,5 +1,6 @@
 <div class="measurement-container">
     <h2>Get Oxygen</h2>
+	<p> Gently press against the sensor and firmly hold your finger for atleast 30 seconds and wait for the readings to show up.</p>
     <p id="data2">-</p>
     
     <div class="button_container">
@@ -61,7 +62,7 @@
 						success:function(resp){
 							console.log(resp);
 							if(resp == 1){
-								location.href = '../pupclinic/dashboard.php?page=completion';
+								location.href = '../pupclinic/dashboard.php?page=get_temp';
 							}else{
 								alert(resp);
 							}

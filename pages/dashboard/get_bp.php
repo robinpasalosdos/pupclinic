@@ -1,6 +1,6 @@
 <div class="measurement-container">
     <h2>Get Temperature</h2>
-	<p> Gently press against the sensor and hold for atleast 10 seconds. </p>
+	<p> Gently press against the sensor for atleast 10 seconds </p>
     <p id="data2">-</p>
     
     <div class="button_container">
@@ -61,7 +61,7 @@
 						},
 						success:function(resp){
 						if(resp == 1){
-							location.href = '../pupclinic/dashboard.php?page=get_height';
+							location.href = '../pupclinic/dashboard.php?page=get_heart_rate';
 						}
 						}
 					})

@@ -1,5 +1,6 @@
 <div class="measurement-container">
     <h2>Get Heart Rate</h2>
+	<p> Gently press against the sensor and firmly hold your finger for atleast 30 seconds and wait for the readings to show up.</p>
     <p id="data2">-</p>
     
     <div class="button_container">

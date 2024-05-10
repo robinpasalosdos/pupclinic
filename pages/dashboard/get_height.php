@@ -5,11 +5,8 @@
         <form id="get_height">
             <button id="get_height_button">Get</button>
         </form>
-        <form id="save_height">
-            <button style="display: none;" id="next">Next</button>
-            <input style="display: none;" type="text" id="data" name="data"><br>
-        </form>
     </div>
+	<p> Please stand straight and hold your stance for atleast 10 seconds below the sensor </p>
 </div>
 
 <script>
@@ -18,7 +15,6 @@
 		e.preventDefault()
 		$("#data2").text("Please wait...");
 		$("#get_height_button").hide();
-		$("#next").hide();
 		$.ajax({
 			url:'../pupclinic/php/ajax.php?action=get_height',
 			method:'POST',
@@ -33,39 +29,28 @@
 			dataType: 'text',
 			success: function(resp) {
 				console.log(resp);
-				var data = parseInt(resp);
-				if(data > 0 && data < 201){
-				$("#data").val(resp);
 				$("#data2").text(resp + " cm");
-				$("#get_height_button").show();
-				$("#get_height_button").text("Retry");
-				$("#next").show();
-				}else{
-				$("#data2").text("Please try again.");
-				$("#get_height_button").show();
-				$("#get_height_button").text("Retry");
-				}
-				
-				$('#save_height').submit(function(e){
-					e.preventDefault()
-					$.ajax({
-						url:'../pupclinic/php/ajax.php?action=save_height',
-						type:'POST',
-						data:$(this).serialize(),
-						error:function(err){
-						console.log(err);
-						alert("An error occured");
-						},
-						success:function(resp){
-							console.log(resp);
-							if(resp == 1){
-								location.href = '../pupclinic/dashboard.php?page=get_weight';
-							}else{
-								alert(resp);
-							}
+				var data = {
+					resp: resp,
+            	};
+				$.ajax({
+					url:'../pupclinic/php/ajax.php?action=save_height',
+					type:'POST',
+					data:data,
+					error:function(err){
+					console.log(err);
+					alert("An error occured");
+					},
+					success:function(resp){
+						console.log(resp);
+						if(resp == 1){
+							location.href = '../pupclinic/dashboard.php?page=get_weight';
+						}else{
+							alert(resp);
 						}
-					})
+					}
 				})
+
 			},
 			error: function(error) {
 				console.error('Error:', error);
