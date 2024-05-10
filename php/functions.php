@@ -190,7 +190,7 @@ Class Action {
 	}
 	
 	function get_weight(){
-		$output = shell_exec('sudo /usr/bin/python3 /var/www/html/pupclinic/hardware/temp.py');
+		$output = shell_exec('sudo /usr/bin/python3 /var/www/html/pupclinic/hardware/weight.py');
 		echo $output;
 	}
 	

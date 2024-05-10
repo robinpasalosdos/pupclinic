@@ -37,7 +37,7 @@
 			success: function(resp) {
 				console.log(resp);
 				var data = parseInt(resp);
-				if(data > 30 && data < 43){
+				if(data < 43){
 				$("#data").val(resp);
 				$("#data2").text(resp + " ℃");
 				$("#get_temp_button").show();
