@@ -11,17 +11,23 @@ m = max30102.MAX30102()
 hr2 = 0
 sp2 = 0
 
-data = []
-while len(data) < 40:
+oxygen = []
+heart_rate = []
+while len(oxygen) < 40:
 	red, ir = m.read_sequential()
 	hr,hrb,sp,spb = hrcalc.calc_hr_and_spo2(ir, red)
-	data.append(round(sp))
-	print(data)
+	oxygen.append(round(sp))
+	heart_rate.append(round(hr))
+	print(oxygen)
+	print(heart_rate)
 	time.sleep(.1)
-filtered_data = [num for num in data if num > 0]
-oxygen = str(statistics.mode(filtered_data))
+filtered_oxygen = [num for num in oxygen if num > 0]
+filtered_heart_rate = [num for num in heart_rate if num > 0]
+oxygen_str = str(statistics.mode(filtered_oxygen))
+heart_rate_str = str(statistics.mode(filtered_heart_rate))
+data = heart_rate_str + " " + oxygen_str
 file = open("/var/www/html/pupclinic/hardware/data.txt", "w")
-file.write(oxygen)
+file.write(data)
 file.close()
-print(oxygen)
+print(data)
 sys.exit()

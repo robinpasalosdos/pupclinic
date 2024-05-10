@@ -1,9 +1,9 @@
 <div class="login-form">
     <h1>Change Your Password:</h1>
     <form id="register">
-        <label for="password">Code</label>
+        <label for="password">Password</label>
         <input type="password" id="password" name="password" required autocomplete="off"><br>
-        <label for="password2">Code</label>
+        <label for="password2">Retype Password</label>
         <input type="password" id="password2" name="password2" required autocomplete="off"><br>
         <button type="submit">Submit</button>
     </form>
@@ -24,10 +24,15 @@
                 if(resp == 2){
                         alert("Password didn't match!");
                 }else{
-                    if(resp){
-                        location.href = '../pupclinic/index.php?page=login&user='+resp;
+                    if(resp == 4){
+                        alert("Password must contain at least one uppercase letter, one digit, and be at least 8 characters long.");
+                        $('#submit_button').prop('disabled', false);
                     }else{
-                        alert("503 Service Unavailable: The server is currently unable to handle the request.");   
+                        if(resp){
+                            location.href = '../pupclinic/index.php?page=login&user='+resp;
+                        }else{
+                            alert("503 Service Unavailable: The server is currently unable to handle the request.");   
+                        }
                     }
                 }
                 

@@ -22,33 +22,31 @@ function displayPrioritySection() {
             $sql2 = "SELECT * FROM queue WHERE assessment_access = 2";
             $prio2 = $conn->query($sql2);
             if ($prio2->num_rows > 0) {
-                if ($row['height'] == ""){
-                    echo "<p class='card-text'>Getting Height...</p>";
+                if ($row['heart_rate'] == ""){
+                    echo "<p class='card-text'>Getting Heart Rate and Oxygen...</p>";
                 } else {
-                    if ($row['weight'] == ""){
-                        echo "<p class='card-text'>Getting Height...</p>";
+                    echo "<p class='card-text'>Heart Rate: " . $row['heart_rate'] . "</p>";
+                    echo "<p class='card-text'>Oxygen: " . $row['oxygen'] . "</p>";
+                    if ($row['bp'] == ""){
+                        echo "<p class='card-text'>Getting Blood Pressure...</p>";
                     } else {
-                        echo "<p class='card-text'>Height: " . $row['height'] . "</p>";
+                        echo "<p class='card-text'>Blood Pressure: " . $row['bp'] . "</p>";
                         if ($row['temp'] == ""){
                             echo "<p class='card-text'>Getting Temperature...</p>";
                         } else {
                             echo "<p class='card-text'>Temp: " . $row['temp'] . "</p>";
-                            if ($row['heart_rate'] == ""){
-                                echo "<p class='card-text'>Getting Heart Rate...</p>";
+                            if ($row['height'] == ""){
+                                echo "<p class='card-text'>Getting Height and Weight...</p>";
                             } else {
-                                echo "<p class='card-text'>Heart Rate: " . $row['heart_rate'] . "</p>";
-                                if ($row['oxygen'] == ""){
-                                    echo "<p class='card-text'>Getting Oxygen Rate...</p>";
-                                } else {
-                                    echo "<p class='card-text'>Oxygen Rate: " . $row['oxygen'] . "</p>";
-                                }
+                                echo "<p class='card-text'>Height: " . $row['height'] . "</p>";
+                                echo "<p class='card-text'>Weight: " . $row['weight'] . "</p>";
                             }
                         }
                     }
                 }
             }
             echo "</div>";
-            echo "<button class='btn btn-primary removeButton' data-id='" . $row['id'] . "'>Remove</button>";
+            echo "<button class='btn btn-primary removeButton' data-id='" . $row['id'] . "' data-user_id='" . $row['user_id'] . "' data-user_type='" . $row['user_type'] . "'>Remove</button>";
             echo "</div>";
         }
     } else {
@@ -65,14 +63,14 @@ function displayQueueSection() {
         while($row = $queue->fetch_assoc()) {
             echo "<div class='card'>";
                 echo "<div class='card-body'>";
-                    echo "<h5 class='card-title'>ID: " . $row['id'] . "</h5>";
-                    echo "<p class='card-text'>Name: " . $row['name'] . "</p>";
+                    echo "<h5 class='card-text'>Name: " . $row['name'] . "</h5>";
                     echo "<p class='card-text'>User Type: " . $row['user_type'] . "</p>";
+                    echo "<p class='card-text'>Discomfort Rate: " . $row['discomfort_rate'] . "</p>";
 
                     $disableButton = checkIfNoPriorityRows() ? '' : 'disabled';
 
                     echo "<button class='btn btn-primary accessButton' data-id='" . $row['id'] . "' data-user_id='" . $row['user_id'] . "' $disableButton>Give Access</button>";
-                    echo "<button class='btn btn-primary removeButton' data-id='" . $row['id'] . "'>Remove</button>";
+                    echo "<button class='btn btn-primary removeButton' data-id='" . $row['id'] . "' data-user_id='" . $row['user_id'] . "' data-user_type='" . $row['user_type'] . "'>Remove</button>";
                 echo "</div>";
             echo "</div>";
         }
@@ -132,21 +130,27 @@ $(document).ready(function(){
         });
     });
 
-    function remove_queue($id){
-		if (confirm("Do you want to delete?") == true) {
-			$.ajax({
-				url:'../pupclinic/php/ajax.php?action=remove_queue',
-				method:'POST',
-				data:{id:$id},
-				success:function(resp){
+    function remove_queue($id, $user_id, $user_type) {
+        if (confirm("Do you want to delete?")) {
+            var data = {
+                id: $id,
+                user_id: $user_id,
+                user_type: $user_type
+            };
+            $.ajax({
+                url: '../pupclinic/php/ajax.php?action=remove_queue',
+                method: 'POST',
+                data: data,
+                success: function(resp) {
                     console.log(resp);
-				}
-			})
-		}
-	}
+                }
+            });
+        }
+    }
 
-    $(document).on('click', '.removeButton', function(){
-        remove_queue($(this).attr('data-id'))
-    })
+    $(document).on('click', '.removeButton', function() {
+        remove_queue($(this).attr('data-id'), $(this).attr('data-user_id'), $(this).attr('data-user_type'));
+    });
+
 });
 </script>
