@@ -5,13 +5,10 @@ import sys
 import RPi.GPIO as GPIO
 import statistics
 
-buzzer = 22
 c = 0
 GPIO_TRIGGER = 23
 GPIO_ECHO = 24
 buzzer = 22
-btn = 21
-i = 0
 def distance():
     # Set Trigger to HIGH
     GPIO.output(GPIO_TRIGGER, True)
@@ -45,7 +42,6 @@ if __name__ == '__main__':
     GPIO.output(buzzer, False)
     GPIO.setup(GPIO_TRIGGER, GPIO.OUT)
     GPIO.setup(GPIO_ECHO, GPIO.IN)
-    GPIO.setup(btn, GPIO.IN, pull_up_down=GPIO.PUD_UP)
     ser = serial.Serial('/dev/ttyACM0', 9600)
     ser.flush()
     time.sleep(2)

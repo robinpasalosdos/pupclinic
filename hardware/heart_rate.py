@@ -5,14 +5,22 @@ import time
 import statistics
 import sys
 from time import sleep
+import RPi.GPIO as GPIO
 
 m = max30102.MAX30102()
 
 hr2 = 0
 sp2 = 0
-
+buzzer = 15
 oxygen = []
 heart_rate = []
+
+GPIO.setup(buzzer, GPIO.OUT)
+GPIO.output(buzzer, False)
+
+GPIO.output(buzzer, True)
+time.sleep(.2)
+GPIO.output(buzzer, False)
 while len(oxygen) < 25:
 	red, ir = m.read_sequential()
 	hr,hrb,sp,spb = hrcalc.calc_hr_and_spo2(ir, red)
@@ -36,4 +44,17 @@ file = open("/var/www/html/pupclinic/hardware/data.txt", "w")
 file.write(data)
 file.close()
 print(data)
+time.sleep(.2)
+GPIO.output(buzzer, True)
+time.sleep(.2)
+GPIO.output(buzzer, False)
+time.sleep(.2)
+GPIO.output(buzzer, True)
+time.sleep(.2)
+GPIO.output(buzzer, False)
+time.sleep(.2)
+GPIO.output(buzzer, True)
+time.sleep(.2)
+GPIO.output(buzzer, False)
+GPIO.cleanup()
 sys.exit()
