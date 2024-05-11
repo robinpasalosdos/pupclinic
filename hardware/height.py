@@ -84,6 +84,7 @@ if __name__ == '__main__':
         print("Mean of last five values:", mean_last_five)
         weight_str = str(round(mean_last_five,2))
         height_str = str(200 - statistics.mode(height_list))
+        print(height_str)
         final_data = height_str + " " + weight_str
         with open("/var/www/html/pupclinic/hardware/data.txt", "w") as file:
             file.write(final_data)
