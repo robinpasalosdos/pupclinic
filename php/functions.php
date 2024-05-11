@@ -440,9 +440,14 @@ Class Action {
 		$sql = "UPDATE queue SET assessment_access = 1 WHERE id = $id";
 	
 		if ($this->db->query($sql) === TRUE) {
-			$sql1 = "UPDATE users SET assessment_access = 1 WHERE id = $user_id";
+			if ($user_type == "guest"){
+				$sql1 = "UPDATE guest SET assessment_access = 1 WHERE id = $user_id";
+			}else{
+				$sql1 = "UPDATE users SET assessment_access = 1 WHERE id = $user_id";
+			}
+			
 			if ($this->db->query($sql1) === TRUE) {
-				return 1;
+				return $user_type;
 			}else{
 				return "Error updating record: " . $this->db->error;
 			}
@@ -580,6 +585,21 @@ Class Action {
 		}
 	}
 
+	function verify_email(){
+		extract($_POST);
+		if($_SESSION['code'] == $code){
+			
+			return 1;
+		}else{
+			return 2;
+		}
+	}
+
+	function profile_send_code(){
+		extract($_POST);
+		return $this->send_code($email);
+	}
+
 	function update_user(){
 		extract($_POST);
 		if($u_password == $u_password2){
@@ -597,7 +617,8 @@ Class Action {
 					course = '$u_course', 
 					year = '$u_year', 
 					section = '$u_section', 
-					password = '$u_password' 
+					password = '$u_password',
+					email = '$u_email'
 				WHERE id = ".intval($u_id).";");
 				if($update){
 					return 1;
@@ -609,7 +630,8 @@ Class Action {
 				SET name = '$u_name', 
 					birthday = '$u_birthday', 
 					sex = '$u_sex',
-					password = '$u_password' 
+					password = '$u_password',
+					email = '$u_email' 
 				WHERE id = ".intval($u_id).";");
 				if($update){
 					return 1;
@@ -762,4 +784,54 @@ Class Action {
 		}
 
 	}
+
+	function save_health_record(){
+		extract($_POST);
+		$childhood_illness = $this->array_to_string($childhood_illness);
+		$family_history =$this->array_to_string($family_history);
+		$head = $this->array_to_string($head);
+		$eyes = $this->array_to_string($eyes);
+		$ears = $this->array_to_string($ears);
+		$throat = $this->array_to_string($throat);
+		$chest_lungs = $this->array_to_string($chest_lungs);
+		$skin = $this->array_to_string($skin);
+		$referred_to = $this->array_to_string($referred_to);
+		if($xray_result == ""){
+			$xray_result = "with findings";
+		}
+		if($vertebral_column == ""){
+			$vertebral_column = "with deformity";
+		}
+		if($family_history == ""){
+			$family_history = "others";
+		}
+		if($childhood_illness == ""){
+			$childhood_illness = "others";
+		}
+
+
+		$sql = "INSERT INTO health_record (name, date, sex, address, contact, emergency_contact, age, civil_status, college_department, course_school_year, contact_no, childhood_illness, previous_hospitalization, operation_surgery, current_medications, allergies, family_history, cigarette_smoking, alcohol_drinking, traveled_abroad, working_impression, vital_signs, height, weight, bmi, bp, hr, rr, temp, head, eyes, ears, throat, chest_lungs, xray_result, breast, heart_murmur, heart_rhythm, abdomen, genito_urinary, extremities, vertebral_column, skin, scars, referred_to, follow_up_on, fit, for_work_up)
+				VALUES ('$name', '$date', '$sex', '$address', '$contact', '$emergency', '$age', '$civil_status', '$college_department', '$course_school_year', '$contact_no', '$childhood_illness', '$previous_hospitalization', '$operation_surgery', '$current_medications', '$allergies', '$family_history', '$cigarette_smoking', '$alcohol_drinking', '$traveled_abroad', '$working_impression', '$vital_signs', '$height', '$weight', '$bmi', '$bp', '$hr', '$rr', '$temp', '$head', '$eyes', '$ears', '$throat', '$chest_lungs', '$xray_result', '$breast', '$murmur', '$rhythm', '$abdomen', '$genito_urinary', '$extremities', '$vertebral_column', '$skin', '$scars', '$referred_to', '$follow_up_on', '$fit', '$for_work_up')";
+		$assessment_status_off = "UPDATE records SET assessment_status = 0 WHERE user_id = $id;";
+		if ($this->db->query($sql) === TRUE) {
+			$this->db->query($assessment_status_off);
+			echo "Record saved successfully";
+		} else {
+			echo "Error: " . $sql . "<br>" . $this->db->error;
+		}
+	}
+
+	function array_to_string($array) {
+
+		if (count($array) > 1) {
+			$filtered_array = array_diff($array, ["none"]);
+			$data = implode(", ", $filtered_array);
+		}
+		else {
+			$data = $array[0];
+		}
+		return $data;
+		
+	}
+	
 }
