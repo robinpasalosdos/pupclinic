@@ -185,8 +185,28 @@ Class Action {
 	
 	function save_height(){
 		extract($_POST);
-		$_SESSION['height'] = $resp;
-		return $this->update_queue_data($resp, "height");
+		$_SESSION['height'] = $height;
+		$_SESSION['weight'] = $weight;
+		$id = $_SESSION['id'];
+		$user_type = $_SESSION['user'];
+		if($user_type == "guest"){
+			$update = $this->db->query("UPDATE queue 
+				SET height = '$height', weight = '$weight'
+				WHERE user_id = $id
+				AND user_type = 'guest';");
+			if($update){
+				return 1;
+			}
+		}else{
+			$update = $this->db->query("UPDATE queue 
+				SET height = '$height', weight = '$weight'
+				WHERE user_id = $id
+				AND (user_type = 'student'
+				OR user_type = 'faculty');");
+			if($update){
+				return 1;
+			}
+		}
 	}
 	
 	function get_weight(){
@@ -206,8 +226,19 @@ Class Action {
 	
 	function save_temp(){
 		extract($_POST);
-		$_SESSION['temp'] = $data;
-		return $this->update_queue_data($data, "temp");
+		$_SESSION['temp'] = $resp;
+		return $this->update_queue_data($resp, "temp");
+	}
+
+	function get_bp(){
+		$output = shell_exec('sudo /usr/bin/python3 /var/www/html/pupclinic/hardware/bp.py');
+		echo $output;
+	}
+	
+	function save_bp(){
+		extract($_POST);
+		$_SESSION['bp'] = $resp;
+		return $this->update_queue_data($resp, "bp");
 	}
 	
 	function get_heart_rate(){
@@ -219,8 +250,28 @@ Class Action {
 	
 	function save_heart_rate(){	
 		extract($_POST);
-		$_SESSION['heart_rate'] = $data;
-		return $this->update_queue_data($data, "heart_rate");
+		$_SESSION['heart_rate'] = $heart_rate;
+		$_SESSION['oxygen'] = $oxygen;
+		$id = $_SESSION['id'];
+		$user_type = $_SESSION['user'];
+		if($user_type == "guest"){
+			$update = $this->db->query("UPDATE queue 
+				SET heart_rate = '$heart_rate', oxygen = '$oxygen'
+				WHERE user_id = $id
+				AND user_type = 'guest';");
+			if($update){
+				return 1;
+			}
+		}else{
+			$update = $this->db->query("UPDATE queue 
+				SET heart_rate = '$heart_rate', oxygen = '$oxygen'
+				WHERE user_id = $id
+				AND (user_type = 'student'
+				OR user_type = 'faculty');");
+			if($update){
+				return 1;
+			}
+		}
 	}
 	
 	function get_oxygen(){
@@ -283,6 +334,7 @@ Class Action {
 		$data['temp'] = $_SESSION['temp'];
 		$data['heart_rate'] = $_SESSION['heart_rate'];
 		$data['oxygen'] = $_SESSION['oxygen'];
+		$data['bp'] = $_SESSION['bp'];
 		$prefix = "PUP";
 		$suffix = "CLI";
 		$data['transaction_no'] = $prefix . $transaction_no . $suffix;
@@ -302,9 +354,26 @@ Class Action {
 		$temp = $_SESSION['temp'];
 		$heart_rate = $_SESSION['heart_rate'];
 		$oxygen = $_SESSION['oxygen'];	
+		$bp = $_SESSION['bp'];	
 		$transaction_no = $_SESSION['transaction_no'];
 		$assessment_status = 1;
-		$save = $this->db->query("INSERT INTO records (user_id, user_type, name, email, height, weight, bmi, temp, heart_rate, oxygen, transaction_no, assessment_status) VALUES ($id, '$user_type', '$name', '$email', '$height', '$weight', '$bmi', '$temp', '$heart_rate', '$oxygen', '$transaction_no', '$assessment_status');");
+		$save = $this->db->query("INSERT INTO records (user_id, user_type, name, email, height, weight, bmi, temp, heart_rate, oxygen, bp, transaction_no, assessment_status) VALUES ($id, '$user_type', '$name', '$email', '$height', '$weight', '$bmi', '$temp', '$heart_rate', '$oxygen', '$bp', '$transaction_no', '$assessment_status');");
+		if ($user_type == "guest"){
+			$sql = $this->db->query("UPDATE guest SET 
+			heart_rate = '$heart_rate',
+			oxygen = '$oxygen',
+			bp = '$bp',
+			temp = '$temp',
+			height = '$height',
+			weight = '$weight',
+			bmi = '$bmi',
+			assessment_access = 0  
+			WHERE id = $id");
+		}else{
+			$sql = $this->db->query("UPDATE users SET 
+			assessment_access = 0  
+			WHERE id = $id");
+		}
 		$_SESSION['height'] = "";
 		$_SESSION['temp'] = "";
 		$_SESSION['heart_rate'] = "";
@@ -494,16 +563,20 @@ Class Action {
 		extract($_POST);
 		$email = $_SESSION['email'];
 		if($password == $password2){
-			$update = $this->db->query("UPDATE users SET password = '$password' WHERE email = '$email';");
-			if($update){
-				$result = $this->db->query("SELECT user_type FROM users WHERE email = '$email';");
-				$row = $result->fetch_assoc();
-				session_destroy();
-				return $row['user_type'];
+			if (!preg_match('/[A-Z]/', $password) || !preg_match('/[0-9]/', $password) || strlen($password) < 8) {
+				return 4;
 			}else{
-				return 0;
+				$hashed_password = md5($password);
+				$update = $this->db->query("UPDATE users SET password = '$hashed_password' WHERE email = '$email';");
+				if($update){
+					$result = $this->db->query("SELECT user_type FROM users WHERE email = '$email';");
+					$row = $result->fetch_assoc();
+					session_destroy();
+					return $row['user_type'];
+				}else{
+					return 0;
+				}
 			}
-
 		}else{
 			return 2;
 		}
@@ -641,9 +714,20 @@ Class Action {
 	function remove_queue(){
 		extract($_POST);
 		$delete = $this->db->query("DELETE FROM queue where id = ".$id);
-		if($delete)
+		if($delete){
+			
+			if ($user_type == "guest"){
+				$sql = $this->db->query("UPDATE guest SET 
+				assessment_access = 0  
+				WHERE id = $user_id");
+			}else{
+				$sql = $this->db->query("UPDATE users SET 
+				assessment_access = 0  
+				WHERE id = $user_id");
+			}
 			return 1;
-		return $id;
+		}
+		return $id;	
 	}
 
 	function save_discomfort_rate() {

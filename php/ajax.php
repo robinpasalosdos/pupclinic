@@ -91,6 +91,18 @@ if($action == 'save_oxygen'){
 		echo $save_oxygen;
 }
 
+if($action == 'get_bp'){
+	$get_bp = $crud->get_bp();
+	if($get_bp)
+		echo $get_bp;
+}
+
+if($action == 'save_bp'){
+	$save_bp = $crud->save_bp();
+	if($save_bp)
+		echo $save_bp;
+}
+
 if($action == 'get_temp'){
 	$get_temp = $crud->get_temp();
 	if($get_temp)

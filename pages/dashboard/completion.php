@@ -4,18 +4,21 @@
 	}
 ?>
 <div class="metrics-container">
+	
+	<h2>Heart Rate:</h2>
+	<h1 id="heart_rate">--</h1>
+	<h2>Oxygen:</h2>
+	<h1 id="oxygen"></h1>
+	<h2>Blood Pressure:</h2>
+	<h1 id="bp"></h1>
+	<h2>Temperature:</h2>
+	<h1 id="temp">--</h1>
 	<h2>Height:</h2>
 	<h1 id="height">--</h1>
 	<h2>Weight:</h2>
 	<h1 id="weight">--</h1>
 	<h2>BMI:</h2>
 	<h1 id="bmi">--</h1>
-	<h2>Temperature:</h2>
-	<h1 id="temp">--</h1>
-	<h2>Heart Rate:</h2>
-	<h1 id="heart_rate">--</h1>
-	<h2>Oxygen:</h2>
-	<h1 id="oxygen"></h1>
 	<h2>Transaction Number:</h2>
 	<h2 id="transaction_no"></h2>
 	<button onclick="retry()">Retry</button>
@@ -26,7 +29,7 @@
 </div>
 <script>
 	function retry() {
-		window.location.href = "../pupclinic/dashboard.php?page=get_height";
+		window.location.href = "../pupclinic/dashboard.php?page=get_heart_rate";
 	}
     $(document).ready(function(){
 		$.ajax({
@@ -39,12 +42,13 @@
 			success:function(resp){
 				resp = JSON.parse(resp)
 				if(resp.status == 1){
+					$("#heart_rate").html(resp.data.heart_rate + " bpm")
+					$("#oxygen").html(resp.data.oxygen + " %")
+					$("#bp").html(resp.data.bp + " bp")
+					$("#temp").html(resp.data.temp + " ℃")
 					$("#height").html(resp.data.height + " cm")
 					$("#weight").html(resp.data.weight + " kg")
 					$("#bmi").html(resp.data.bmi + " kg/m²")
-					$("#temp").html(resp.data.temp + " ℃")
-					$("#heart_rate").html(resp.data.heart_rate + " bpm")
-					$("#oxygen").html(resp.data.oxygen + " %")
 					$("#transaction_no").html(resp.data.transaction_no)
 				}
 			}

@@ -1,8 +1,6 @@
 <div class="measurement-container">
     <h2>Height</h2>
-    <p id="height">-</p>
-	<h2>Weight</h2>
-    <p id="weight">-</p>
+    <p id="data2">-</p>
     <div>
         <form id="get_height">
             <button id="get_height_button">Get</button>
@@ -32,18 +30,14 @@
 			dataType: 'text',
 			success: function(resp) {
 				console.log(resp);
-				var data = resp.split(" ");
-				console.log(data);
-				$("#height").text(data[0] + " cm");
-				$("#weight").text(data[1] + " kg");
-				var vitals = {
-					height: data[0],
-					weight: data[1]
+				$("#data2").text(resp + " cm");
+				var data = {
+					resp: resp,
             	};
 				$.ajax({
 					url:'../pupclinic/php/ajax.php?action=save_height',
 					type:'POST',
-					data:vitals,
+					data:data,
 					error:function(err){
 					console.log(err);
 					alert("An error occured");
@@ -52,7 +46,7 @@
 						console.log(resp);
 						if(resp == 1){
 							setTimeout(function() {
-								location.href = '../pupclinic/dashboard.php?page=completion';
+								location.href = '../pupclinic/dashboard.php?page=get_weight';
 							}, 1500);
 							
 						}else{
