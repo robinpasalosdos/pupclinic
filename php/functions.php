@@ -759,8 +759,8 @@ Class Action {
 	
 		if ($result->num_rows < 1) {
 			$save = $this->db->query(
-				"INSERT INTO queue (user_id, name, user_type, height, weight, bmi, heart_rate, oxygen, temp, assessment_access, discomfort_rate) 
-				VALUES ($id, '$name', '$user_type', '', '', '', '', '', '', 0, $discomfort_rate);"
+				"INSERT INTO queue (user_id, name, user_type, height, weight, bmi, heart_rate, oxygen, bp, temp, assessment_access, discomfort_rate) 
+				VALUES ($id, '$name', '$user_type', '', '', '', '', '', '', '', 0, $discomfort_rate);"
 			);
 	
 			if ($save) {
