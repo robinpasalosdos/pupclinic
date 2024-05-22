@@ -165,7 +165,7 @@
             <label class="u_student_label" for="u_section">Section</label>
             <input type="text" id="u_section" name="u_section" required autocomplete="off">
             <label for="u_email">Email</label>
-            <input type="text" id="u_email" name="u_email" disabled>
+            <input type="text" id="u_email" name="u_email">
             <label for="u_password">New Password</label>
             <input type="password" id="u_password" name="u_password">
             <label for="u_password2">Retype Password</label>

@@ -69,7 +69,7 @@ function displayQueueSection() {
 
                     $disableButton = checkIfNoPriorityRows() ? '' : 'disabled';
 
-                    echo "<button class='btn btn-primary accessButton' data-id='" . $row['id'] . "' data-user_id='" . $row['user_id'] . "' $disableButton>Give Access</button>";
+                    echo "<button class='btn btn-primary accessButton' data-id='" . $row['id'] . "' data-user_id='" . $row['user_id'] . "' data-user_type='" . $row['user_type'] . "' $disableButton>Give Access</button>";
                     echo "<button class='btn btn-primary removeButton' data-id='" . $row['id'] . "' data-user_id='" . $row['user_id'] . "' data-user_type='" . $row['user_type'] . "'>Remove</button>";
                 echo "</div>";
             echo "</div>";
@@ -116,9 +116,11 @@ $(document).ready(function(){
     $(document).on('click', '.accessButton', function(){
         var id = $(this).data('id');
         var user_id = $(this).data('user_id');
+        var user_type = $(this).data('user_type');
         var data = {
             id: id,
-            user_id: user_id
+            user_id: user_id,
+            user_type: user_type
         };
         $.ajax({
             url: '../pupclinic/php/ajax.php?action=give_access',

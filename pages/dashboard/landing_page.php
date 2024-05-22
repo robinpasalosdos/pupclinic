@@ -4,7 +4,7 @@
 <?php 
   include('../pupclinic/php/db_connect.php');
   $id = $_SESSION['id'];
-  $query = "SELECT assessment_status FROM records WHERE user_id = $id AND assessment_status = 0;";
+  $query = "SELECT assessment_status FROM records WHERE user_id = $id AND assessment_status = 1;";
   $result = mysqli_query($conn, $query);
   
   if(mysqli_num_rows($result) > 0)

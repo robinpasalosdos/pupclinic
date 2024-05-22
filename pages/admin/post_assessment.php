@@ -32,9 +32,9 @@
 
                     $filtervalues = $_GET['search'];
                     if($_GET['search'] == ""){
-                        $query = "SELECT * FROM records";
+                        $query = "SELECT * FROM records WHERE assessment_status = 1";
                     }else{
-                        $query = "SELECT * FROM records WHERE CONCAT(user_id,user_type,name,email,height,temp,heart_rate,oxygen,transaction_no) LIKE '%$filtervalues%' ";
+                        $query = "SELECT * FROM records WHERE assessment_status = 1 AND CONCAT(user_id,user_type,name,email,height,temp,heart_rate,oxygen,transaction_no) LIKE '%$filtervalues%' ";
                     }
                     $query_run = mysqli_query($conn, $query);
 
@@ -56,7 +56,7 @@
                                 <td><?= date('M d, Y', strtotime($items['date_created'])); ?></td>
                                 <td><?= date('h:i A', strtotime($items['created_timestamp'])); ?></td>
                                 <td>
-                                    <a class="assess" href="javascript:void(0)" data-id="<?= $items['id'] ?>">Assess</a>
+                                    <a class="assess" href="javascript:void(0)" data-id="<?= $items['user_id'] ?>">Assess</a>
                                 </td>
                                 
                                 
@@ -79,5 +79,9 @@
     </table>
 </div>
 <script>
+    $(document).on('click', '.assess', function(){
+        var id = $(this).data('id');
+        window.location.href = "../pupclinic/admin.php?page=form&id=" + id;
+    });
 
 </script>
