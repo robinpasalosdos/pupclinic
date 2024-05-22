@@ -156,7 +156,8 @@ button:hover {
 
 .login-form form[id="login"], 
 .login-form form[id="register"],
-.floating-register form[id="register"] {
+.floating-register form[id="register"],
+.floating-register form[id="update_user"] {
     display: flex;
     background: var(--def-gradient-form);
     flex-direction: column;
@@ -239,7 +240,6 @@ button:hover {
     align-content: space-evenly;
     font-family: var(--def-font);
     pointer-events: all;
-
 }
 
 .logout-button-a {
