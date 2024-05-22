@@ -1,8 +1,8 @@
 <div class="measurement-container">
+	<h2>Blood Pressure</h2>
+    <p id="bp">-</p>
     <h2>Heart Rate</h2>
     <p id="heart_rate">-</p>
-	<h2>Oxygen</h2>
-    <p id="oxygen">-</p>
     <div>
         <form id="get_heart_rate">
             <button id="get_heart_rate_button">Get</button>
@@ -34,11 +34,11 @@
 				console.log(resp);
 				var data = resp.split(" ");
 				console.log(data);
-				$("#heart_rate").text(data[0] + " bpm");
-				$("#oxygen").text(data[1] + " %");
+				$("#heart_rate").text(data[1] + " bpm");
+				$("#bp").text(data[0] + " mmHg");
 				var vitals = {
-					heart_rate: data[0],
-					oxygen: data[1]
+					heart_rate: data[1],
+					bp: data[0]
             	};
 				$.ajax({
 					url:'../pupclinic/php/ajax.php?action=save_heart_rate',
@@ -52,7 +52,7 @@
 						console.log(resp);
 						if(resp == 1){
 							setTimeout(function() {
-								location.href = '../pupclinic/dashboard.php?page=get_bp';
+								location.href = '../pupclinic/dashboard.php?page=get_temp';
 							}, 1500);
 							
 						}else{

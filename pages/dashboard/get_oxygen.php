@@ -1,28 +1,20 @@
 <div class="measurement-container">
-    <h2>Get Oxygen</h2>
-	<p> Gently press against the sensor and firmly hold your finger for atleast 30 seconds and wait for the readings to show up.</p>
-    <p id="data2">-</p>
-    
-    <div class="button_container">
-	<form id="get_oxygen">
-	    <button id="get_oxygen_button">Get</button>
-	</form>
-	<form id="save_oxygen">
-	    <button style="display: none;" id="next">Next</button>
-	    <input style="display: none;" type="text" id="data" name="data"><br>
-	</form>
-	
+    <h2>Oxygen</h2>
+    <p id="oxygen">-</p>
+    <div>
+        <form id="get_oxygen">
+            <button id="get_oxygen_button">Get</button>
+        </form>
     </div>
-    
+	<p> Please stand straight and hold your stance for atleast 10 seconds below the sensor </p>
 </div>
 
 <script>
     var params = <?php echo json_encode($_GET)?>;
     $('#get_oxygen').submit(function(e){
 		e.preventDefault()
-		$("#data2").text("Please Wait...");
+		$("#data2").text("Please wait...");
 		$("#get_oxygen_button").hide();
-		$("#next").hide();
 		$.ajax({
 			url:'../pupclinic/php/ajax.php?action=get_oxygen',
 			method:'POST',
@@ -31,45 +23,38 @@
 			console.log(err)
 			},
 			success:function(resp){
+				console.log(resp);
 			$.ajax({
 			url: '../pupclinic/hardware/data.txt?t=' + new Date().getTime(),
 			type: 'GET',
 			dataType: 'text',
 			success: function(resp) {
 				console.log(resp);
-				var data = parseInt(resp);
-				if(data > 0 && data < 101){
-				$("#data").val(resp);
-				$("#data2").text(resp + " %");
-				$("#get_oxygen_button").show();
-				$("#get_oxygen_button").text("Retry");
-				$("#next").show();
-				}else{
-				$("#data2").text("Please try again.");
-				$("#get_oxygen_button").show();
-				$("#get_oxygen_button").text("Retry");
-				}
-				$('#save_oxygen').submit(function(e){
-					e.preventDefault()
-					$.ajax({
-						url:'../pupclinic/php/ajax.php?action=save_oxygen',
-						type:'POST',
-						data:$(this).serialize(),
-						error:function(err){
-							console.log(err);
-							alert("An error occured");
-						},
-						success:function(resp){
-							console.log(resp);
-							if(resp == 1){
-								location.href = '../pupclinic/dashboard.php?page=get_temp';
-							}else{
-								alert(resp);
-							}
+				$("#oxygen").text(resp + " %");
+				var data = {
+					resp: resp,
+            	};
+				$.ajax({
+					url:'../pupclinic/php/ajax.php?action=save_oxygen',
+					type:'POST',
+					data:data,
+					error:function(err){
+					console.log(err);
+					alert("An error occured");
+					},
+					success:function(resp){
+						console.log(resp);
+						if(resp == 1){
+							setTimeout(function() {
+								location.href = '../pupclinic/dashboard.php?page=get_heart_rate';
+							}, 1500);
+							
+						}else{
+							alert(resp);
 						}
-					})
-				
+					}
 				})
+
 			},
 			error: function(error) {
 				console.error('Error:', error);
@@ -77,8 +62,5 @@
 			});
 			}
 		})
-		
     })
-    
-
 </script>

@@ -249,12 +249,12 @@ Class Action {
 	function save_heart_rate(){	
 		extract($_POST);
 		$_SESSION['heart_rate'] = $heart_rate;
-		$_SESSION['oxygen'] = $oxygen;
+		$_SESSION['bp'] = $bp;
 		$id = $_SESSION['id'];
 		$user_type = $_SESSION['user'];
 		if($user_type == "guest"){
 			$update = $this->db->query("UPDATE queue 
-				SET heart_rate = '$heart_rate', oxygen = '$oxygen'
+				SET heart_rate = '$heart_rate', bp = '$bp'
 				WHERE user_id = $id
 				AND user_type = 'guest';");
 			if($update){
@@ -262,7 +262,7 @@ Class Action {
 			}
 		}else{
 			$update = $this->db->query("UPDATE queue 
-				SET heart_rate = '$heart_rate', oxygen = '$oxygen'
+				SET heart_rate = '$heart_rate', bp = '$bp'
 				WHERE user_id = $id
 				AND (user_type = 'student'
 				OR user_type = 'faculty');");
@@ -279,8 +279,8 @@ Class Action {
 	
 	function save_oxygen(){	
 		extract($_POST);
-		$_SESSION['oxygen'] = $data;
-		return $this->update_queue_data($data, "oxygen");
+		$_SESSION['oxygen'] = $resp;
+		return $this->update_queue_data($resp, "oxygen");
 	}
 
 	function update_queue_data($data, $vital_sign){
