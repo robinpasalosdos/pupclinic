@@ -3,20 +3,11 @@
     <p id="bp">-</p>
     <h2>Heart Rate</h2>
     <p id="heart_rate">-</p>
-    <div>
-        <form id="get_heart_rate">
-            <button id="get_heart_rate_button">Get</button>
-        </form>
-    </div>
 	<p> Please stand straight and hold your stance for atleast 10 seconds below the sensor </p>
 </div>
 
 <script>
     var params = <?php echo json_encode($_GET)?>;
-    $('#get_heart_rate').submit(function(e){
-		e.preventDefault()
-		$("#data2").text("Please wait...");
-		$("#get_heart_rate_button").hide();
 		$.ajax({
 			url:'../pupclinic/php/ajax.php?action=get_heart_rate',
 			method:'POST',
@@ -69,5 +60,4 @@
 			}
 		})
 	
-    })
 </script>

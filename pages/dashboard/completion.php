@@ -29,7 +29,7 @@
 </div>
 <script>
 	function retry() {
-		window.location.href = "../pupclinic/dashboard.php?page=get_heart_rate";
+		window.location.href = "../pupclinic/dashboard.php?page=get_oxygen";
 	}
     $(document).ready(function(){
 		$.ajax({

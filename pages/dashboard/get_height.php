@@ -3,18 +3,11 @@
     <p id="height">-</p>
 	<h2>Weight</h2>
     <p id="weight">-</p>
-    <div>
-        <form id="get_height">
-            <button id="get_height_button">Get</button>
-        </form>
-    </div>
 	<p> Please stand straight and hold your stance for atleast 10 seconds below the sensor </p>
 </div>
 
 <script>
     var params = <?php echo json_encode($_GET)?>;
-    $('#get_height').submit(function(e){
-		e.preventDefault()
 		$("#data2").text("Please wait...");
 		$("#get_height_button").hide();
 		$.ajax({
@@ -68,8 +61,4 @@
 			});
 			}
 		})
-	
-    })
-    
-
 </script>
