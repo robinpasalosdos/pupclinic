@@ -91,6 +91,18 @@ if($action == 'save_oxygen'){
 		echo $save_oxygen;
 }
 
+if($action == 'get_bp'){
+	$get_bp = $crud->get_bp();
+	if($get_bp)
+		echo $get_bp;
+}
+
+if($action == 'save_bp'){
+	$save_bp = $crud->save_bp();
+	if($save_bp)
+		echo $save_bp;
+}
+
 if($action == 'get_temp'){
 	$get_temp = $crud->get_temp();
 	if($get_temp)
@@ -141,12 +153,6 @@ if($action == 'delete_ongoing'){
 	$delete_ongoing = $crud->delete_ongoing();
 	if($delete_ongoing)
 		echo $delete_ongoing;
-}
-
-if($action == 'assess'){
-	$assess = $crud->assess();
-	if($assess)
-		echo $assess;
 }
 
 if($action == 'display_realtime_records'){
@@ -220,3 +226,22 @@ if($action == 'assessment'){
 	if($assessment)
 		echo $assessment;
 }
+
+if($action == 'save_health_record'){
+	$save_health_record = $crud->save_health_record();
+	if($save_health_record)
+		echo $save_health_record;
+}
+
+if($action == 'verify_email'){
+	$verify_email = $crud->verify_email();
+	if($verify_email)
+		echo $verify_email;
+}
+
+if($action == 'profile_send_code'){
+	$profile_send_code = $crud->profile_send_code();
+	if($profile_send_code)
+		echo $profile_send_code;
+}
+

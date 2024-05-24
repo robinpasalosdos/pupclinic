@@ -10,21 +10,15 @@
             if (mysqli_num_rows($res) > 0) {
                 $user = mysqli_fetch_assoc($res) ?>
             <div>
-                <form class="form" id = "form" action="" enctype="multipart/form-data" method="post">
+                <form id="email_verification">
                     <div class="upload">
                         <?php
                             $name = $user["name"];
                             $image = $user["pic"];
                         ?>
+                        <input type="hidden" name="email" value="<?=$user['email']?>">
                         <img src="../pupclinic/php/profile_pic/<?php echo $image; ?>" width = 125 height = 125 title="<?php echo $image; ?>">
-                        <div class="round">
-                            <input type="hidden" name="email" id="profileEmail" value="<?php echo $user['email']; ?>">
-                            <input type="hidden" name="name" id="profileName" value="<?php echo $name; ?>">
-                            <label for="image">
-                                Upload
-                            </label>
-                            <input type="file" name="image" id = "image" style="display: none;" accept=".jpg, .jpeg, .png">
-                        </div>
+                        <input type="submit" value="Verify Email">
                     </div>
                 </form>   
                 <label>Name</label>
@@ -73,33 +67,20 @@
 </div>
 </body>
 <script>
-    document.getElementById("image").onchange = function(){
-        let form_data = new FormData();
-            var image = $('#image')[0].files;
-            var profileName = $("#profileName").val().trim();
-            var profileEmail = $("#profileEmail").val().trim();
-       
-            form_data.append('profileName',profileName);
-            form_data.append('profileEmail',profileEmail);
-            form_data.append('image',image[0]);
-            $.ajax({
-                url:'../pupclinic/php/ajax.php?action=upload_profile_pic',
-                type:'post',
-                data:form_data,
-                contentType: false,
-                processData: false,
-                success:function(response){
-                    console.log(response);
-                    if(response == 0){
-                        location.reload();
-                        alert('Successfully Updated!');
-                    }else if(response == 'max'){
-                        alert('Sorry, your file is too large.');
-                    }else if(response == 'diff'){
-                        alert('Invalid Image Extension');
-                    }
-                }
-            });
-    };
-    
+    $('#email_verification').submit(function(e){
+        e.preventDefault();
+        $.ajax({
+            url: "../pupclinic/php/ajax.php?action=profile_send_code",
+            type: "POST",
+            data: $(this).serialize(),
+            success: function(response){
+                console.log(response);
+                location.href = "../pupclinic/dashboard.php?page=verify";
+            },
+            error: function(jqXHR, textStatus, errorThrown){
+                console.error(textStatus, errorThrown);
+                console.log(response);
+            }
+        });
+    });
 </script>

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 14, 2024 at 01:44 PM
+-- Generation Time: May 22, 2024 at 03:43 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.0.25
 
@@ -50,23 +50,75 @@ CREATE TABLE `guest` (
   `birthday` varchar(50) NOT NULL,
   `sex` varchar(50) NOT NULL,
   `email` varchar(50) NOT NULL,
-  `height` varchar(50) NOT NULL,
-  `weight` int(11) NOT NULL,
-  `bmi` int(11) NOT NULL,
-  `temp` varchar(50) NOT NULL,
   `heart_rate` varchar(50) NOT NULL,
   `oxygen` varchar(50) NOT NULL,
+  `bp` varchar(50) NOT NULL,
+  `temp` varchar(50) NOT NULL,
+  `height` varchar(50) NOT NULL,
+  `weight` varchar(50) NOT NULL,
+  `bmi` varchar(50) NOT NULL,
   `assessment_access` int(11) NOT NULL,
   `date_created` date NOT NULL DEFAULT current_timestamp(),
   `created_timestamp` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+-- --------------------------------------------------------
+
 --
--- Dumping data for table `guest`
+-- Table structure for table `health_record`
 --
 
-INSERT INTO `guest` (`id`, `name`, `birthday`, `sex`, `email`, `height`, `weight`, `bmi`, `temp`, `heart_rate`, `oxygen`, `assessment_access`, `date_created`, `created_timestamp`) VALUES
-(20, 'robin', '2024-02-15', 'Male', 'robinpasalosdos@gmail.com', '', 0, 0, '', '', '', 0, '2024-02-09', '2024-02-09 02:17:42');
+CREATE TABLE `health_record` (
+  `id` int(11) NOT NULL,
+  `name` varchar(100) DEFAULT NULL,
+  `date` date DEFAULT NULL,
+  `sex` varchar(10) DEFAULT NULL,
+  `address` varchar(255) DEFAULT NULL,
+  `contact` varchar(20) DEFAULT NULL,
+  `emergency_contact` varchar(100) DEFAULT NULL,
+  `age` int(11) DEFAULT NULL,
+  `civil_status` varchar(50) DEFAULT NULL,
+  `college_department` varchar(100) DEFAULT NULL,
+  `course_school_year` varchar(100) DEFAULT NULL,
+  `contact_no` varchar(20) DEFAULT NULL,
+  `childhood_illness` varchar(255) DEFAULT NULL,
+  `previous_hospitalization` varchar(3) DEFAULT NULL,
+  `operation_surgery` varchar(3) DEFAULT NULL,
+  `current_medications` varchar(255) DEFAULT NULL,
+  `allergies` varchar(255) DEFAULT NULL,
+  `family_history` varchar(255) DEFAULT NULL,
+  `cigarette_smoking` varchar(3) DEFAULT NULL,
+  `alcohol_drinking` varchar(3) DEFAULT NULL,
+  `traveled_abroad` varchar(3) DEFAULT NULL,
+  `working_impression` varchar(255) DEFAULT NULL,
+  `vital_signs` varchar(20) DEFAULT NULL,
+  `height` varchar(10) DEFAULT NULL,
+  `weight` varchar(10) DEFAULT NULL,
+  `bmi` varchar(10) DEFAULT NULL,
+  `bp` varchar(10) DEFAULT NULL,
+  `hr` varchar(10) DEFAULT NULL,
+  `rr` varchar(10) DEFAULT NULL,
+  `temp` varchar(10) DEFAULT NULL,
+  `head` varchar(255) DEFAULT NULL,
+  `eyes` varchar(255) DEFAULT NULL,
+  `ears` varchar(255) DEFAULT NULL,
+  `throat` varchar(255) DEFAULT NULL,
+  `chest_lungs` varchar(255) DEFAULT NULL,
+  `xray_result` varchar(20) DEFAULT NULL,
+  `breast` varchar(20) DEFAULT NULL,
+  `heart_murmur` varchar(10) DEFAULT NULL,
+  `heart_rhythm` varchar(10) DEFAULT NULL,
+  `abdomen` varchar(20) DEFAULT NULL,
+  `genito_urinary` varchar(50) DEFAULT NULL,
+  `extremities` varchar(20) DEFAULT NULL,
+  `vertebral_column` varchar(20) DEFAULT NULL,
+  `skin` varchar(255) DEFAULT NULL,
+  `scars` varchar(20) DEFAULT NULL,
+  `referred_to` varchar(255) DEFAULT NULL,
+  `follow_up_on` varchar(50) DEFAULT NULL,
+  `fit` varchar(20) DEFAULT NULL,
+  `for_work_up` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -79,23 +131,17 @@ CREATE TABLE `queue` (
   `user_id` int(11) NOT NULL,
   `name` varchar(50) NOT NULL,
   `user_type` varchar(50) NOT NULL,
+  `heart_rate` varchar(50) NOT NULL,
+  `oxygen` varchar(50) NOT NULL,
+  `bp` varchar(50) NOT NULL,
+  `temp` varchar(50) NOT NULL,
   `height` varchar(50) NOT NULL,
   `weight` varchar(50) NOT NULL,
   `bmi` varchar(50) NOT NULL,
-  `temp` varchar(50) NOT NULL,
-  `heart_rate` varchar(50) NOT NULL,
-  `oxygen` varchar(50) NOT NULL,
   `assessment_access` int(11) NOT NULL,
   `discomfort_rate` int(11) NOT NULL,
   `created_timestamp` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `queue`
---
-
-INSERT INTO `queue` (`id`, `user_id`, `name`, `user_type`, `height`, `weight`, `bmi`, `temp`, `heart_rate`, `oxygen`, `assessment_access`, `discomfort_rate`, `created_timestamp`) VALUES
-(35, 19, 'Robin Pasalosdos', 'student', '39', '39', '', '39', '39', '39', 0, 6, '2024-02-14 16:57:47');
 
 -- --------------------------------------------------------
 
@@ -109,26 +155,18 @@ CREATE TABLE `records` (
   `user_type` varchar(50) NOT NULL,
   `name` varchar(50) NOT NULL,
   `email` varchar(50) NOT NULL,
+  `heart_rate` varchar(50) NOT NULL,
+  `oxygen` varchar(50) NOT NULL,
+  `bp` varchar(50) NOT NULL,
+  `temp` varchar(50) NOT NULL,
   `height` varchar(50) NOT NULL,
   `weight` varchar(50) NOT NULL,
   `bmi` varchar(50) NOT NULL,
-  `temp` varchar(50) NOT NULL,
-  `heart_rate` varchar(50) NOT NULL,
-  `oxygen` varchar(50) NOT NULL,
   `transaction_no` int(11) NOT NULL,
   `assessment_status` int(11) NOT NULL,
   `date_created` date NOT NULL DEFAULT current_timestamp(),
   `created_timestamp` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `records`
---
-
-INSERT INTO `records` (`id`, `user_id`, `user_type`, `name`, `email`, `height`, `weight`, `bmi`, `temp`, `heart_rate`, `oxygen`, `transaction_no`, `assessment_status`, `date_created`, `created_timestamp`) VALUES
-(2, 19, 'student', 'robin', 'robinpasalosdos@gmail.com', '40', '', '', '40', '40', '40', 100002, 1, '2024-02-08', '2024-02-08 02:14:50'),
-(4, 24, 'faculty', 'robin', 'rawbean09@gmail.com', '39', '', '', '39', '39', '39', 100004, 1, '2024-02-10', '2024-02-10 20:38:19'),
-(6, 24, 'faculty', 'robin', 'rawbean09@gmail.com', '39', '', '', '39', '39', '39', 100005, 1, '2024-02-14', '2024-02-14 13:51:14');
 
 -- --------------------------------------------------------
 
@@ -159,9 +197,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `user_type`, `name`, `birthday`, `sex`, `email`, `student_no`, `course`, `year`, `section`, `password`, `assessment_access`, `pic`, `date_created`, `created_timestamp`) VALUES
-(19, 'student', 'Robin Pasalosdos', '2024-02-15', 'Male', 'robinpasalosdos@gmail.com', '2019-XXXXX-MN-0', 'BSCoE', '5', '6', '202cb962ac59075b964b07152d234b70', 1, 'default.png', '2024-02-07', '2024-02-07 23:56:14'),
-(24, 'faculty', 'robin', '2024-02-16', 'Male', 'rawbean09@gmail.com', '', '', '', '', '8f3ba5fd2beac46774ceba7798b4e2c4', 1, 'default.png', '2024-02-09', '2024-02-09 01:05:59'),
-(26, 'student', 'desu', '2000-08-30', 'Male', 'jasutindono@gmail.com', '2019-05473-MN-0', 'BSCPE', '4', '3', 'fb32aaf975d84397f650b994973c0b78', 0, 'desu - 2024.02.12 - 03.26.37pm.jpg', '2024-02-12', '2024-02-12 22:25:50');
+(32, 'faculty', 'Robin Pasalosdo', '2111-11-11', 'Male', 'robinpasalosdos@gmail.com', '', '', '', '', '689f48f753397d7c606150b855bc4b1e', 0, 'default.png', '2024-05-14', '2024-05-14 22:10:14');
 
 --
 -- Indexes for dumped tables
@@ -171,6 +207,12 @@ INSERT INTO `users` (`id`, `user_type`, `name`, `birthday`, `sex`, `email`, `stu
 -- Indexes for table `guest`
 --
 ALTER TABLE `guest`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `health_record`
+--
+ALTER TABLE `health_record`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -199,25 +241,31 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `guest`
 --
 ALTER TABLE `guest`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+
+--
+-- AUTO_INCREMENT for table `health_record`
+--
+ALTER TABLE `health_record`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
 
 --
 -- AUTO_INCREMENT for table `queue`
 --
 ALTER TABLE `queue`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=82;
 
 --
 -- AUTO_INCREMENT for table `records`
 --
 ALTER TABLE `records`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -20,6 +20,7 @@ time.sleep(.2)
 GPIO.output(buzzer, False)
 while len(data) < 40:
 	targetTemp = mlx.object_temperature
+	print(targetTemp)
 	data.append(round(targetTemp,1))
 	time.sleep(.1)
 temp = str(statistics.mode(data))

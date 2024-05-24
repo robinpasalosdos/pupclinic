@@ -1,6 +1,6 @@
 <?php
     $id = $_SESSION['id'];
-    $query = "SELECT * FROM users WHERE id = $id AND assessment_access = 1;";
+    $query = "SELECT * FROM queue WHERE user_id = $id;";
     $result = mysqli_query($conn, $query);
     
     if(mysqli_num_rows($result) > 0)

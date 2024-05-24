@@ -8,25 +8,28 @@ $conn->close();
 function display(){
   global $conn;
   $id = $_SESSION['id'];
-  $query = "SELECT assessment_access FROM users WHERE id = $id AND assessment_access = 0;";
+  $userType = $_SESSION['user'];
+  
+  $tableName = ($userType == "guest") ? "guest" : "users";
+  
+  $query = "SELECT assessment_access FROM $tableName WHERE id = $id AND assessment_access IN (0, 1)";
   $result = mysqli_query($conn, $query);
-  if(mysqli_num_rows($result) > 0)
-  {
-    echo "<h3>Your assessment access is pending approval from the admin.</h3>";
-    echo "<h3>Please wait for further instructions.</h3>";
-  }
+  
+  if(mysqli_num_rows($result) > 0) {
+    $row = mysqli_fetch_assoc($result);
+    $accessStatus = $row['assessment_access'];
 
-  $query = "SELECT assessment_access FROM users WHERE id = $id AND assessment_access = 1;";
-  $result = mysqli_query($conn, $query);
-  if(mysqli_num_rows($result) > 0)
-  {
-
-    echo "<h3>Your assessment access has been granted.</h3>";
-    echo "<h3> You can proceed with the assessment now.</h3>";
-    echo "<button class='proceed'>Proceed to Assessment</button>";
-
+    if($accessStatus == 0) {
+      echo "<h3>Your assessment access is pending approval from the admin.</h3>";
+      echo "<h3>Please wait for further instructions.</h3>";
+    } elseif ($accessStatus == 1) {
+      echo "<h3>Your assessment access has been granted.</h3>";
+      echo "<h3>You can proceed with the assessment now.</h3>";
+      echo "<button class='proceed'>Proceed to Assessment</button>";
+    }
   }
 }
+
   
 ?>
 <script>
@@ -50,7 +53,7 @@ function display(){
             success:function(response){
                 console.log(response);
                 if(response == 1){
-                    location.href = '../pupclinic/dashboard.php?page=get_heart_rate';
+                    location.href = '../pupclinic/dashboard.php?page=get_oxygen';
                 }
             }
         }); 

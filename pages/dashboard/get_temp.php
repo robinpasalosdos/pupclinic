@@ -1,28 +1,20 @@
 <div class="measurement-container">
-    <h2>Get Temperature</h2>
-	<p> Gently press against the sensor and hold for atleast 10 seconds. </p>
-    <p id="data2">-</p>
-    
-    <div class="button_container">
-	<form id="get_temp">
-	    <button id="get_temp_button">Get</button>
-	</form>
-	<form id="save_temp">
-	    <button style="display: none;" id="next">Next</button>
-	    <input style="display: none;" type="text" id="data" name="data"><br>
-	</form>
-	
+    <h2>Temperature</h2>
+    <p id="temp">-</p>
+    <div>
+        <form id="get_temp">
+            <button id="get_temp_button">Get</button>
+        </form>
     </div>
-    
+	<p> Please stand straight and hold your stance for atleast 10 seconds below the sensor </p>
 </div>
 
 <script>
     var params = <?php echo json_encode($_GET)?>;
     $('#get_temp').submit(function(e){
 		e.preventDefault()
-		$("#data2").text("Please Wait...");
+		$("#data2").text("Please wait...");
 		$("#get_temp_button").hide();
-		$("#next").hide();
 		$.ajax({
 			url:'../pupclinic/php/ajax.php?action=get_temp',
 			method:'POST',
@@ -31,42 +23,38 @@
 			console.log(err)
 			},
 			success:function(resp){
+				console.log(resp);
 			$.ajax({
 			url: '../pupclinic/hardware/data.txt?t=' + new Date().getTime(),
 			type: 'GET',
 			dataType: 'text',
 			success: function(resp) {
 				console.log(resp);
-				var data = parseInt(resp);
-				if(data < 43){
-				$("#data").val(resp);
-				$("#data2").text(resp + " ℃");
-				$("#get_temp_button").show();
-				$("#get_temp_button").text("Retry");
-				$("#next").show();
-				}else{
-				$("#data2").text("Please try again.");
-				$("#get_temp_button").show();
-				$("#get_temp_button").text("Retry");
-				}
-				$('#save_temp').submit(function(e){
-					e.preventDefault()
-					$.ajax({
-						url:'../pupclinic/php/ajax.php?action=save_temp',
-						type:'POST',
-						data:$(this).serialize(),
-						error:function(err){
-						console.log(err)
-						alert("An error occured");
-						},
-						success:function(resp){
+				$("#temp").text(resp + " C");
+				var data = {
+					resp: resp,
+            	};
+				$.ajax({
+					url:'../pupclinic/php/ajax.php?action=save_temp',
+					type:'POST',
+					data:data,
+					error:function(err){
+					console.log(err);
+					alert("An error occured");
+					},
+					success:function(resp){
+						console.log(resp);
 						if(resp == 1){
-							location.href = '../pupclinic/dashboard.php?page=get_height';
+							setTimeout(function() {
+								location.href = '../pupclinic/dashboard.php?page=get_height';
+							}, 1500);
+							
+						}else{
+							alert(resp);
 						}
-						}
-					})
-				
+					}
 				})
+
 			},
 			error: function(error) {
 				console.error('Error:', error);
@@ -74,8 +62,5 @@
 			});
 			}
 		})
-	
     })
-    
-
 </script>

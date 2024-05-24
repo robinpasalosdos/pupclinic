@@ -185,8 +185,28 @@ Class Action {
 	
 	function save_height(){
 		extract($_POST);
-		$_SESSION['height'] = $resp;
-		return $this->update_queue_data($resp, "height");
+		$_SESSION['height'] = $height;
+		$_SESSION['weight'] = $weight;
+		$id = $_SESSION['id'];
+		$user_type = $_SESSION['user'];
+		if($user_type == "guest"){
+			$update = $this->db->query("UPDATE queue 
+				SET height = '$height', weight = '$weight'
+				WHERE user_id = $id
+				AND user_type = 'guest';");
+			if($update){
+				return 1;
+			}
+		}else{
+			$update = $this->db->query("UPDATE queue 
+				SET height = '$height', weight = '$weight'
+				WHERE user_id = $id
+				AND (user_type = 'student'
+				OR user_type = 'faculty');");
+			if($update){
+				return 1;
+			}
+		}
 	}
 	
 	function get_weight(){
@@ -206,21 +226,50 @@ Class Action {
 	
 	function save_temp(){
 		extract($_POST);
-		$_SESSION['temp'] = $data;
-		return $this->update_queue_data($data, "temp");
+		$_SESSION['temp'] = $resp;
+		return $this->update_queue_data($resp, "temp");
+	}
+
+	function get_bp(){
+		$output = shell_exec('sudo /usr/bin/python3 /var/www/html/pupclinic/hardware/temp.py');
+		echo $output;
+	}
+	
+	function save_bp(){
+		extract($_POST);
+		$_SESSION['bp'] = $resp;
+		return $this->update_queue_data($resp, "bp");
 	}
 	
 	function get_heart_rate(){
-		exec('/usr/bin/python /var/www/html/pupclinic/hardware/heart_rate.py 2>&1', $output, $return_code);
-		echo "Output: " . implode("\n", $output);
-		echo "\nReturn code: " . $return_code;
-		return $output;
+		$output = shell_exec('sudo /usr/bin/python3 /var/www/html/pupclinic/hardware/heart_rate.py');
+		echo $output;
 	}
 	
 	function save_heart_rate(){	
 		extract($_POST);
-		$_SESSION['heart_rate'] = $data;
-		return $this->update_queue_data($data, "heart_rate");
+		$_SESSION['heart_rate'] = $heart_rate;
+		$_SESSION['bp'] = $bp;
+		$id = $_SESSION['id'];
+		$user_type = $_SESSION['user'];
+		if($user_type == "guest"){
+			$update = $this->db->query("UPDATE queue 
+				SET heart_rate = '$heart_rate', bp = '$bp'
+				WHERE user_id = $id
+				AND user_type = 'guest';");
+			if($update){
+				return 1;
+			}
+		}else{
+			$update = $this->db->query("UPDATE queue 
+				SET heart_rate = '$heart_rate', bp = '$bp'
+				WHERE user_id = $id
+				AND (user_type = 'student'
+				OR user_type = 'faculty');");
+			if($update){
+				return 1;
+			}
+		}
 	}
 	
 	function get_oxygen(){
@@ -230,8 +279,8 @@ Class Action {
 	
 	function save_oxygen(){	
 		extract($_POST);
-		$_SESSION['oxygen'] = $data;
-		return $this->update_queue_data($data, "oxygen");
+		$_SESSION['oxygen'] = $resp;
+		return $this->update_queue_data($resp, "oxygen");
 	}
 
 	function update_queue_data($data, $vital_sign){
@@ -283,6 +332,7 @@ Class Action {
 		$data['temp'] = $_SESSION['temp'];
 		$data['heart_rate'] = $_SESSION['heart_rate'];
 		$data['oxygen'] = $_SESSION['oxygen'];
+		$data['bp'] = $_SESSION['bp'];
 		$prefix = "PUP";
 		$suffix = "CLI";
 		$data['transaction_no'] = $prefix . $transaction_no . $suffix;
@@ -302,9 +352,26 @@ Class Action {
 		$temp = $_SESSION['temp'];
 		$heart_rate = $_SESSION['heart_rate'];
 		$oxygen = $_SESSION['oxygen'];	
+		$bp = $_SESSION['bp'];	
 		$transaction_no = $_SESSION['transaction_no'];
 		$assessment_status = 1;
-		$save = $this->db->query("INSERT INTO records (user_id, user_type, name, email, height, weight, bmi, temp, heart_rate, oxygen, transaction_no, assessment_status) VALUES ($id, '$user_type', '$name', '$email', '$height', '$weight', '$bmi', '$temp', '$heart_rate', '$oxygen', '$transaction_no', '$assessment_status');");
+		$save = $this->db->query("INSERT INTO records (user_id, user_type, name, email, height, weight, bmi, temp, heart_rate, oxygen, bp, transaction_no, assessment_status) VALUES ($id, '$user_type', '$name', '$email', '$height', '$weight', '$bmi', '$temp', '$heart_rate', '$oxygen', '$bp', '$transaction_no', '$assessment_status');");
+		if ($user_type == "guest"){
+			$sql = $this->db->query("UPDATE guest SET 
+			heart_rate = '$heart_rate',
+			oxygen = '$oxygen',
+			bp = '$bp',
+			temp = '$temp',
+			height = '$height',
+			weight = '$weight',
+			bmi = '$bmi',
+			assessment_access = 0  
+			WHERE id = $id");
+		}else{
+			$sql = $this->db->query("UPDATE users SET 
+			assessment_access = 0  
+			WHERE id = $id");
+		}
 		$_SESSION['height'] = "";
 		$_SESSION['temp'] = "";
 		$_SESSION['heart_rate'] = "";
@@ -373,9 +440,14 @@ Class Action {
 		$sql = "UPDATE queue SET assessment_access = 1 WHERE id = $id";
 	
 		if ($this->db->query($sql) === TRUE) {
-			$sql1 = "UPDATE users SET assessment_access = 1 WHERE id = $user_id";
+			if ($user_type == "guest"){
+				$sql1 = "UPDATE guest SET assessment_access = 1 WHERE id = $user_id";
+			}else{
+				$sql1 = "UPDATE users SET assessment_access = 1 WHERE id = $user_id";
+			}
+			
 			if ($this->db->query($sql1) === TRUE) {
-				return 1;
+				return $user_type;
 			}else{
 				return "Error updating record: " . $this->db->error;
 			}
@@ -494,19 +566,38 @@ Class Action {
 		extract($_POST);
 		$email = $_SESSION['email'];
 		if($password == $password2){
-			$update = $this->db->query("UPDATE users SET password = '$password' WHERE email = '$email';");
-			if($update){
-				$result = $this->db->query("SELECT user_type FROM users WHERE email = '$email';");
-				$row = $result->fetch_assoc();
-				session_destroy();
-				return $row['user_type'];
+			if (!preg_match('/[A-Z]/', $password) || !preg_match('/[0-9]/', $password) || strlen($password) < 8) {
+				return 4;
 			}else{
-				return 0;
+				$hashed_password = md5($password);
+				$update = $this->db->query("UPDATE users SET password = '$hashed_password' WHERE email = '$email';");
+				if($update){
+					$result = $this->db->query("SELECT user_type FROM users WHERE email = '$email';");
+					$row = $result->fetch_assoc();
+					session_destroy();
+					return $row['user_type'];
+				}else{
+					return 0;
+				}
 			}
-
 		}else{
 			return 2;
 		}
+	}
+
+	function verify_email(){
+		extract($_POST);
+		if($_SESSION['code'] == $code){
+			
+			return 1;
+		}else{
+			return 2;
+		}
+	}
+
+	function profile_send_code(){
+		extract($_POST);
+		return $this->send_code($email);
 	}
 
 	function update_user(){
@@ -526,7 +617,8 @@ Class Action {
 					course = '$u_course', 
 					year = '$u_year', 
 					section = '$u_section', 
-					password = '$u_password' 
+					password = '$u_password',
+					email = '$u_email'
 				WHERE id = ".intval($u_id).";");
 				if($update){
 					return 1;
@@ -538,7 +630,8 @@ Class Action {
 				SET name = '$u_name', 
 					birthday = '$u_birthday', 
 					sex = '$u_sex',
-					password = '$u_password' 
+					password = '$u_password',
+					email = '$u_email' 
 				WHERE id = ".intval($u_id).";");
 				if($update){
 					return 1;
@@ -641,9 +734,20 @@ Class Action {
 	function remove_queue(){
 		extract($_POST);
 		$delete = $this->db->query("DELETE FROM queue where id = ".$id);
-		if($delete)
+		if($delete){
+			
+			if ($user_type == "guest"){
+				$sql = $this->db->query("UPDATE guest SET 
+				assessment_access = 0  
+				WHERE id = $user_id");
+			}else{
+				$sql = $this->db->query("UPDATE users SET 
+				assessment_access = 0  
+				WHERE id = $user_id");
+			}
 			return 1;
-		return $id;
+		}
+		return $id;	
 	}
 
 	function save_discomfort_rate() {
@@ -655,8 +759,8 @@ Class Action {
 	
 		if ($result->num_rows < 1) {
 			$save = $this->db->query(
-				"INSERT INTO queue (user_id, name, user_type, height, weight, bmi, heart_rate, oxygen, temp, assessment_access, discomfort_rate) 
-				VALUES ($id, '$name', '$user_type', '', '', '', '', '', '', 0, $discomfort_rate);"
+				"INSERT INTO queue (user_id, name, user_type, height, weight, bmi, heart_rate, oxygen, bp, temp, assessment_access, discomfort_rate) 
+				VALUES ($id, '$name', '$user_type', '', '', '', '', '', '', '', 0, $discomfort_rate);"
 			);
 	
 			if ($save) {
@@ -680,4 +784,54 @@ Class Action {
 		}
 
 	}
+
+	function save_health_record(){
+		extract($_POST);
+		$childhood_illness = $this->array_to_string($childhood_illness);
+		$family_history =$this->array_to_string($family_history);
+		$head = $this->array_to_string($head);
+		$eyes = $this->array_to_string($eyes);
+		$ears = $this->array_to_string($ears);
+		$throat = $this->array_to_string($throat);
+		$chest_lungs = $this->array_to_string($chest_lungs);
+		$skin = $this->array_to_string($skin);
+		$referred_to = $this->array_to_string($referred_to);
+		if($xray_result == ""){
+			$xray_result = "with findings";
+		}
+		if($vertebral_column == ""){
+			$vertebral_column = "with deformity";
+		}
+		if($family_history == ""){
+			$family_history = "others";
+		}
+		if($childhood_illness == ""){
+			$childhood_illness = "others";
+		}
+
+
+		$sql = "INSERT INTO health_record (name, date, sex, address, contact, emergency_contact, age, civil_status, college_department, course_school_year, contact_no, childhood_illness, previous_hospitalization, operation_surgery, current_medications, allergies, family_history, cigarette_smoking, alcohol_drinking, traveled_abroad, working_impression, vital_signs, height, weight, bmi, bp, hr, rr, temp, head, eyes, ears, throat, chest_lungs, xray_result, breast, heart_murmur, heart_rhythm, abdomen, genito_urinary, extremities, vertebral_column, skin, scars, referred_to, follow_up_on, fit, for_work_up)
+				VALUES ('$name', '$date', '$sex', '$address', '$contact', '$emergency', '$age', '$civil_status', '$college_department', '$course_school_year', '$contact_no', '$childhood_illness', '$previous_hospitalization', '$operation_surgery', '$current_medications', '$allergies', '$family_history', '$cigarette_smoking', '$alcohol_drinking', '$traveled_abroad', '$working_impression', '$vital_signs', '$height', '$weight', '$bmi', '$bp', '$hr', '$rr', '$temp', '$head', '$eyes', '$ears', '$throat', '$chest_lungs', '$xray_result', '$breast', '$murmur', '$rhythm', '$abdomen', '$genito_urinary', '$extremities', '$vertebral_column', '$skin', '$scars', '$referred_to', '$follow_up_on', '$fit', '$for_work_up')";
+		$assessment_status_off = "UPDATE records SET assessment_status = 0 WHERE user_id = $id;";
+		if ($this->db->query($sql) === TRUE) {
+			$this->db->query($assessment_status_off);
+			echo "Record saved successfully";
+		} else {
+			echo "Error: " . $sql . "<br>" . $this->db->error;
+		}
+	}
+
+	function array_to_string($array) {
+
+		if (count($array) > 1) {
+			$filtered_array = array_diff($array, ["none"]);
+			$data = implode(", ", $filtered_array);
+		}
+		else {
+			$data = $array[0];
+		}
+		return $data;
+		
+	}
+	
 }
