@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 24.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 500 500" style="enable-background:new 0 0 500 500;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:#FFFFFF;stroke:#000000;stroke-width:3;stroke-miterlimit:10;}
+	.st1{fill:none;stroke:#000000;stroke-width:3;stroke-miterlimit:10;}
+	.st2{fill:#C1272D;stroke:#000000;stroke-width:3;stroke-miterlimit:10;}
+	.st3{stroke:#000000;stroke-miterlimit:10;}
+	.st4{font-family:'MyriadPro-Regular';}
+	.st5{font-size:12.5px;}
+	.st6{font-size:20px;}
+</style>
+<circle class="st0" cx="250" cy="43" r="29"/>
+<path class="st0" d="M398.5,469.5h-291C93.97,469.5,83,458.53,83,445V115c0-13.53,10.97-24.5,24.5-24.5h291
+	c13.53,0,24.5,10.97,24.5,24.5v330C423,458.53,412.03,469.5,398.5,469.5z"/>
+<line class="st1" x1="148" y1="136.79" x2="148" y2="339.79"/>
+<line class="st1" x1="352" y1="139.29" x2="352" y2="338.29"/>
+<rect x="214" y="180.79" class="st0" width="73" height="59"/>
+<rect x="247.25" y="202.79" class="st2" width="6.5" height="6.5"/>
+<rect x="247.25" y="209.83" class="st1" width="6.5" height="6.5"/>
+<path class="st3" d="M250.33,272.51L250.33,272.51c-3.61,0-6.54-2.93-6.54-6.54v-58.58c0-3.61,2.93-6.54,6.54-6.54h0
+	c3.61,0,6.54,2.93,6.54,6.54v58.58C256.87,269.58,253.94,272.51,250.33,272.51z"/>
+<path class="st3" d="M263.4,287.28L263.4,287.28c-3.61,0-6.54-2.93-6.54-6.54v-48.16c0-3.61,2.93-6.54,6.54-6.54h0
+	c3.61,0,6.54,2.93,6.54,6.54v48.16C269.94,284.35,267.01,287.28,263.4,287.28z"/>
+<path class="st3" d="M273.84,286.61L273.84,286.61c-3.61-0.14-6.42-3.17-6.29-6.78l1.64-43.38c0.14-3.61,3.17-6.42,6.78-6.29l0,0
+	c3.61,0.14,6.42,3.17,6.29,6.78l-1.64,43.38C280.49,283.93,277.45,286.75,273.84,286.61z"/>
+<path class="st3" d="M283.45,292.28L283.45,292.28c-3.6-0.3-6.27-3.46-5.97-7.06l3.45-41.28c0.3-3.6,3.46-6.27,7.06-5.97l0,0
+	c3.6,0.3,6.27,3.46,5.97,7.06l-3.45,41.28C290.21,289.91,287.05,292.59,283.45,292.28z"/>
+<path class="st3" d="M275.9,297.09h-2.67c-19.18,0-34.73-15.55-34.73-34.73v0c0-10,8.1-18.1,18.1-18.1h19.3c10,0,18.1,8.1,18.1,18.1
+	v16.63C294,288.99,285.9,297.09,275.9,297.09z"/>
+<path class="st3" d="M260.36,290.96L260.36,290.96c-3.13,1.81-7.13,0.73-8.93-2.39l-23.26-40.29c-1.81-3.13-0.73-7.13,2.39-8.93h0
+	c3.13-1.81,7.13-0.73,8.93,2.39l23.26,40.29C264.56,285.16,263.49,289.16,260.36,290.96z"/>
+<text transform="matrix(1 0 0 1 103.0212 398.3118)"><tspan x="0" y="0" class="st4 st5">Gently press your index finger and cover the glowing</tspan><tspan x="0" y="15" class="st4 st5">part while holding firmly for at least __seconds. </tspan></text>
+<text transform="matrix(1 0 0 1 244.8701 48.1561)" class="st4 st6">3</text>
+<text transform="matrix(1 0 0 1 501 -27.1431)" class="st4" style="font-size:12px;">Lorem ipsum</text>
+</svg>

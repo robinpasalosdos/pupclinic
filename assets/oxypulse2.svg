@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 24.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 500 500" style="enable-background:new 0 0 500 500;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:#FFFFFF;stroke:#000000;stroke-width:3;stroke-miterlimit:10;}
+	.st1{fill:#FFFFFF;stroke:#000000;stroke-width:4;stroke-miterlimit:10;}
+	.st2{font-family:'MyriadPro-Regular';}
+	.st3{font-size:20px;}
+	.st4{fill:none;stroke:#000000;stroke-width:3;stroke-miterlimit:10;}
+	.st5{fill:#C1272D;stroke:#000000;stroke-width:3;stroke-miterlimit:10;}
+	.st6{font-size:12.5px;}
+	.st7{fill:none;stroke:#000000;stroke-width:4;stroke-miterlimit:10;}
+	.st8{fill:none;stroke:#000000;stroke-width:6;stroke-miterlimit:10;}
+	.st9{stroke:#000000;stroke-width:3;stroke-miterlimit:10;}
+	.st10{stroke:#000000;stroke-width:4;stroke-miterlimit:10;}
+	.st11{fill:#FFFFFF;stroke:#000000;stroke-miterlimit:10;}
+</style>
+<circle class="st0" cx="250" cy="43" r="29"/>
+<path class="st1" d="M399,470.5H108c-13.53,0-24.5-10.97-24.5-24.5V116c0-13.53,10.97-24.5,24.5-24.5h291
+	c13.53,0,24.5,10.97,24.5,24.5v330C423.5,459.53,412.53,470.5,399,470.5z"/>
+<text transform="matrix(1 0 0 1 244.87 50.0002)" class="st2 st3">2</text>
+<line class="st4" x1="262.5" y1="140.5" x2="262.5" y2="313"/>
+<line class="st4" x1="402" y1="142.62" x2="402" y2="311.73"/>
+<rect x="298.63" y="186.5" class="st4" width="65.37" height="44.52"/>
+<rect x="328.41" y="199.7" class="st5" width="5.82" height="7.23"/>
+<rect x="328.41" y="207.54" class="st4" width="5.82" height="7.23"/>
+<text transform="matrix(1 0 0 1 115.0394 374.0732)"><tspan x="0" y="0" class="st2 st6">You can find the sensor under the box resting at the  </tspan><tspan x="0" y="15" class="st2 st6">sliding arm rest. Glowing red in the sensor indicates </tspan><tspan x="0" y="30" class="st2 st6">that the machine is ready to read </tspan></text>
+<rect x="127.5" y="138.5" class="st1" width="92" height="85"/>
+<rect x="127.5" y="223.5" class="st7" width="92" height="93"/>
+<rect x="144.5" y="165.5" class="st1" width="58" height="31"/>
+<line class="st8" x1="195.5" y1="227" x2="213.5" y2="227"/>
+<line class="st4" x1="248.5" y1="226.5" x2="231.5" y2="226.5"/>
+<polygon class="st9" points="228.63,226 235.19,229.79 235.19,222.21 "/>
+<line class="st7" x1="174" y1="113" x2="174" y2="139"/>
+<line class="st7" x1="117" y1="316" x2="230" y2="316"/>
+<rect x="225" y="320" class="st10" width="7" height="7"/>
+<rect x="113" y="320" class="st10" width="7" height="7"/>
+<rect x="151" y="149" class="st10" width="45" height="6"/>
+<circle class="st11" cx="173" cy="152" r="3.5"/>
+</svg>
