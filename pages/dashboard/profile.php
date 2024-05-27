@@ -65,7 +65,10 @@
                 <label>Heart Rate</label>
                 <input type="text" value="<?=$record['heart_rate']?>" name="heart_rate" id="heart_rate" autocomplete="off" disabled required> 
                 <label>Oxygen</label>
-                <input type="text" value="<?=$record['oxygen']?>" name="oxygen" id="oxygen" autocomplete="off" disabled required>
+                <input type="text" value="<?=$record['heart_rate']?>" name="heart_rate" id="heart_rate" autocomplete="off" disabled required> 
+                <label>Blood Pressure</label>
+                <input type="text" value="<?=$record['bp']?>" name="bp" id="bp" autocomplete="off" disabled required>
+                <a class="view_health_record" href="javascript:void(0)" data-tn="<?= $record['transaction_no'] ?>">See more</a>
             </div>            
     <?php }}?> 
 </div>
@@ -87,4 +90,7 @@
             }
         });
     });
+    $('.view_health_record').click(function(){
+        location.href = "../pupclinic/admin.php?page=view_health_record&tn=" + $(this).attr('data-tn');
+    })
 </script>

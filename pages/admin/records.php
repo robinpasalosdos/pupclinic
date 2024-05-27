@@ -22,6 +22,7 @@
                 <th>Transaction no.</th>
                 <th>Date</th>
                 <th>Time</th>
+                <th>Action</th>
             </tr>
         </thead>
         <tbody>
@@ -55,7 +56,7 @@
                                 <td><?= $items['transaction_no']; ?></td>
                                 <td><?= date('M d, Y', strtotime($items['date_created'])); ?></td>
                                 <td><?= date('h:i A', strtotime($items['created_timestamp'])); ?></td>
-
+                                <td><a class="view_health_record" href="javascript:void(0)" data-tn="<?= $items['transaction_no'] ?>">See more</a></td>
                             </tr>
                             <?php
                         }
@@ -67,10 +68,14 @@
                                 <td>No Record Found</td>
                             </tr>
                         <?php
-                    }
-                
+                    } 
             ?>
         </tbody>
     </table>
 </div>
+<script>
+    $('.view_health_record').click(function(){
+        location.href = "../pupclinic/admin.php?page=view_health_record&tn=" + $(this).attr('data-tn');
+    })
+</script>
 

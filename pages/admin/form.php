@@ -6,6 +6,7 @@ if (isset($_SESSION['id']) && $_SESSION['id'] != ""){
     if (mysqli_num_rows($res) > 0) {
         $record = mysqli_fetch_assoc($res);
         $name = $_SESSION["name"];
+        $tn = $_SESSION["tn"];
         $sex = $record["sex"];
         $_SESSION["sex"] = $sex; 
         $email = $record["email"];
@@ -26,6 +27,7 @@ if (isset($_SESSION['id']) && $_SESSION['id'] != ""){
                 ?>
 <form id="health-form">
     <input type="hidden" name="id" value="<?php echo $id; ?>">
+    <input type="hidden" name="tn" value="<?php echo $tn; ?>">
     <p>
         <label for="name">Name:</label>
         <input type="text" id="name" name="name" value="<?php echo $name; ?>">

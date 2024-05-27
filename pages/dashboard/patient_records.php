@@ -18,6 +18,8 @@
             <th>Heart Rate (bpm)</th>
             <th>Oxygen (%)</th>
             <th>Transaction no.</th>
+            <th>Action</th>
+
         </tr>
     </thead>
     <tbody>
@@ -47,7 +49,8 @@
                             <td><?= $items['temp']; ?></td>
                             <td><?= $items['heart_rate']; ?></td>
                             <td><?= $items['oxygen']; ?></td>
-                            <td><?= $items['transaction_no']; ?></td> 
+                            <td><?= $items['transaction_no']; ?></td>
+                            <td><a class="view_health_record" href="javascript:void(0)" data-tn="<?= $items['transaction_no'] ?>">See more</a></td>
                         </tr>
                         <?php
                     }
@@ -67,5 +70,7 @@
 </div>
 
 <script>
-
+$('.view_health_record').click(function(){
+    location.href = "../pupclinic/dashboard.php?page=view_health_record&tn=" + $(this).attr('data-tn');
+});
 </script>
