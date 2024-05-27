@@ -56,7 +56,6 @@ if __name__ == '__main__':
                 try:
                     data = float(line) 
                     if c == 0:
-                        time.sleep(4)
                         GPIO.output(buzzer, True)
                         time.sleep(.2)
                         GPIO.output(buzzer, False)
@@ -83,7 +82,7 @@ if __name__ == '__main__':
         mean_last_five = sum(last_five_values) / len(last_five_values)
         print("Mean of last five values:", mean_last_five)
         weight_str = str(round(mean_last_five,2))
-        height_str = str(200 - statistics.mode(height_list))
+        height_str = str(188 - statistics.mode(height_list))
         print(height_str)
         final_data = height_str + " " + weight_str
         with open("/var/www/html/pupclinic/hardware/data.txt", "w") as file:
