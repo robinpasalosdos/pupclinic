@@ -18,7 +18,11 @@
                         ?>
                         <input type="hidden" name="email" value="<?=$user['email']?>">
                         <img src="../pupclinic/php/profile_pic/<?php echo $image; ?>" width = 125 height = 125 title="<?php echo $image; ?>">
-                        <input type="submit" value="Verify Email">
+                        <?php if ($user["verified"] == 0){ ?>
+                            <input type="submit" value="Verify Email">
+                        <?php }else{ ?>
+                            <p>Verified</p>
+                        <?php } ?>  
                     </div>
                 </form>   
                 <label>Name</label>

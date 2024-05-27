@@ -1,26 +1,28 @@
 <h2>Health Examination Record</h2>
 <?php
-if (isset($_GET['id'])){
-    $id = $_GET['id'];
-    $res = mysqli_query($conn, "SELECT users.id, users.sex, users.birthday, records.name, records.email, records.heart_rate, records.oxygen, records.bp, records.temp, records.height, records.weight, records.bmi FROM users INNER JOIN records ON users.id = records.user_id;");
+if (isset($_SESSION['id']) && $_SESSION['id'] != ""){
+    $id = $_SESSION['id'];
+    $res = mysqli_query($conn, "SELECT users.id, users.sex, users.birthday, records.email, records.bmi FROM users INNER JOIN records ON users.id = records.user_id WHERE records.id = $id;");
     if (mysqli_num_rows($res) > 0) {
         $record = mysqli_fetch_assoc($res);
-        $id = $record["id"];
-        $name = $record["name"];
+        $name = $_SESSION["name"];
         $sex = $record["sex"];
+        $_SESSION["sex"] = $sex; 
         $email = $record["email"];
         $birthday = $record["birthday"];
         $birthDate = new DateTime($birthday);
         $currentDate = new DateTime();
         $ageDifference = $currentDate->diff($birthDate);
         $age = $ageDifference->y;
-        $heart_rate = $record["heart_rate"];
-        $oxygen = $record["oxygen"];
-        $bp = $record["bp"];
-        $temp = $record["temp"];
-        $height = $record["height"];
-        $weight = $record["weight"];
+        $_SESSION['age'] = $age;
+        $heart_rate = $_SESSION["heart_rate"];
+        $oxygen = $_SESSION["oxygen"];
+        $bp = $_SESSION["bp"];
+        $temp = $_SESSION["temp"];
+        $height = $_SESSION["height"];
+        $weight = $_SESSION["weight"];
         $bmi = $record["bmi"];
+        $_SESSION['bmi'] = $bmi;
                 ?>
 <form id="health-form">
     <input type="hidden" name="id" value="<?php echo $id; ?>">
@@ -30,7 +32,7 @@ if (isset($_GET['id'])){
     </p>
     <p>
         <label for="date">Date:</label>
-        <input type="date" id="date" name="date" >
+        <input type="date" id="date" name="date" required autocomplete="off" value="<?php echo $_SESSION['date']; ?>">
     </p>
     <p>
         <label for="sex">Sex:</label>
@@ -38,15 +40,15 @@ if (isset($_GET['id'])){
     </p>
     <p>
         <label for="address">Address:</label>
-        <input type="text" id="address" name="address">
+        <input type="text" id="address" name="address" required autocomplete="off" value="<?php echo $_SESSION['address']; ?>">
     </p>
     <p>
         <label for="contact">Contact No.:</label>
-        <input type="text" id="contact" name="contact">
+        <input type="text" id="contact" name="contact" required autocomplete="off" value="<?php echo $_SESSION['contact']; ?>">
     </p>
     <p>
         <label for="emergency">Contact Person In Case of Emergency:</label>
-        <input type="text" id="emergency" name="emergency">
+        <input type="text" id="emergency" name="emergency" required autocomplete="off" value="<?php echo $_SESSION['emergency']; ?>">
     </p>
     <p>
         <label for="age">Age:</label>
@@ -54,19 +56,19 @@ if (isset($_GET['id'])){
     </p>
     <p>
         <label for="civil-status">Civil Status:</label>
-        <input type="text" id="civil-status" name="civil_status">
+        <input type="text" id="civil-status" name="civil_status" required autocomplete="off" value="<?php echo $_SESSION['civil_status']; ?>">
     </p>
     <p>
         <label for="college-department">College / Department:</label>
-        <input type="text" id="college-department" name="college_department">
+        <input type="text" id="college-department" name="college_department" required autocomplete="off" value="<?php echo $_SESSION['college_department']; ?>">
     </p>
     <p>
         <label for="course-school-year">Course / School Year:</label>
-        <input type="text" id="course-school-year" name="course_school_year">
+        <input type="text" id="course-school-year" name="course_school_year" required autocomplete="off" value="<?php echo $_SESSION['course_school_year']; ?>">
     </p>
     <p>
         <label for="contact-no">Contact No.:</label>
-        <input type="text" id="contact-no" name="contact_no">
+        <input type="text" id="contact-no" name="contact_no" required autocomplete="off" value="<?php echo $_SESSION['contact_no']; ?>">
     </p>
     <h3>I. Past Medical History</h3>
     <p>
@@ -90,25 +92,25 @@ if (isset($_GET['id'])){
     </p>
     <p>
         <label for="previous-hospitalization">Previous Hospitalization:</label><br>
-        <input type="radio" id="hospitalization-no" name="previous_hospitalization" value="no">
+        <input type="radio" id="hospitalization-no" name="previous_hospitalization" value="no" required>
         <label for="hospitalization-no">No</label><br>
         <input type="radio" id="hospitalization-yes" name="previous_hospitalization" value="yes">
         <label for="hospitalization-yes">Yes</label>
     </p>
     <p>
         <label for="operation-surgery">Operation/Surgery:</label><br>
-        <input type="radio" id="operation-no" name="operation_surgery" value="no">
+        <input type="radio" id="operation-no" name="operation_surgery" value="no" required>
         <label for="operation-no">No</label><br>
         <input type="radio" id="operation-yes" name="operation_surgery" value="yes">
         <label for="operation-yes">Yes</label>
     </p>
     <p>
         <label for="current-medications">Current Medications:</label>
-        <input type="text" id="current-medications" name="current_medications">
+        <input type="text" id="current-medications" name="current_medications" autocomplete="off" value="<?php echo $_SESSION['current_medications']; ?>">
     </p>
     <p>
         <label for="allergies">Allergies:</label>
-        <input type="text" id="allergies" name="allergies">
+        <input type="text" id="allergies" name="allergies" autocomplete="off" value="<?php echo $_SESSION['allergies']; ?>">
     </p>
     <h3>II. Family History</h3>
     <p>
@@ -129,33 +131,30 @@ if (isset($_GET['id'])){
     <h3>III. Personal History</h3>
     <p>
         <label for="cigarette-smoking">Cigarette Smoking:</label><br>
-        <input type="radio" id="smoking-no" name="cigarette_smoking" value="no">
+        <input type="radio" id="smoking-no" name="cigarette_smoking" value="no" required>
         <label for="smoking-no">No</label><br>
         <input type="radio" id="smoking-yes" name="cigarette_smoking" value="yes">
         <label for="smoking-yes">Yes</label>
     </p>
     <p>
         <label for="alcohol-drinking">Alcohol Drinking:</label><br>
-        <input type="radio" id="drinking-no" name="alcohol_drinking" value="no">
+        <input type="radio" id="drinking-no" name="alcohol_drinking" value="no" required>
         <label for="drinking-no">No</label><br>
         <input type="radio" id="drinking-yes" name="alcohol_drinking" value="yes">
         <label for="drinking-yes">Yes</label>
     </p>
     <p>
         <label for="traveled-abroad">Traveled Abroad:</label><br>
-        <input type="radio" id="abroad-no" name="traveled_abroad" value="no">
+        <input type="radio" id="abroad-no" name="traveled_abroad" value="no" required>
         <label for="abroad-no">No</label><br>
         <input type="radio" id="abroad-yes" name="traveled_abroad" value="yes">
         <label for="abroad-yes">Yes</label>
     </p>
-    <p>
-        <label for="working-impression">Working Impression:</label>
-        <input type="text" id="working-impression" name="working_impression">
-    </p>
+
     <h3>IV. Physical Examination</h3>
     <p>
         <label>Vital Signs:</label><br>
-        <input type="radio" id="not-in-distress" name="vital_signs" value="not-in-distress">
+        <input type="radio" id="not-in-distress" name="vital_signs" value="not-in-distress" required>
         <label for="not-in-distress">Not in Distress</label><br>
         <input type="radio" id="in-distress" name="vital_signs" value="in-distress">
         <label for="in-distress">In Distress</label>
@@ -227,43 +226,46 @@ if (isset($_GET['id'])){
     <label for="rales">Rales</label>
 
     <p><b>Chest X-Ray Result:</b></p>
-    <input type="radio" id="xray-normal" name="xray_result" value="normal">
+    <input type="radio" id="xray-normal" name="xray_result" value="normal" required>
     <label for="xray-normal">Normal</label>
     <input type="radio" id="xray-findings" name="xray_result" value="with findings">
     <label for="xray-findings">With findings</label>
     <input type="text" id="xray-findings-details">
 
     <p><b>Breast:</b></p>
-    <input type="radio" id="breast-normal" name="breast" value="normal">
+    <input type="hidden" name="breast" value="none">
+    <input type="checkbox" id="breast-normal" name="breast" value="normal">
     <label for="breast-normal">Normal</label>
 
     <p><b>Heart:</b></p>
     <label>Murmur:</label>
-    <input type="radio" id="murmur-present" name="murmur" value="present">
+    <input type="radio" id="murmur-present" name="murmur" value="present" required>
     <label for="murmur-present">Present</label>
     <input type="radio" id="murmur-absent" name="murmur" value="absent">
     <label for="murmur-absent">Absent</label>
     <br>
     <label>Rhythm:</label>
-    <input type="radio" id="rhythm-regular" name="rhythm" value="regular">
+    <input type="radio" id="rhythm-regular" name="rhythm" value="regular" required>
     <label for="rhythm-regular">Regular</label>
     <input type="radio" id="rhythm-irregular" name="rhythm" value="irregular">
     <label for="rhythm-irregular">Irregular</label>
 
     <p><b>Abdomen:</b></p>
-    <input type="radio" id="abdomen-normal" name="abdomen" value="normal">
+    <input type="hidden" name="abdomen" value="none">
+    <input type="checkbox" id="abdomen-normal" name="abdomen" value="normal">
     <label for="abdomen-normal">Normal</label>
 
     <p><b>Genito-Urinary:</b></p>
     <label for="genito-urinary">1<sup>st</sup> day of last Menstruation:</label>
-    <input type="text" id="genito-urinary" name="genito_urinary">
+    <input type="text" id="genito-urinary" name="genito_urinary" autocomplete="off" value="<?php echo $_SESSION['genito_urinary']; ?>">
 
     <p><b>Extremities:</b></p>
-    <input type="radio" id="no-deformities" name="extremities" value="no-deformities">
+    <input type="hidden" name="extremities" value="none">
+    <input type="checkbox" id="no-deformities" name="extremities" value="no-deformities">
     <label for="no-deformities">No Deformities</label>
 
     <p><b>Vertebral Column:</b></p>
-    <input type="radio" id="vertebral-normal" name="vertebral_column" value="normal">
+    <input type="radio" id="vertebral-normal" name="vertebral_column" value="normal" required>
     <label for="vertebral-normal">Normal</label>
     <input type="radio" id="vertebral-deformity" name="vertebral_column" value="deformity">
     <label for="vertebral-deformity">With Deformity</label>
@@ -279,19 +281,19 @@ if (isset($_GET['id'])){
     <label for="lesions">Lesions</label>
     <br>
     <label>Scars:</label>
-    <input type="radio" id="scars-absent" name="scars" value="absent">
+    <input type="radio" id="scars-absent" name="scars" value="absent" required>
     <label for="scars-absent">Absent</label>
     <input type="radio" id="scars-present" name="scars" value="present">
     <label for="scars-present">Present</label>
 
     <p><b>Working Impression:</b></p>
-    <input type="text" id="working-impression" name="working_impression">
+    <input type="text" id="working-impression" name="working_impression" autocomplete="off" value="<?php echo $_SESSION['working_impression']; ?>">
 
     <p><b>Fit:</b></p>
-    <input type="text" id="fit" name="fit">
+    <input type="text" id="fit" name="fit" autocomplete="off" value="<?php echo $_SESSION['fit']; ?>">
 
     <p><b>For Work-Up:</b></p>
-    <input type="text" id="for-work-up" name="for_work_up">
+    <input type="text" id="for-work-up" name="for_work_up" autocomplete="off" value="<?php echo $_SESSION['for_work_up']; ?>">
 
     <p><b>Referred to:</b></p>
     <input type="hidden" name="referred_to[]" value="none">
@@ -310,10 +312,13 @@ if (isset($_GET['id'])){
     <label for="others-referred">Others</label>
 
     <p><b>Follow up on:</b></p>
-    <input type="text" id="follow-up-on" name="follow_up_on">
+    <input type="text" id="follow-up-on" name="follow_up_on" autocomplete="off" value="<?php echo $_SESSION['follow_up_on']; ?>">
     <input type="submit" value="Submit">
 </form>
-<?php }}?> 
+<?php }}else{
+    header("location:../pupclinic/admin.php?page=landing_page");
+}
+    ?> 
 <script>
     $(document).ready(function(){
         $('#childhood_illness_others').hide();
@@ -349,13 +354,12 @@ if (isset($_GET['id'])){
         $('#health-form').on('submit', function(e){
             e.preventDefault();
             $.ajax({
-                url: "../pupclinic/php/ajax.php?action=save_health_record",
+                url: "../pupclinic/php/ajax.php?action=hold_health_record",
                 type: "POST",
                 data: $(this).serialize(),
                 success: function(response){
-                    alert(response);
                     console.log(response)
-                    window.location.href = "../pupclinic/admin.php?page=post_assessment&search=";
+                    window.location.href = "../pupclinic/admin.php?page=display_health_record";
                 },
                 error: function(jqXHR, textStatus, errorThrown){
                     console.error(textStatus, errorThrown);

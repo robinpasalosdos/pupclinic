@@ -20,7 +20,7 @@
             },
             success:function(resp){
                 console.log(resp);
-                if(resp == 2){
+                if(resp == 7){
                     alert("Invalid Code!");
                 }else{
                     if(resp == 1){

@@ -85,7 +85,7 @@ Class Action {
 						return 2;
 					}else{
 						$hashed_password = md5($password);
-						$save = $this->db->query("INSERT INTO users (user_type, name, birthday, sex, email, student_no, course, year, section, password, assessment_access, pic) VALUES ('student', '$name', '$birthday', '$sex', '$email', '$student_no', '$course', '$year', '$section', '$hashed_password', 0, 'default.png')");
+						$save = $this->db->query("INSERT INTO users (user_type, name, birthday, sex, email, student_no, course, year, section, password, assessment_access, verified, pic) VALUES ('student', '$name', '$birthday', '$sex', '$email', '$student_no', '$course', '$year', '$section', '$hashed_password', 0, 0, 'default.png')");
 						if($save){
 							return 1;
 						}
@@ -111,7 +111,7 @@ Class Action {
 						return 2;
 					}else{
 						$hashed_password = md5($password);
-						$save = $this->db->query("INSERT INTO users (user_type, name, birthday, sex, email, student_no, course, year, section, password, assessment_access, pic) VALUES ('faculty', '$name', '$birthday', '$sex', '$email', '', '', '', '', '$hashed_password', 0, 'default.png')");
+						$save = $this->db->query("INSERT INTO users (user_type, name, birthday, sex, email, student_no, course, year, section, password, assessment_access, verified, pic) VALUES ('faculty', '$name', '$birthday', '$sex', '$email', '', '', '', '', '$hashed_password', 0, 0, 'default.png')");
 						if($save){
 							return 1;
 						}	
@@ -159,12 +159,12 @@ Class Action {
 						return 2;
 					}else{
 						if($user_type == 'student'){
-							$save = $this->db->query("INSERT INTO users (user_type, name, birthday, sex, email, student_no, course, year, section, password, assessment_access, pic) VALUES ('student', '$name', '$birthday', '$sex', '$email', '$student_no', '$course', '$year', '$section', '".md5($password)."', 0, 'default.png')");
+							$save = $this->db->query("INSERT INTO users (user_type, name, birthday, sex, email, student_no, course, year, section, password, assessment_access, verified, pic) VALUES ('student', '$name', '$birthday', '$sex', '$email', '$student_no', '$course', '$year', '$section', '".md5($password)."', 0, 0, 'default.png')");
 							if($save){
 								return 1;
 							}
 						}else{
-							$save = $this->db->query("INSERT INTO users (user_type, name, birthday, sex, email, student_no, course, year, section, password, assessment_access, pic) VALUES ('faculty', '$name', '$birthday', '$sex', '$email', '', '', '', '', '".md5($password)."', 0, 'default.png')");
+							$save = $this->db->query("INSERT INTO users (user_type, name, birthday, sex, email, student_no, course, year, section, password, assessment_access, verified, pic) VALUES ('faculty', '$name', '$birthday', '$sex', '$email', '', '', '', '', '".md5($password)."', 0, 0, 'default.png')");
 							if($save){
 								return 1;
 							}
@@ -587,11 +587,13 @@ Class Action {
 
 	function verify_email(){
 		extract($_POST);
+		$id = $_SESSION['id'];
 		if($_SESSION['code'] == $code){
-			
-			return 1;
+			$update = $this->db->query("UPDATE users SET verified = 1 WHERE id = $id;");
+			$_SESSION['code'] = "";
+			return 0;
 		}else{
-			return 2;
+			return 7;
 		}
 	}
 
@@ -785,7 +787,7 @@ Class Action {
 
 	}
 
-	function save_health_record(){
+	function hold_health_record(){
 		extract($_POST);
 		$childhood_illness = $this->array_to_string($childhood_illness);
 		$family_history =$this->array_to_string($family_history);
@@ -809,12 +811,117 @@ Class Action {
 			$childhood_illness = "others";
 		}
 
+		$_SESSION['name'] = $name;
+		$_SESSION['date'] = $date;
+		$_SESSION['sex'] = $sex;
+		$_SESSION['address'] = $address;
+		$_SESSION['contact'] = $contact;
+		$_SESSION['emergency'] = $emergency;
+		$_SESSION['age'] = $age;
+		$_SESSION['civil_status'] = $civil_status;
+		$_SESSION['college_department'] = $college_department;
+		$_SESSION['course_school_year'] = $course_school_year;
+		$_SESSION['contact_no'] = $contact_no;
+		$_SESSION['childhood_illness'] = $childhood_illness;
+		$_SESSION['previous_hospitalization'] = $previous_hospitalization;
+		$_SESSION['operation_surgery'] = $operation_surgery;
+		$_SESSION['current_medications'] = $current_medications;
+		$_SESSION['allergies'] = $allergies;
+		$_SESSION['family_history'] = $family_history;
+		$_SESSION['cigarette_smoking'] = $cigarette_smoking;
+		$_SESSION['alcohol_drinking'] = $alcohol_drinking;
+		$_SESSION['traveled_abroad'] = $traveled_abroad;
+		$_SESSION['working_impression'] = $working_impression;
+		$_SESSION['vital_signs'] = $vital_signs;
+		$_SESSION['height'] = $height;
+		$_SESSION['weight'] = $weight;
+		$_SESSION['bmi'] = $bmi;
+		$_SESSION['bp'] = $bp;
+		$_SESSION['hr'] = $hr;
+		$_SESSION['rr'] = $rr;
+		$_SESSION['temp'] = $temp;
+		$_SESSION['head'] = $head;
+		$_SESSION['eyes'] = $eyes;
+		$_SESSION['ears'] = $ears;
+		$_SESSION['throat'] = $throat;
+		$_SESSION['chest_lungs'] = $chest_lungs;
+		$_SESSION['xray_result'] = $xray_result;
+		$_SESSION['breast'] = $breast;
+		$_SESSION['murmur'] = $murmur;
+		$_SESSION['rhythm'] = $rhythm;
+		$_SESSION['abdomen'] = $abdomen;
+		$_SESSION['genito_urinary'] = $genito_urinary;
+		$_SESSION['extremities'] = $extremities;
+		$_SESSION['vertebral_column'] = $vertebral_column;
+		$_SESSION['skin'] = $skin;
+		$_SESSION['scars'] = $scars;
+		$_SESSION['referred_to'] = $referred_to;
+		$_SESSION['follow_up_on'] = $follow_up_on;
+		$_SESSION['fit'] = $fit;
+		$_SESSION['for_work_up'] = $for_work_up;
+
+
+
+		return 1;
+	}
+
+	function save_health_record(){
+		$id = $_SESSION['id'];
+		$name = $_SESSION['name'];
+		$date = $_SESSION['date'];
+		$sex = $_SESSION['sex'];
+		$address = $_SESSION['address'];
+		$contact = $_SESSION['contact'];
+		$emergency = $_SESSION['emergency'];
+		$age = $_SESSION['age'];
+		$civil_status = $_SESSION['civil_status'];
+		$college_department = $_SESSION['college_department'];
+		$course_school_year = $_SESSION['course_school_year'];
+		$contact_no = $_SESSION['contact_no'];
+		$childhood_illness = $_SESSION['childhood_illness'];
+		$previous_hospitalization = $_SESSION['previous_hospitalization'];
+		$operation_surgery = $_SESSION['operation_surgery'];
+		$current_medications = $_SESSION['current_medications'];
+		$allergies = $_SESSION['allergies'];
+		$family_history = $_SESSION['family_history'];
+		$cigarette_smoking = $_SESSION['cigarette_smoking'];
+		$alcohol_drinking = $_SESSION['alcohol_drinking'];
+		$traveled_abroad = $_SESSION['traveled_abroad'];
+		$working_impression = $_SESSION['working_impression'];
+		$vital_signs = $_SESSION['vital_signs'];
+		$height = $_SESSION['height'];
+		$weight = $_SESSION['weight'];
+		$bmi = $_SESSION['bmi'];
+		$bp = $_SESSION['bp'];
+		$hr = $_SESSION['hr'];
+		$rr = $_SESSION['rr'];
+		$temp = $_SESSION['temp'];
+		$head = $_SESSION['head'];
+		$eyes = $_SESSION['eyes'];
+		$ears = $_SESSION['ears'];
+		$throat = $_SESSION['throat'];
+		$chest_lungs = $_SESSION['chest_lungs'];
+		$xray_result = $_SESSION['xray_result'];
+		$breast = $_SESSION['breast'];
+		$murmur = $_SESSION['murmur'];
+		$rhythm = $_SESSION['rhythm'];
+		$abdomen = $_SESSION['abdomen'];
+		$genito_urinary = $_SESSION['genito_urinary'];
+		$extremities = $_SESSION['extremities'];
+		$vertebral_column = $_SESSION['vertebral_column'];
+		$skin = $_SESSION['skin'];
+		$scars = $_SESSION['scars'];
+		$referred_to = $_SESSION['referred_to'];
+		$follow_up_on = $_SESSION['follow_up_on'];
+		$fit = $_SESSION['fit'];
+		$for_work_up = $_SESSION['for_work_up'];
 
 		$sql = "INSERT INTO health_record (name, date, sex, address, contact, emergency_contact, age, civil_status, college_department, course_school_year, contact_no, childhood_illness, previous_hospitalization, operation_surgery, current_medications, allergies, family_history, cigarette_smoking, alcohol_drinking, traveled_abroad, working_impression, vital_signs, height, weight, bmi, bp, hr, rr, temp, head, eyes, ears, throat, chest_lungs, xray_result, breast, heart_murmur, heart_rhythm, abdomen, genito_urinary, extremities, vertebral_column, skin, scars, referred_to, follow_up_on, fit, for_work_up)
 				VALUES ('$name', '$date', '$sex', '$address', '$contact', '$emergency', '$age', '$civil_status', '$college_department', '$course_school_year', '$contact_no', '$childhood_illness', '$previous_hospitalization', '$operation_surgery', '$current_medications', '$allergies', '$family_history', '$cigarette_smoking', '$alcohol_drinking', '$traveled_abroad', '$working_impression', '$vital_signs', '$height', '$weight', '$bmi', '$bp', '$hr', '$rr', '$temp', '$head', '$eyes', '$ears', '$throat', '$chest_lungs', '$xray_result', '$breast', '$murmur', '$rhythm', '$abdomen', '$genito_urinary', '$extremities', '$vertebral_column', '$skin', '$scars', '$referred_to', '$follow_up_on', '$fit', '$for_work_up')";
-		$assessment_status_off = "UPDATE records SET assessment_status = 0 WHERE user_id = $id;";
+		$assessment_status_off = "UPDATE records SET assessment_status = 0 WHERE id = $id;";
 		if ($this->db->query($sql) === TRUE) {
 			$this->db->query($assessment_status_off);
+			$_SESSION['id'] = "";
 			echo "Record saved successfully";
 		} else {
 			echo "Error: " . $sql . "<br>" . $this->db->error;
@@ -833,5 +940,37 @@ Class Action {
 		return $data;
 		
 	}
+
+	function assess(){
+		extract($_POST);
+		$height_m = $height / 100;
+		$bmi = number_format($weight/($height_m * $height_m), 2);
+		$_SESSION['id'] = $id;
+		$_SESSION['name'] = $name;
+		$_SESSION['height'] = $height;
+		$_SESSION['weight'] = $weight;
+		$_SESSION['temp'] = $temp;
+		$_SESSION['heart_rate'] = $heart_rate;
+		$_SESSION['oxygen'] = $oxygen;
+		$_SESSION['bp'] = $bp;
+		$_SESSION['address'] = "";
+        $_SESSION['date'] = "";
+        $_SESSION['address'] = "";
+        $_SESSION['contact'] = "";
+        $_SESSION['emergency'] = "";
+        $_SESSION['civil_status'] = "";
+        $_SESSION['college_department'] = "";
+        $_SESSION['course_school_year'] = "";
+        $_SESSION['contact_no'] = "";
+        $_SESSION['current_medications'] = "";
+        $_SESSION['allergies'] = "";
+        $_SESSION['working_impression'] = "";
+        $_SESSION['genito_urinary'] = "";
+        $_SESSION['fit'] = "";
+        $_SESSION['for_work_up'] = "";
+        $_SESSION['follow_up_on'] = "";
+		return 1;
+	}
+
 	
 }

@@ -245,3 +245,20 @@ if($action == 'profile_send_code'){
 		echo $profile_send_code;
 }
 
+if($action == 'assess'){
+	$assess = $crud->assess();
+	if($assess)
+		echo $assess;
+}
+
+if($action == 'hold_health_record'){
+	$hold_health_record = $crud->hold_health_record();
+	if($hold_health_record)
+		echo $hold_health_record;
+}
+
+if($action == 'verify_email'){
+	$verify_email = $crud->verify_email();
+	if($verify_email)
+		echo $verify_email;
+}

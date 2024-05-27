@@ -11,13 +11,16 @@
         <thead>
             <tr>
                 <th>ID</th>
+                <th>UserID</th>
                 <th>UserType</th>
                 <th>Name</th>
                 <th>Email</th>
                 <th>Height</th>
+                <th>Weight</th>
                 <th>Temp</th>
                 <th>Heart Rate</th>
                 <th>Oxygen</th>
+                <th>BP</th>
 				<th>Transaction no.</th>
 				<th>Date</th>
 				<th>Time</th>
@@ -44,19 +47,22 @@
                         {
                             ?>
                             <tr>
+                                <td><?= $items['id']; ?></td>
                                 <td><?= $items['user_id']; ?></td>
                                 <td><?= $items['user_type']; ?></td>
                                 <td><?= $items['name']; ?></td>
                                 <td><?= $items['email']; ?></td>
                                 <td><?= $items['height']; ?></td>
+                                <td><?= $items['weight']; ?></td>
                                 <td><?= $items['temp']; ?></td>
                                 <td><?= $items['heart_rate']; ?></td>
                                 <td><?= $items['oxygen']; ?></td>
+                                <td><?= $items['bp']; ?></td>
                                 <td><?= $items['transaction_no']; ?></td>
                                 <td><?= date('M d, Y', strtotime($items['date_created'])); ?></td>
                                 <td><?= date('h:i A', strtotime($items['created_timestamp'])); ?></td>
                                 <td>
-                                    <a class="assess" href="javascript:void(0)" data-id="<?= $items['user_id'] ?>">Assess</a>
+                                    <a class="assess" href="javascript:void(0)" data-id="<?= $items['id'] ?>" data-name="<?= $items['name'] ?>" data-height="<?= $items['height'] ?>" data-weight="<?= $items['weight'] ?>" data-temp="<?= $items['temp'] ?>" data-heart_rate="<?= $items['heart_rate'] ?>" data-oxygen="<?= $items['oxygen'] ?>" data-bp="<?= $items['bp'] ?>">Assess</a>
                                 </td>
                                 
                                 
@@ -79,9 +85,28 @@
     </table>
 </div>
 <script>
-    $(document).on('click', '.assess', function(){
+    $('.assess').click(function(){
         var id = $(this).data('id');
-        window.location.href = "../pupclinic/admin.php?page=form&id=" + id;
+        var data = {
+                id: id,
+                name: $(this).data('name'),
+                height: $(this).data('height'),
+                weight: $(this).data('weight'),
+                heart_rate: $(this).data('heart_rate'),
+                oxygen: $(this).data('oxygen'),
+                bp: $(this).data('bp'),
+                temp: $(this).data('temp')
+            };
+        $.ajax({
+				url:'../pupclinic/php/ajax.php?action=assess',
+				method:'POST',
+				data:data,
+				success:function(resp){
+					if(resp==1){
+                        window.location.href = "../pupclinic/admin.php?page=form";
+					}
+				}
+			})
     });
 
 </script>

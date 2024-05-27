@@ -18,6 +18,7 @@
                 <th>Temperature</th>
                 <th>Heart Rate</th>
                 <th>Oxygen</th>
+                <th>BP</th>
                 <th>Transaction no.</th>
                 <th>Date</th>
                 <th>Time</th>
@@ -50,6 +51,7 @@
                                 <td><?= $items['temp']; ?></td>
                                 <td><?= $items['heart_rate']; ?></td>
                                 <td><?= $items['oxygen']; ?></td>
+                                <td><?= $items['bp']; ?></td>
                                 <td><?= $items['transaction_no']; ?></td>
                                 <td><?= date('M d, Y', strtotime($items['date_created'])); ?></td>
                                 <td><?= date('h:i A', strtotime($items['created_timestamp'])); ?></td>

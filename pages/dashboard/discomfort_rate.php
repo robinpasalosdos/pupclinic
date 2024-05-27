@@ -14,7 +14,7 @@
     <p>Please select the level of discomfort you are experiencing based on the scale provided below.</p>
     <div class="discomfort-container">
         <form id="save_rate">
-            <input type="radio" id="rate1" name="discomfort" value="1">
+            <input type="radio" id="rate1" name="discomfort" value="1" required>
             <label for="rate1">1 - Minimal discomfort</label><br>
 
             <input type="radio" id="rate2" name="discomfort" value="2">
