@@ -2,9 +2,11 @@
 	<div>
 		<h2>Measuring Blood Pressure and Heart Rate</h2>
 		<h2 id="instruction">Get the blood pressure sensor, check its instructions, then press the power button to start readings.</h2>
+		<h2>Blood Pressure</h2>
+    	<p id="bp">-</p>
+		<h2>Heart_Rate</h2>
+    	<p id="heart_rate">-</p>
     </div>
-    <p id="bp">-</p>
-    <p id="heart_rate">-</p>
 </div>
 
 <script>
@@ -45,7 +47,7 @@
 						if(resp == 1){
 							setTimeout(function() {
 								location.href = '../pupclinic/dashboard.php?page=get_temp';
-							}, 1500);
+							}, 2000);
 							
 						}else{
 							alert(resp);

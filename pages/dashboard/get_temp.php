@@ -2,6 +2,8 @@
 	<div>
 		<h2>Measuring Temperature</h2>
 		<h2 id="instruction">Place your forehead on the round opening at the top of the screen and press the button to take your temperature.</h2>
+		<h2 id="temp_label" style="display: none;">Oxygen</h2>
+    	<p style="display: none;" id="temp">-</p>
 		<form id="get_temp">
 			<button id="get_temp_button">Measure</button>
 		</form>
@@ -12,7 +14,10 @@
     var params = <?php echo json_encode($_GET)?>;
     $('#get_temp').submit(function(e){
 		e.preventDefault()
-		$("#get_temp_button").hide();
+		$("#temp_label").show();
+		$("#temp").show();
+		$("#temp").text("Measuring...");
+		$("#instruction").hide();
 		$.ajax({
 			url:'../pupclinic/php/ajax.php?action=get_temp',
 			method:'POST',
@@ -28,7 +33,7 @@
 			dataType: 'text',
 			success: function(resp) {
 				console.log(resp);
-				$("#instruction").text(resp + " C");
+				$("#temp").text(resp + " C");
 				var data = {
 					resp: resp,
             	};

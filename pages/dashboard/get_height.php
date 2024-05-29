@@ -1,9 +1,10 @@
 <div class="measurement-container">
+	<h2>Measuring Height and Weight</h2>
+	<h2 id="instruction">Step onto the weighing scale and stand up straight</h2>
     <h2>Height</h2>
     <p id="height">-</p>
 	<h2>Weight</h2>
     <p id="weight">-</p>
-	<p> Please stand straight and hold your stance for atleast 10 seconds below the sensor </p>
 </div>
 
 <script>

@@ -2,6 +2,8 @@
     <div>
 		<h2>Measuring Oxygen Saturation Level</h2>
 		<h2 id="instruction"> Please place your index finger on the pulse oximeter then press the button for a reading,.</h2>
+		<h2 id="oxygen_label" style="display: none;">Oxygen</h2>
+    	<p style="display: none;" id="oxygen">-</p>
 		<form id="get_oxygen">
 			<button id="get_oxygen_button">Measure</button>
 		</form>
@@ -12,7 +14,9 @@
     var params = <?php echo json_encode($_GET)?>;
     $('#get_oxygen').submit(function(e){
 		e.preventDefault()
-		$("#instruction").text("Please wait...");
+		$("#oxygen_label").show();
+		$("#oxygen").show();
+		$("#oxygen").text("Measuring...");
 		$("#get_oxygen_button").hide();
 		$.ajax({
 			url:'../pupclinic/php/ajax.php?action=get_oxygen',
@@ -29,7 +33,7 @@
 			dataType: 'text',
 			success: function(resp) {
 				console.log(resp);
-				$("#instruction").text(resp + " %");
+				$("#oxygen").text(resp + " %");
 				var data = {
 					resp: resp,
             	};
