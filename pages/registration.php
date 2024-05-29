@@ -1,3 +1,6 @@
+<head>
+    <title>Registration - PUPClinic</title>
+</head>
 <?php if($_GET['user'] == 'student'): ?>
     <div class="login-form">
         <h1>Register as Student</h1>

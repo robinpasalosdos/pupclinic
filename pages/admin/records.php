@@ -1,4 +1,5 @@
-<head>   
+<head>
+    <title>Records - PUPClinic</title>   
 </head>
 <div class="records-table">
     <h1>Records</h1>

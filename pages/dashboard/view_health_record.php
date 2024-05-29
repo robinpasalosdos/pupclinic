@@ -1,9 +1,14 @@
+<head>
+    <title>Health Record - PUPClinic</title>
+</head>
 <h2>Health Examination Record</h2>
 <?php
     $tn = $_GET['tn'];
     $query = "SELECT * FROM health_record WHERE transaction_no = $tn";
     $query_run = mysqli_query($conn, $query);
-    $record = mysqli_fetch_assoc($query_run)
+    if(mysqli_num_rows($query_run) > 0)
+    {
+    $record = mysqli_fetch_assoc($query_run);
 ?>
 <form id="health-form">
     <p>
@@ -59,4 +64,6 @@
     
 </form>
 
-
+<?php }else{ ?>
+    No health record found
+<?php } ?>

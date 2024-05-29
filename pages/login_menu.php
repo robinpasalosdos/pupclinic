@@ -1,3 +1,6 @@
+<head>
+  <title>Student or Faculty - PUPClinic</title>
+</head>
 <div class="main-menu">
     <h2>User Login Options</h2>
     <p>Please select your user type and proceed with login:</p>

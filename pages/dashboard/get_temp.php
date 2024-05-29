@@ -1,19 +1,17 @@
 <div class="measurement-container">
-    <h2>Temperature</h2>
-    <p id="temp">-</p>
-    <div>
-        <form id="get_temp">
-            <button id="get_temp_button">Get</button>
-        </form>
+	<div>
+		<h2>Measuring Temperature</h2>
+		<h2 id="instruction">Place your forehead on the round opening at the top of the screen and press the button to take your temperature.</h2>
+		<form id="get_temp">
+			<button id="get_temp_button">Measure</button>
+		</form>
     </div>
-	<p> Please stand straight and hold your stance for atleast 10 seconds below the sensor </p>
 </div>
 
 <script>
     var params = <?php echo json_encode($_GET)?>;
     $('#get_temp').submit(function(e){
 		e.preventDefault()
-		$("#data2").text("Please wait...");
 		$("#get_temp_button").hide();
 		$.ajax({
 			url:'../pupclinic/php/ajax.php?action=get_temp',
@@ -30,7 +28,7 @@
 			dataType: 'text',
 			success: function(resp) {
 				console.log(resp);
-				$("#temp").text(resp + " C");
+				$("#instruction").text(resp + " C");
 				var data = {
 					resp: resp,
             	};

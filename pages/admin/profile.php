@@ -1,4 +1,7 @@
 <head>
+    <title>Profile - PUPClinic</title>
+</head>
+<head>
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>

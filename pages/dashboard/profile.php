@@ -54,6 +54,7 @@
             if (mysqli_num_rows($res) > 0) {
                 $record = mysqli_fetch_assoc($res) ?>   
             <div>
+                <label><b>Latest Physical Examination</b></label>
                 <label>Height</label>
                 <input type="text" value="<?=$record['height']?>" name="height" id="height" autocomplete="off" disabled required>
                 <label>Weight</label>
@@ -91,6 +92,6 @@
         });
     });
     $('.view_health_record').click(function(){
-        location.href = "../pupclinic/admin.php?page=view_health_record&tn=" + $(this).attr('data-tn');
+        location.href = "../pupclinic/dashboard.php?page=view_health_record&tn=" + $(this).attr('data-tn');
     })
 </script>

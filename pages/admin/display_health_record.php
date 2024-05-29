@@ -1,3 +1,6 @@
+<head>
+    <title>Health Examination Form - PUPClinic</title>
+</head>
 <h2>Health Examination Record</h2>
 <?php
 if (isset($_SESSION['id']) && $_SESSION['id'] != ""){

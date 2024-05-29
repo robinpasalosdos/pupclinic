@@ -1,7 +1,8 @@
-<head>   
+<head>
+  <title>Physical Examination - PUPClinic</title>
 </head>
 <div class="records-table">
-    <h1>Users</h1>
+    <h1>Health Examination</h1>
     <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="GET">
         <input type="hidden" name="page" value="<?php if(isset($_GET['page'])){echo $_GET['page']; } ?>">
         <input type="text" name="search" value="<?php if(isset($_GET['search'])){echo $_GET['search']; } ?>" placeholder="Search data">

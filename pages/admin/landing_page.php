@@ -1,5 +1,5 @@
 <head>
-    <title>Welcome Admin</title>
+    <title>Admin - PUPClinic</title>
 </head>
 
 <div class="admin-container">
@@ -8,8 +8,8 @@
     <div class="admin-menu">
         <button onclick="redirectToRecords()">Records</button>
         <button onclick="redirectToUsers()">Users</button>
-        <button onclick="redirectToRTA()">Real-Time Assessment</button>
-        <button onclick="redirectToPA()">Post-Assessment</button>
+        <button onclick="redirectToRTA()">Physical Examination</button>
+        <button onclick="redirectToPA()">Health Examination</button>
     </div>
 </div>
 <script>

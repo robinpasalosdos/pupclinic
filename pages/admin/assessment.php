@@ -1,3 +1,6 @@
+<head>
+  <title>Physical Examination - PUPClinic</title>
+</head>
 <?php
 echo "<div id='priority'>";
 displayPrioritySection();

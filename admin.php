@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="assets/PUP-Logo.png" type="image/png">
     <link rel="stylesheet" href="../pupclinic/css/style.css">
     <script src="jquery-3.6.0.min.js"></script>
     <?php
@@ -20,8 +21,20 @@
 </head>
 <body>
     <main>
+    <?php
+        if ($_GET['page'] != 'landing_page'){?>
+            <img src="../pupclinic/assets/back.png" id="backToPreviousPage">
+        <?php
+        }?>
         <?php $page = isset($_GET['page']) ? $_GET['page'] :'landing_page'; ?>
         <?php include 'pages/admin/'.$page.'.php' ?>
+        <script>
+            $(document).ready(function() {
+                $('#backToPreviousPage').click(function() {
+                    window.history.back();
+                });
+            });
+        </script>
     </main>
 </body>
 </html>

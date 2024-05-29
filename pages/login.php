@@ -1,5 +1,5 @@
 <head>
-    <title>Login</title>
+    <title>Login - PUPClinic</title>
 </head>
 <div class="login-form">
 	<h1>Login as <?php echo $_GET['user']; ?></h1>

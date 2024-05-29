@@ -1,3 +1,6 @@
+<head>
+    <title>Guest - PUPClinic</title>
+</head>
 <div class="login-form">
     <h1>Guest Registration Form</h1>
     <p>Please fill in the following details to register as a guest:</p>

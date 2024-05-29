@@ -22,9 +22,9 @@
         <h2>Welcome to PupClinic Dashboard</h2>
         <p>Manage your health and records efficiently.</p>
         <div class="menu_container">
-        <button onclick="redirectToAssessment()">Initial Monitoring</button>
-        <button onclick="redirectToYourRecords()">View Your Records</button>
-        <button onclick="redirectToYourProfile()">Profile</button>
+        <button onclick="redirectToAssessment()">Physical Examination</button>
+        <button onclick="redirectToYourRecords()">Check Your Health Record</button>
+        <button onclick="redirectToYourProfile()">Your Profile</button>
         </div>
     </div>
     <?php

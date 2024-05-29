@@ -20,12 +20,12 @@ function display(){
     $accessStatus = $row['assessment_access'];
 
     if($accessStatus == 0) {
-      echo "<h3>Your assessment access is pending approval from the admin.</h3>";
+      echo "<h3>Your physical examination access is pending admin approval.</h3>";
       echo "<h3>Please wait for further instructions.</h3>";
     } elseif ($accessStatus == 1) {
-      echo "<h3>Your assessment access has been granted.</h3>";
-      echo "<h3>You can proceed with the assessment now.</h3>";
-      echo "<button class='proceed'>Proceed to Assessment</button>";
+      echo "<h3>Access to your physical examination has been granted.</h3>";
+      echo "<h3>You can proceed now.</h3>";
+      echo "<button class='proceed'>Proceed</button>";
     }
   }
 }

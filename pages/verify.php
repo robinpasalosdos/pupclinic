@@ -1,3 +1,6 @@
+<head>
+    <title>Forgot Password - PUPClinic</title>
+</head>
 <div class="login-form">
     <h1>Code:</h1>
     <form id="register">

@@ -1,3 +1,6 @@
+<head>
+  <title>User Portal - PUPClinic</title>
+</head>
 <div class="main-menu">
     <h2>User Options</h2>
     <p>Please select one of the following options:</p>

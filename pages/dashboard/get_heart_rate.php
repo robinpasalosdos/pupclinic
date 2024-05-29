@@ -1,9 +1,10 @@
 <div class="measurement-container">
-	<h2>Blood Pressure</h2>
+	<div>
+		<h2>Measuring Blood Pressure and Heart Rate</h2>
+		<h2 id="instruction">Get the blood pressure sensor, check its instructions, then press the power button to start readings.</h2>
+    </div>
     <p id="bp">-</p>
-    <h2>Heart Rate</h2>
     <p id="heart_rate">-</p>
-	<p> Please stand straight and hold your stance for atleast 10 seconds below the sensor </p>
 </div>
 
 <script>
