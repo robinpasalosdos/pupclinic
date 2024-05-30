@@ -1,7 +1,7 @@
 <head>
     <title>Health Record - PUPClinic</title>
 </head>
-<h2>Health Examination Record</h2>
+<h1 class="record-header">Health Examination Record</h1>
 <?php
     $tn = $_GET['tn'];
     $query = "SELECT * FROM health_record WHERE transaction_no = $tn";
@@ -65,5 +65,7 @@
 </form>
 
 <?php }else{ ?>
+    <div class="waiting-container">
     No health record found
+</div>
 <?php } ?>

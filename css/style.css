@@ -289,6 +289,10 @@ button:hover {
     margin: 3rem 1rem 1rem 24rem;
 }
 
+.record-header {
+    margin: 3rem 1rem 1rem 20rem;
+}
+
 .floating-container {
     position: absolute;
     top: 0;
