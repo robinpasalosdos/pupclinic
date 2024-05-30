@@ -63,7 +63,7 @@
                                 <td><?= date('M d, Y', strtotime($items['date_created'])); ?></td>
                                 <td><?= date('h:i A', strtotime($items['created_timestamp'])); ?></td>
                                 <td>
-                                    <a class="assess" href="javascript:void(0)" data-id="<?= $items['id'] ?>" data-name="<?= $items['name'] ?>" data-height="<?= $items['height'] ?>" data-weight="<?= $items['weight'] ?>" data-temp="<?= $items['temp'] ?>" data-heart_rate="<?= $items['heart_rate'] ?>" data-oxygen="<?= $items['oxygen'] ?>" data-bp="<?= $items['bp'] ?>" data-tn="<?= $items['transaction_no'] ?>">Assess</a>
+                                    <a class="assess" href="javascript:void(0)" data-id="<?= $items['id'] ?>" data-user_type="<?= $items['user_type'] ?>" data-name="<?= $items['name'] ?>" data-height="<?= $items['height'] ?>" data-weight="<?= $items['weight'] ?>" data-temp="<?= $items['temp'] ?>" data-heart_rate="<?= $items['heart_rate'] ?>" data-oxygen="<?= $items['oxygen'] ?>" data-bp="<?= $items['bp'] ?>" data-tn="<?= $items['transaction_no'] ?>">Assess</a>
                                 </td>
                                 
                                 
@@ -90,6 +90,7 @@
         var id = $(this).data('id');
         var data = {
                 id: id,
+                user_type: $(this).data('user_type'),
                 name: $(this).data('name'),
                 height: $(this).data('height'),
                 weight: $(this).data('weight'),

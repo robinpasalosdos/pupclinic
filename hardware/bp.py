@@ -11,6 +11,7 @@ if __name__ == '__main__':
     ser.flush()
     time.sleep(2)
     ser.write(b'b')
+    start_time = time.time()
     GPIO.setup(buzzer, GPIO.OUT)
     GPIO.output(buzzer, True)
     time.sleep(.2)
@@ -23,7 +24,8 @@ if __name__ == '__main__':
             file.write(line)
             file.close()
             print(line)
-            break
+            if start_time > 4:    
+                break
 
 	
     time.sleep(.2)

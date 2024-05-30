@@ -25,14 +25,14 @@ function displayPrioritySection() {
             $sql2 = "SELECT * FROM queue WHERE assessment_access = 2";
             $prio2 = $conn->query($sql2);
             if ($prio2->num_rows > 0) {
-                if ($row['heart_rate'] == ""){
-                    echo "<p class='card-text'>Getting Heart Rate and Oxygen...</p>";
+                if ($row['oxygen'] == ""){
+                    echo "<p class='card-text'>Getting Oxygen...</p>";
                 } else {
-                    echo "<p class='card-text'>Heart Rate: " . $row['heart_rate'] . "</p>";
-                    echo "<p class='card-text'>Oxygen: " . $row['oxygen'] . "</p>";
-                    if ($row['bp'] == ""){
-                        echo "<p class='card-text'>Getting Blood Pressure...</p>";
+                    echo "<p class='card-text'>Oxygen: " . $row['oxygen'] . "</p>"; 
+                    if ($row['heart_rate'] == ""){
+                        echo "<p class='card-text'>Getting Heart Rate and Blood Pressure...</p>";  
                     } else {
+                        echo "<p class='card-text'>Heart Rate: " . $row['heart_rate'] . "</p>";
                         echo "<p class='card-text'>Blood Pressure: " . $row['bp'] . "</p>";
                         if ($row['temp'] == ""){
                             echo "<p class='card-text'>Getting Temperature...</p>";

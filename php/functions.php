@@ -947,6 +947,7 @@ Class Action {
 		$height_m = $height / 100;
 		$bmi = number_format($weight/($height_m * $height_m), 2);
 		$_SESSION['id'] = $id;
+		$_SESSION['user_type'] = $user_type;
 		$_SESSION['name'] = $name;
 		$_SESSION['height'] = $height;
 		$_SESSION['weight'] = $weight;

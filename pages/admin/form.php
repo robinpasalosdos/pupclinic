@@ -5,7 +5,12 @@
 <?php
 if (isset($_SESSION['id']) && $_SESSION['id'] != ""){
     $id = $_SESSION['id'];
-    $res = mysqli_query($conn, "SELECT users.id, users.sex, users.birthday, records.email, records.bmi FROM users INNER JOIN records ON users.id = records.user_id WHERE records.id = $id;");
+    $user_type = $_SESSION['user_type'];
+    if($user_type == "guest"){
+        $res = mysqli_query($conn, "SELECT guest.id, guest.sex, guest.birthday, records.email, records.bmi FROM guest INNER JOIN records ON guest.id = records.user_id WHERE records.id = $id;");
+    }else{
+        $res = mysqli_query($conn, "SELECT users.id, users.sex, users.birthday, records.email, records.bmi FROM users INNER JOIN records ON users.id = records.user_id WHERE records.id = $id;");
+    }
     if (mysqli_num_rows($res) > 0) {
         $record = mysqli_fetch_assoc($res);
         $name = $_SESSION["name"];
