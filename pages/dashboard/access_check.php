@@ -23,8 +23,8 @@ function display(){
       echo "<h3>Your physical examination access is pending admin approval.</h3>";
       echo "<h3>Please wait for further instructions.</h3>";
     } elseif ($accessStatus == 1) {
-      echo "<h3>Access to your physical examination has been granted.</h3>";
-      echo "<h3>You can proceed now.</h3>";
+      echo "<h3>Access has been granted.</h3>";
+      echo "<h3>You can now proceed with the physical examination.</h3>";
       echo "<button class='proceed'>Proceed</button>";
     }
   }

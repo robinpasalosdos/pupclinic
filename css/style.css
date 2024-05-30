@@ -167,8 +167,7 @@ button:hover {
 }
 
 .login-form form[id="login"], 
-.login-form form[id="register"],
-.floating-register form[id="update_user"] {
+.login-form form[id="register"] {
     display: flex;
     background: var(--def-gradient-form);
     flex-direction: column;
@@ -179,7 +178,8 @@ button:hover {
     box-shadow: var(--box-shadow);
 }
 
-.floating-register form[id="register"] {
+.floating-register form[id="register"],
+.floating-register form[id="update_user"] {
     display: flex;
     background: white;
     flex-direction: column;
