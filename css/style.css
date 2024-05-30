@@ -183,7 +183,8 @@ button:hover {
 .login-form form[id="register"] input,
 .login-form form[id="register"] select,
 .floating-register form[id="register"] input,
-.floating-register form[id="register"] select {
+.floating-register form[id="register"] select,
+#health-form input[type="text"] {
     height: 2rem;
     border: none;
     background: #f0ecec;
@@ -224,6 +225,51 @@ button:hover {
     height: 100vh;
     width: 100%;
     display: none;
+}
+
+#health-form {
+    display: flex;
+    flex-direction: column;
+    background: white;
+    height: min-content;
+    width: 50vw;
+    margin: auto;
+    padding: 2rem 2rem 4rem 2rem;
+    border-radius: 2rem ;
+    box-shadow: var(--box-shadow);
+}
+
+#health-form label,
+#health-form div {
+    margin: .75rem 0 0 0;
+}
+
+#health-form h3 {
+    margin: 2rem 0 0 0;
+}
+
+#health-form h4 {
+    margin: .5rem 0 0 0;
+}
+
+#health-form input[type="submit"] {
+    background: var(--def-theme-color);
+    height: 2.5em;
+    width: 6rem;
+	font-size: 1rem;
+    border: none;
+	border-radius: 2rem;
+    margin: .25rem;
+	cursor:pointer;
+	color:#dddddd;
+    box-shadow: var(--box-shadow);
+    font-family: var(--def-font);
+    font-weight: 500;
+    transition: var(--def-transition);
+}
+
+.form-header {
+    margin: 3rem 1rem 1rem 24rem;
 }
 
 .floating-container {
@@ -347,7 +393,6 @@ button:hover {
     display: grid;
     height: min-content;
     width: 85vw;
-    max-width: 40rem;
     margin: auto;
     margin-top: 3rem;
     padding: 2rem 1rem 4rem 1rem ;
@@ -359,8 +404,13 @@ button:hover {
     align-items: center;
 }
 
+.measurement-container img {
+    width: auto;
+    height: 10rem;
+}
+
 .measurement-container h1 {
-    margin: auto 1rem auto 1rem;
+    margin: inherit 2rem inherit 2rem;
 }
 
 .measurement-container h3 {
@@ -605,12 +655,12 @@ button:hover {
     width: 85vw;
     max-width: 40rem;
     margin: auto;
-    margin-top: 3rem;
+    margin-top: 1rem;
     padding: 1rem 2rem 4rem 2rem ;
     box-shadow: var(--box-shadow);
     border-radius: 2rem;
-    justify-items: start;
     align-items: center;
+    justify-content: space-evenly;
 }
 
 .card > .card-body > p, .card > .card-body > h3 {
@@ -820,7 +870,8 @@ button:hover {
 @media (max-width: 800px) {
     .menu_container button {
         height: 9rem;
-        width: 12rem;
+        width: 13rem;
+        margin: .5rem;
         font-size: 1rem;
         border-radius: 1.5rem;
     }
