@@ -572,7 +572,7 @@ button:hover {
     position: relative;
     align-content: space-evenly;
     margin: 2%;
-    margin-top: 7vh;
+    margin-top: 0;
     font-family: var(--def-font);
 }
 
