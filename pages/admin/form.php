@@ -207,16 +207,16 @@ if (isset($_SESSION['id']) && $_SESSION['id'] != ""){
     </div>
     <div>
         <h4>Eyes:</h4>
-    <input type="hidden" name="eyes[]" value="none">
-    <input type="checkbox" id="without-glasses" name="eyes[]" value="without-glasses">
-    <label for="without-glasses">w/o Glasses</label>
-    <input type="checkbox" id="with-glasses" name="eyes[]" value="with-glasses">
-    <label for="with-glasses">w/ Glasses</label>
-    <input type="checkbox" id="anicteric-sclera" name="eyes[]" value="anicteric-sclera">
-    <label for="anicteric-sclera">Anicteric Sclera</label>
-    <input type="checkbox" id="pink-palpebral-conjunctiva" name="eyes[]" value="pink-palpebral-conjunctiva">
-    <label for="pink-palpebral-conjunctiva">Pink Palpebral Conjunctiva</label>
-</div>
+        <input type="hidden" name="eyes[]" value="none">
+        <input type="checkbox" id="without-glasses" name="eyes[]" value="without-glasses">
+        <label for="without-glasses">w/o Glasses</label>
+        <input type="checkbox" id="with-glasses" name="eyes[]" value="with-glasses">
+        <label for="with-glasses">w/ Glasses</label>
+        <input type="checkbox" id="anicteric-sclera" name="eyes[]" value="anicteric-sclera">
+        <label for="anicteric-sclera">Anicteric Sclera</label>
+        <input type="checkbox" id="pink-palpebral-conjunctiva" name="eyes[]" value="pink-palpebral-conjunctiva">
+        <label for="pink-palpebral-conjunctiva">Pink Palpebral Conjunctiva</label>
+    </div>
 
     <div>
         <h4>Ears:</h4>
