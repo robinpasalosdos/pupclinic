@@ -112,6 +112,7 @@ button:hover {
     margin: auto;
     height: min-content;
     width: min-content;
+    min-width: 50vw;
     justify-content: space-evenly;
     align-items: center;
     justify-items: center;
