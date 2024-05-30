@@ -78,7 +78,7 @@ function displayQueueSection() {
             echo "</div>";
         }
     } else {
-        echo "<div class='center-p'><p>No one is in line</p></div>";
+        echo "<div class='center-p'><p>No one is in queue</p></div>";
     }
 }
 

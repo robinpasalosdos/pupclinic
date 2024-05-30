@@ -1,6 +1,9 @@
 <div class="measurement-container">
 	<h1>Measuring Oxygen Saturation Level</h1>
-	<h3 id="instruction">Please place your middle finger on the pulse oximeter, then press the button to get a reading.</h3>
+    <div>
+        <h3 id="instruction">Please place your middle finger on the pulse oximeter, then press the button to get a reading.</h3>
+        <img src="assets/oxyen.png">
+    </div>
 	<form id="get_oxygen">
 		<button id="get_oxygen_button">Measure</button>
 	</form>
