@@ -422,16 +422,17 @@ button:hover {
     justify-items: center;
     justify-content: center;
     align-content: space-evenly;
-    padding: 2rem 1rem 3rem 1rem;
+    padding: 2rem 2rem 5rem 2rem;
     border-radius: 2rem 2rem 0 0;
     box-shadow: var(--box-shadow);
 }
 
 .admin-menu button {
-    height: 7rem;
+    height: 9rem;
     width: 90%;
     border-radius: 1.5rem;
     margin: 0.5rem;
+    font-size: 1.2rem;
 }
 
 .admin-container h1 {
@@ -557,8 +558,9 @@ button:hover {
 
 .center-p {
     height: max-content;
+    text-align: center;
     padding: 1rem 0 1rem 0;
-    width: 80%;
+    width: 90%;
     margin: auto;
 }
 
@@ -566,15 +568,20 @@ button:hover {
     background: var(--def-gradient-form);
     display: flex;
     height: min-content;
+    font-size: 1.2rem;
     width: 85vw;
     max-width: 40rem;
     margin: auto;
     margin-top: 3rem;
-    padding: 1.5rem 1rem 4rem 2rem ;
+    padding: 1.5rem 2rem 4rem 2rem ;
     box-shadow: var(--box-shadow);
     border-radius: 2rem 2rem 0 0 ;
     justify-items: start;
     align-items: center;
+}
+
+.card > .card-body > p, .card > .card-body > h5 {
+    margin-left: 1rem;
 }
 
 #backToPreviousPage {
