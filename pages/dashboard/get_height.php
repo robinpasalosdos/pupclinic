@@ -1,10 +1,14 @@
 <div class="measurement-container">
-	<h2>Measuring Height and Weight</h2>
+	<h1>Measuring Height and Weight</h1>
 	<h2 id="instruction">Step onto the weighing scale and stand up straight</h2>
-    <h2>Height</h2>
-    <p id="height">-</p>
-	<h2>Weight</h2>
-    <p id="weight">-</p>
+	<div>
+		<h2>Height:</h2>
+		<h2 id="height">-</h2>
+	</div>
+	<div>
+		<h2>Weight:</h2>
+		<h2 id="weight">-</h2>
+	</div>
 </div>
 
 <script>

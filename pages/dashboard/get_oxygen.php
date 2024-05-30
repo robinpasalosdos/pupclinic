@@ -1,23 +1,21 @@
 <div class="measurement-container">
-    <div>
-		<h2>Measuring Oxygen Saturation Level</h2>
-		<h2 id="instruction"> Please place your index finger on the pulse oximeter then press the button for a reading,.</h2>
-		<h2 id="oxygen_label" style="display: none;">Oxygen</h2>
-    	<p style="display: none;" id="oxygen">-</p>
-		<form id="get_oxygen">
-			<button id="get_oxygen_button">Measure</button>
-		</form>
-    </div>
+	<h1>Measuring Oxygen Saturation Level</h1>
+	<h2 id="instruction"> Please place your index finger on the pulse oximeter then press the button for a reading,.</h2>
+	<form id="get_oxygen">
+		<button id="get_oxygen_button">Measure</button>
+	</form>
+	<div id="oxygen_con" style="display: none;">
+		<h2>Oxygen Saturation Level:</h2>
+		<h2 id="oxygen">-</h2>
+	</div>
 </div>
-
 <script>
     var params = <?php echo json_encode($_GET)?>;
     $('#get_oxygen').submit(function(e){
 		e.preventDefault()
-		$("#oxygen_label").show();
-		$("#oxygen").show();
+		$("#oxygen_con").show();
 		$("#oxygen").text("Measuring...");
-		$("#get_oxygen_button").hide();
+		$("#get_oxygen").hide();
 		$.ajax({
 			url:'../pupclinic/php/ajax.php?action=get_oxygen',
 			method:'POST',

@@ -4,7 +4,8 @@
 	}
 ?>
 <div class="metrics-container">
-	
+	<h2>Transaction Number:</h2>
+	<h2 id="transaction_no"></h2>
 	<h2>Heart Rate:</h2>
 	<h1 id="heart_rate">--</h1>
 	<h2>Oxygen:</h2>
@@ -19,8 +20,6 @@
 	<h1 id="weight">--</h1>
 	<h2>BMI:</h2>
 	<h1 id="bmi">--</h1>
-	<h2>Transaction Number:</h2>
-	<h2 id="transaction_no"></h2>
 	<button onclick="retry()">Retry</button>
 	<form id="save_all_data">
 	    <button id="save">Save and Exit</button>

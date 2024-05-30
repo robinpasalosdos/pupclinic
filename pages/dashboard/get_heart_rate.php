@@ -1,12 +1,14 @@
 <div class="measurement-container">
+	<h1>Measuring Blood Pressure and Heart Rate</h1>
+	<h2 id="instruction">Get the blood pressure sensor, check its instructions, then press the power button to start readings.</h2>
 	<div>
-		<h2>Measuring Blood Pressure and Heart Rate</h2>
-		<h2 id="instruction">Get the blood pressure sensor, check its instructions, then press the power button to start readings.</h2>
-		<h2>Blood Pressure</h2>
-    	<p id="bp">-</p>
-		<h2>Heart_Rate</h2>
-    	<p id="heart_rate">-</p>
-    </div>
+		<h2>Blood Pressure:</h2>
+		<h2 id="bp">-</h2>
+	</div>
+	<div>
+		<h2>Heart Rate:</h2>
+		<h2 id="heart_rate">-</h2>
+	</div>
 </div>
 
 <script>
