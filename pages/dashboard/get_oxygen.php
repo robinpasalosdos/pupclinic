@@ -2,7 +2,7 @@
 	<h1>Measuring Oxygen Saturation Level</h1>
     <div>
         <h3 id="instruction">Please place your middle finger on the pulse oximeter, then press the button to get a reading.</h3>
-        <img src="assets/oxyen.png">
+        <img src="assets/oxyen-c.png">
     </div>
 	<form id="get_oxygen">
 		<button id="get_oxygen_button">Measure</button>

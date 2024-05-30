@@ -9,8 +9,8 @@
   
   if(mysqli_num_rows($result) > 0){ ?>
     <a class ="logout-button-a" href="../pupclinic/php/ajax.php?action=logout">logout</a>
-    <div class="waiting_container">
-	    <p>The physical examination is complete. Please proceed to the clinic staff for interview. You can now log-out.</p>
+    <div class="waiting-container">
+	    <p>The physical examination is complete. Please proceed to the clinic staff for health interview. You can now log-out.</p>
     </div>
     <?php }else{ ?>
       <a class ="logout-button-a" href="../pupclinic/php/ajax.php?action=logout">logout</a>

@@ -117,7 +117,7 @@ button:hover {
     justify-items: center;
 }
 
-.waiting_container {
+.waiting-container {
     position: relative;
     background: var(--def-gradient-form);
     padding: 2rem 2rem 4rem 2rem;
@@ -125,7 +125,7 @@ button:hover {
     box-shadow: var(--box-shadow);
     margin: 4rem auto auto auto;
     height: min-content;
-    width: 50vw;
+    width: 60vw;
     text-align: center;
 }
 
@@ -167,7 +167,6 @@ button:hover {
 
 .login-form form[id="login"], 
 .login-form form[id="register"],
-.floating-register form[id="register"],
 .floating-register form[id="update_user"] {
     display: flex;
     background: var(--def-gradient-form);
@@ -178,6 +177,25 @@ button:hover {
     border-radius: 2rem 2rem 0 0 ;
     box-shadow: var(--box-shadow);
 }
+
+.floating-register form[id="register"] {
+    display: flex;
+    background: white;
+    flex-direction: column;
+    justify-items: center;
+    align-content: space-evenly;
+    padding: 2rem;
+    margin: 1rem;
+    border-radius: 2rem;
+    box-shadow: var(--box-shadow);
+}
+
+.floating-register button {
+    height: 3em;
+    width: 8rem;
+    margin: 1rem 0 0 0;
+}
+
 
 .login-form form[id="login"] input, 
 .login-form form[id="register"] input,
@@ -198,8 +216,7 @@ button:hover {
     margin-left: 1.5rem;
 }
 
-.login-form button,
-.floating-register button {
+.login-form button {
     height: 3em;
     width: 8rem;
     margin: 0.5rem 0 0 0;
@@ -390,18 +407,25 @@ button:hover {
 
 .measurement-container {
     background: var(--def-gradient-form);
-    display: grid;
+    display: flex;
+    flex-direction: column;
     height: min-content;
     width: 85vw;
     margin: auto;
     margin-top: 3rem;
-    padding: 2rem 1rem 4rem 1rem ;
+    padding: 1rem 1rem 4rem 1rem;
     box-shadow: var(--box-shadow);
     border-radius: 2rem 2rem 0 0 ;
-    grid-template-columns: 1fr;
-    grid-template-rows: 1fr 1fr 1fr;
     justify-items: center;
     align-items: center;
+}
+
+.measurement-container > div:first-of-type {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 70%;
+    margin: 1rem;
 }
 
 .measurement-container img {
@@ -410,13 +434,18 @@ button:hover {
 }
 
 .measurement-container h1 {
-    margin: inherit 2rem inherit 2rem;
+    margin: 1rem 2rem 1rem 2rem;
+}
+
+.measurement-container h2 {
+    margin: 1rem 2rem 1rem 2rem;
+    font-size: 1.75rem;
 }
 
 .measurement-container h3 {
     font-weight: 500;
     font-size: 1rem;
-    margin: auto 2rem auto 2rem;
+    margin: 1rem;
 }
 
 .metrics-container {
@@ -656,7 +685,7 @@ button:hover {
     max-width: 40rem;
     margin: auto;
     margin-top: 1rem;
-    padding: 1rem 2rem 4rem 2rem ;
+    padding: 1rem;
     box-shadow: var(--box-shadow);
     border-radius: 2rem;
     align-items: center;
