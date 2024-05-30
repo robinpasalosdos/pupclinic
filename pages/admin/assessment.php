@@ -53,7 +53,7 @@ function displayPrioritySection() {
             echo "</div>";
         }
     } else {
-        echo "<div class='center-p'><p>No one used the machine. Choose one from below if there's someone queued to be given access to using the machine.</p></div>";
+        echo "<div class='center-p'><p>No one has been examined yet. You must give permission for a physical examination first. You can see the list of people requesting permission below.</p></div>";
     }
 }
 
