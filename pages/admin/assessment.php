@@ -20,7 +20,7 @@ function displayPrioritySection() {
         while($row = $prio->fetch_assoc()) {
             echo "<div class='card'>";
             echo "<div class='card-body'>";
-            echo "<h2 class='card-title'>Name: " . $row['name'] . "</h2>";
+            echo "<h3 class='card-title'>Name: " . $row['name'] . "</h3>";
             echo "<p class='card-text'>UserType: " . $row['user_type'] . "</p>";
             $sql2 = "SELECT * FROM queue WHERE assessment_access = 2";
             $prio2 = $conn->query($sql2);
@@ -66,7 +66,7 @@ function displayQueueSection() {
         while($row = $queue->fetch_assoc()) {
             echo "<div class='card'>";
                 echo "<div class='card-body'>";
-                    echo "<h5 class='card-text'>Name: " . $row['name'] . "</h5>";
+                    echo "<h3 class='card-text'>Name: " . $row['name'] . "</h3>";
                     echo "<p class='card-text'>User Type: " . $row['user_type'] . "</p>";
                     echo "<p class='card-text'>Discomfort Rate: " . $row['discomfort_rate'] . "</p>";
 

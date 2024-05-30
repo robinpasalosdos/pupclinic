@@ -11,8 +11,8 @@
   {
     ?>
     <a class ="logout-button-a" href="../pupclinic/php/ajax.php?action=logout">logout</a>
-    <div class="menu_container">
-	<p>Waiting</p>
+    <div class="waiting_container">
+	<p>The physical examination is complete. Please proceed to the clinic staff for interview. You can now log-out.</p>
     </div>
     <?php
   }else{

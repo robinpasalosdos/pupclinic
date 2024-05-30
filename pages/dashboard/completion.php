@@ -5,7 +5,7 @@
 ?>
 <div class="metrics-container">
 	<h2>Transaction Number:</h2>
-	<h2 id="transaction_no"></h2>
+	<h1 id="transaction_no"></h2>
 	<h2>Heart Rate:</h2>
 	<h1 id="heart_rate">--</h1>
 	<h2>Oxygen:</h2>
@@ -24,7 +24,6 @@
 	<form id="save_all_data">
 	    <button id="save">Save and Exit</button>
 	</form>
-	
 </div>
 <script>
 	function retry() {

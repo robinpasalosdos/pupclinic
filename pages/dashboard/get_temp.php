@@ -1,6 +1,6 @@
 <div class="measurement-container">
 	<h1>Measuring Temperature</h1>
-	<h2 id="instruction">Place your forehead on the round opening at the top of the screen and press the button to take your temperature.</h2>
+	<h3 id="instruction">Place your forehead on the round opening at the top of the screen and press the button to take your temperature.</h2>
 	<form id="get_temp">
 		<button id="get_temp_button">Measure</button>
 	</form>
