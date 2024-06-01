@@ -124,7 +124,7 @@ Class Action {
 	
 	function guest_register(){
 		extract($_POST);
-		$save = $this->db->query("INSERT INTO guest (name, birthday, sex, email, assessment_access) VALUES ('$name', '$birthday', '$sex', '$email', 0)");
+		$save = $this->db->query("INSERT INTO guest (name, birthday, sex, email, heart_rate, oxygen, bp, temp, height, weight, assessment_access) VALUES ('$name', '$birthday', '$sex', '$email', '', '', '', '', '', '', 0)");
 		if($save){
 			$_SESSION['user'] = 'guest';
 			$_SESSION['name'] = $name;

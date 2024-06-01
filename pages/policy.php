@@ -2,13 +2,13 @@
     <title>Data Protection and Privacy Regulation</title>
 </head>
 
-<div class="policy-container">
+<form class="policy-container">
     <div>
-        <input type="checkbox" id="checkbox" name="checkbox">
+        <input type="checkbox" id="checkbox" name="checkbox" required>
         <p>I agree&nbsp;<a href="#" id="privacyLink">to the data privacy agreement</a></p>
     </div>
-    <button id="proceed_button" disabled>Continue</button>
-</div>
+    <button id="proceed_button" type="submit">Continue</button>
+</form>
 <div style="display: none;" class="dialog-box" id="dialog">
     <h1>Data Protection and Privacy Regulation</h1> 
     
@@ -50,24 +50,8 @@
 <script>
     $(document).ready(function() {
         var params = <?php echo json_encode($_GET)?>;
-
-        $('#privacyLink').on('click', function(event) {
-            event.preventDefault();
-            $('#dialog').css('display', 'block');
-        });
-
-        $('#closeDialog').on('click', function() {
-            $('#dialog').css('display', 'none');
-        });
-
-        $('#checkbox').on('change', function() {
-            if ($('#checkbox').prop('checked')) {
-                $('#proceed_button').prop('disabled', false);
-            } else {
-                $('#proceed_button').prop('disabled', true);
-            }
-        });
-        $("#proceed_button").click(function(){
+        $('.policy-container').submit(function(e){
+		    e.preventDefault()
             location.href ='../pupclinic/index.php?page=registration&user='+params['user'];
         });
     });

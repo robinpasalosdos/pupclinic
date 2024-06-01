@@ -6,7 +6,7 @@
     <p>Please fill in the following details to register as a guest:</p>
     <form id="register">   
         <label for="name">Name</label>
-        <input type="text" id="name" name="name" placeholder="Enter your name"><br>
+        <input type="text" id="name" name="name" placeholder="Enter your name" required autocomplete="off"><br>
         <label for="birthday">Birthday</label>
         <input type="date" id="birthday" name="birthday" required autocomplete="off"><br>
         <label for="sex">Sex</label>
@@ -16,7 +16,7 @@
             <option value="Female">Female</option>
         </select><br>
         <label for="email">Email</label>
-        <input type="text" id="email" name="email" placeholder="Enter your email"><br>
+        <input type="text" id="email" name="email" placeholder="Enter your email" required autocomplete="off"><br>
         <button>Save</button>
     </form>
 </div>

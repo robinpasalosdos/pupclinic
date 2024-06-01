@@ -6,9 +6,9 @@
 	<?php if($_GET['user'] == 'student' || $_GET['user'] == 'faculty' ): ?>
     <form id="login">
         <label>Email</label>
-        <input type="text" id="email" name="email" placeholder="Enter your email address"><br>
+        <input type="text" id="email" name="email" placeholder="Enter your email address" required autocomplete="off"><br>
         <label>Password</label>
-        <input type="password" id="password" name="password" placeholder="Enter your password"><br>
+        <input type="password" id="password" name="password" placeholder="Enter your password" required><br>
         <button>Login</button>
         <button id="forgot_password">Forgot Password?</button>
     </form>
@@ -16,7 +16,7 @@
 	<?php if($_GET['user'] == 'admin'): ?>
 	    <form id="login">
 		<label>Password</label>
-		<input type="password" id="password" name="password"><br>
+		<input type="password" id="password" name="password" required><br>
 		<button>Login</button>
 	    </form>
 	<?php endif; ?>
