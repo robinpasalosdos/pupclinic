@@ -16,11 +16,11 @@
                 <th>UserType</th>
                 <th>Name</th>
                 <th>Email</th>
-                <th>Height</th>
-                <th>Weight</th>
-                <th>Temp</th>
-                <th>Heart Rate</th>
-                <th>Oxygen</th>
+                <th>Ht.</th>
+                <th>Wt.</th>
+                <th>Temp.</th>
+                <th>HR</th>
+                <th>RR</th>
                 <th>BP</th>
 				<th>Transaction no.</th>
 				<th>Date</th>

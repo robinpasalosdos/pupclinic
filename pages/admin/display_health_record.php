@@ -38,13 +38,13 @@ if (isset($_SESSION['id']) && $_SESSION['id'] != ""){
 
         <div class="section-title">Physical Examination</div>
         <p><label for="vital_signs">Vital Signs:</label><span><?php echo $_SESSION['vital_signs']; ?></span></p>
-        <p><label for="height">Height:</label><span><?php echo $_SESSION['height']; ?></span></p>
-        <p><label for="weight">Weight:</label><span><?php echo $_SESSION['weight']; ?></span></p>
-        <p><label for="bmi">BMI:</label><span><?php echo $_SESSION['bmi']; ?></span></p>
-        <p><label for="bp">Blood Pressure:</label><span><?php echo $_SESSION['bp']; ?></span></p>
-        <p><label for="hr">Heart Rate:</label><span><?php echo $_SESSION['hr']; ?></span></p>
-        <p><label for="rr">Respiratory Rate:</label><span><?php echo $_SESSION['rr']; ?></span></p>
-        <p><label for="temp">Temperature:</label><span><?php echo $_SESSION['temp']; ?></span></p>
+        <p><label for="height">Height:</label><span><?php echo $_SESSION['height'] . " cm"; ?></span></p>
+        <p><label for="weight">Weight:</label><span><?php echo $_SESSION['weight'] . " kg" ; ?></span></p>
+        <p><label for="bmi">BMI:</label><span><?php echo $_SESSION['bmi'] . " kg/m²"; ?></span></p>
+        <p><label for="bp">Blood Pressure:</label><span><?php echo $_SESSION['bp'] . " mmHg"; ?></span></p>
+        <p><label for="hr">Heart Rate:</label><span><?php echo $_SESSION['hr'] . " bpm"; ?></span></p>
+        <p><label for="rr">Respiratory Rate:</label><span><?php echo $_SESSION['rr'] . " %"; ?></span></p>
+        <p><label for="temp">Temperature:</label><span><?php echo $_SESSION['temp'] . " °C"; ?></span></p>
 
         <div class="section-title"></div>
         <p><label for="head">Head:</label><span><?php echo $_SESSION['head']; ?></span></p>

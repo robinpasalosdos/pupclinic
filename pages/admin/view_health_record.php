@@ -10,59 +10,70 @@
     {
     $record = mysqli_fetch_assoc($query_run);
 ?>
-<form id="health-form">
-    <p>
-    <label for="name"><b>Name:</b>&nbsp;<?php echo $record['name']; ?></label><br>
-    <label for="date"><b>Date:</b>&nbsp;<?php echo $record['date']; ?></label><br>
-    <label for="sex"><b>Sex:</b>&nbsp;<?php echo $record['sex']; ?></label><br>
-    <label for="address"><b>Address:</b>&nbsp;<?php echo $record['address']; ?></label><br>
-    <label for="contact"><b>Contact:</b>&nbsp;<?php echo $record['contact']; ?></label><br>
-    <label for="emergency"><b>Emergency:</b>&nbsp;<?php echo $record['emergency_contact']; ?></label><br>
-    <label for="age"><b>Age:</b>&nbsp;<?php echo $record['age']; ?></label><br>
-    <label for="civil_status"><b>Civil Status:</b>&nbsp;<?php echo $record['civil_status']; ?></label><br>
-    <label for="college_department"><b>College Department:</b>&nbsp;<?php echo $record['college_department']; ?></label><br>
-    <label for="course_school_year"><b>Course/School Year:</b>&nbsp;<?php echo $record['course_school_year']; ?></label><br>
-    <label for="contact_no"><b>Contact Number:</b>&nbsp;<?php echo $record['contact_no']; ?></label><br>
-    <label for="childhood_illness"><b>Childhood Illness:</b>&nbsp;<?php echo $record['childhood_illness']; ?></label><br>
-    <label for="previous_hospitalization"><b>Previous Hospitalization:</b>&nbsp;<?php echo $record['previous_hospitalization']; ?></label><br>
-    <label for="operation_surgery"><b>Operation/Surgery:</b>&nbsp;<?php echo $record['operation_surgery']; ?></label><br>
-    <label for="current_medications"><b>Current Medications:</b>&nbsp;<?php echo $record['current_medications']; ?></label><br>
-    <label for="allergies"><b>Allergies:</b>&nbsp;<?php echo $record['allergies']; ?></label><br>
-    <label for="family_history"><b>Family History:</b>&nbsp;<?php echo $record['family_history']; ?></label><br>
-    <label for="cigarette_smoking"><b>Cigarette Smoking:</b>&nbsp;<?php echo $record['cigarette_smoking']; ?></label><br>
-    <label for="alcohol_drinking"><b>Alcohol Drinking:</b>&nbsp;<?php echo $record['alcohol_drinking']; ?></label><br>
-    <label for="traveled_abroad"><b>Traveled Abroad:</b>&nbsp;<?php echo $record['traveled_abroad']; ?></label><br>
-    <label for="working_impression"><b>Working Impression:</b>&nbsp;<?php echo $record['working_impression']; ?></label><br>
-    <label for="vital_signs"><b>Vital Signs:</b>&nbsp;<?php echo $record['vital_signs']; ?></label><br>
-    <label for="height"><b>Height:</b>&nbsp;<?php echo $record['height']; ?></label><br>
-    <label for="weight"><b>Weight:</b>&nbsp;<?php echo $record['weight']; ?></label><br>
-    <label for="bmi"><b>BMI:</b>&nbsp;<?php echo $record['bmi']; ?></label><br>
-    <label for="bp"><b>Blood Pressure:</b>&nbsp;<?php echo $record['bp']; ?></label><br>
-    <label for="hr"><b>Heart Rate:</b>&nbsp;<?php echo $record['hr']; ?></label><br>
-    <label for="rr"><b>Respiratory Rate:</b>&nbsp;<?php echo $record['rr']; ?></label><br>
-    <label for="temp"><b>Temperature:</b>&nbsp;<?php echo $record['temp']; ?></label><br>
-    <label for="head"><b>Head:</b>&nbsp;<?php echo $record['head']; ?></label><br>
-    <label for="eyes"><b>Eyes:</b>&nbsp;<?php echo $record['eyes']; ?></label><br>
-    <label for="ears"><b>Ears:</b>&nbsp;<?php echo $record['ears']; ?></label><br>
-    <label for="throat"><b>Throat:</b>&nbsp;<?php echo $record['throat']; ?></label><br>
-    <label for="chest_lungs"><b>Chest/Lungs:</b>&nbsp;<?php echo $record['chest_lungs']; ?></label><br>
-    <label for="xray_result"><b>X-Ray Result:</b>&nbsp;<?php echo $record['xray_result']; ?></label><br>
-    <label for="breast"><b>Breast:</b>&nbsp;<?php echo $record['breast']; ?></label><br>
-    <label for="murmur"><b>Murmur:</b>&nbsp;<?php echo $record['heart_murmur']; ?></label><br>
-    <label for="rhythm"><b>Rhythm:</b>&nbsp;<?php echo $record['heart_rhythm']; ?></label><br>
-    <label for="abdomen"><b>Abdomen:</b>&nbsp;<?php echo $record['abdomen']; ?></label><br>
-    <label for="genito_urinary"><b>Genito-Urinary:</b>&nbsp;<?php echo $record['genito_urinary']; ?></label><br>
-    <label for="extremities"><b>Extremities:</b>&nbsp;<?php echo $record['extremities']; ?></label><br>
-    <label for="vertebral_column"><b>Vertebral Column:</b>&nbsp;<?php echo $record['vertebral_column']; ?></label><br>
-    <label for="skin"><b>Skin:</b>&nbsp;<?php echo $record['skin']; ?></label><br>
-    <label for="scars"><b>Scars:</b>&nbsp;<?php echo $record['scars']; ?></label><br>
-    <label for="referred_to"><b>Referred To:</b>&nbsp;<?php echo $record['referred_to']; ?></label><br>
-    <label for="follow_up_on"><b>Follow-Up On:</b>&nbsp;<?php echo $record['follow_up_on']; ?></label><br>
-    <label for="fit"><b>Fit:</b>&nbsp;<?php echo $record['fit']; ?></label><br>
-    <label for="for_work_up"><b>For Work-Up:</b>&nbsp;<?php echo $record['for_work_up']; ?></label><br>
-    </p>
-    
+<form id="health-record">
+    <input type="hidden" name="id" value="<?php echo $id; ?>">
+    <p class="full-width"><label for="name">Name:</label><span><?php echo $record['name']; ?></span></p>
+    <p><label for="date">Date:</label><span><?php echo $record['date']; ?></span></p>
+    <p><label for="college_department">College/Department:</label><span><?php echo $record['college_department']; ?></span></p>
+    <p><label for="address">Address:</label><span><?php echo $record['address']; ?></span></p>
+    <p><label for="contact">Contact No.:</label><span><?php echo $record['contact']; ?></span></p>
+    <p><label for="emergency_contact">Emergency Contact:</label><span><?php echo $record['emergency_contact']; ?></span></p>
+    <p><label for="sex">Sex:</label><span><?php echo $record['sex']; ?></span></p>
+    <p><label for="civil_status">Civil Status:</label><span><?php echo $record['civil_status']; ?></span></p>
+    <p><label for="course_school_year">Course/School Year:</label><span><?php echo $record['course_school_year']; ?></span></p>
+    <p><label for="contact_no">Contact No.:</label><span><?php echo $record['contact_no']; ?></span></p>
+    <p><label for="age">Age:</label><span><?php echo $record['age']; ?></span></p>
+
+    <div class="section-title">Past Medical History</div>
+    <p class="full-width"><label for="childhood_illness">Childhood Illness:</label><span><?php echo $record['childhood_illness']; ?></span></p>
+    <p><label for="previous_hospitalization">Previous Hospitalization:</label><span><?php echo $record['previous_hospitalization']; ?></span></p>
+    <p><label for="operation_surgery">Operation/Surgery:</label><span><?php echo $record['operation_surgery']; ?></span></p>
+    <p class="full-width"><label for="current_medications">Current Medications:</label><span><?php echo $record['current_medications']; ?></span></p>
+    <p class="full-width"><label for="allergies">Allergies:</label><span><?php echo $record['allergies']; ?></span></p>
+
+    <div class="section-title">Family History</div>
+    <p class="full-width"><label for="family_history">Family History:</label><span><?php echo $record['family_history']; ?></span></p>
+
+    <div class="section-title">Personal History</div>
+    <p><label for="cigarette_smoking">Cigarette Smoking:</label><span><?php echo $record['cigarette_smoking']; ?></span></p>
+    <p><label for="alcohol_drinking">Alcohol Drinking:</label><span><?php echo $record['alcohol_drinking']; ?></span></p>
+    <p><label for="traveled_abroad">Traveled Abroad:</label><span><?php echo $record['traveled_abroad']; ?></span></p>
+
+    <div class="section-title">Physical Examination</div>
+    <p><label for="vital_signs">Vital Signs:</label><span><?php echo $record['vital_signs']; ?></span></p>
+    <p><label for="height">Height:</label><span><?php echo $record['height'] . " cm"; ?></span></p>
+    <p><label for="weight">Weight:</label><span><?php echo $record['weight'] . " kg" ; ?></span></p>
+    <p><label for="bmi">BMI:</label><span><?php echo $record['bmi'] . " kg/m²"; ?></span></p>
+    <p><label for="bp">Blood Pressure:</label><span><?php echo $record['bp'] . " mmHg"; ?></span></p>
+    <p><label for="hr">Heart Rate:</label><span><?php echo $record['hr'] . " bpm"; ?></span></p>
+    <p><label for="rr">Respiratory Rate:</label><span><?php echo $record['rr'] . " %"; ?></span></p>
+    <p><label for="temp">Temperature:</label><span><?php echo $record['temp'] . " °C"; ?></span></p>
+
+    <div class="section-title"></div>
+    <p><label for="head">Head:</label><span><?php echo $record['head']; ?></span></p>
+    <p><label for="eyes">Eyes:</label><span><?php echo $record['eyes']; ?></span></p>
+    <p><label for="ears">Ears:</label><span><?php echo $record['ears']; ?></span></p>
+    <p><label for="throat">Throat:</label><span><?php echo $record['throat']; ?></span></p>
+    <p><label for="chest_lungs">Chest/Lungs:</label><span><?php echo $record['chest_lungs']; ?></span></p>
+    <p><label for="xray_result">X-Ray Result:</label><span><?php echo $record['xray_result']; ?></span></p>
+    <p><label for="breast">Breast:</label><span><?php echo $record['breast']; ?></span></p>
+    <p><label for="heart_murmur">Murmur:</label><span><?php echo $record['heart_murmur']; ?></span></p>
+    <p><label for="heart_rhythm">Rhythm:</label><span><?php echo $record['heart_rhythm']; ?></span></p>
+    <p><label for="abdomen">Abdomen:</label><span><?php echo $record['abdomen']; ?></span></p>
+    <p><label for="genito_urinary">Genito-Urinary:</label><span><?php echo $record['genito_urinary']; ?></span></p>
+    <p><label for="extremities">Extremities:</label><span><?php echo $record['extremities']; ?></span></p>
+    <p><label for="vertebral_column">Vertebral Column:</label><span><?php echo $record['vertebral_column']; ?></span></p>
+    <p><label for="skin">Skin:</label><span><?php echo $record['skin']; ?></span></p>
+    <p><label for="scars">Scars:</label><span><?php echo $record['scars']; ?></span></p>
+
+    <div class="section-title"></div>
+    <p><label for="working_impression">Working Impression:</label><span><?php echo $record['working_impression']; ?></span></p>
+    <p><label for="fit">Fit:</label><span><?php echo $record['fit']; ?></span></p>
+    <p><label for="for_work_up">For Work-Up:</label><span><?php echo $record['for_work_up']; ?></span></p>
+    <p><label for="referred_to">Referred To:</label><span><?php echo $record['referred_to']; ?></span></p>
+    <p><label for="follow_up_on">Follow-Up On:</label><span><?php echo $record['follow_up_on']; ?></span></p>
 </form>
+
 
 <?php }else{ ?>
     <div class="waiting-container">
