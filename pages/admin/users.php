@@ -9,82 +9,84 @@
         <button type="submit">Search</button>
         <button type="button" onclick="show_dialog()">Add User</button>
     </form>
-    <table>
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>UserType</th>
-                <th>Name</th>
-                <th>Birthday</th>
-                <th>Sex</th>
-                <th>Email</th>
-                <th>Student Number</th>
-                <th>Course</th>
-                <th>Year</th>
-                <th>Section</th>
-                <th>Date Created</th>
-                <th>Action</th>
+    <div>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>UserType</th>
+                    <th>Name</th>
+                    <th>Birthday</th>
+                    <th>Sex</th>
+                    <th>Email</th>
+                    <th>Student Number</th>
+                    <th>Course</th>
+                    <th>Year</th>
+                    <th>Section</th>
+                    <th>Date Created</th>
+                    <th>Action</th>
 
-            </tr>
-        </thead>
-        <tbody>
-            <?php 
-                include('../pupclinic/php/db_connect.php');
+                </tr>
+            </thead>
+            <tbody>
+                <?php 
+                    include('../pupclinic/php/db_connect.php');
 
 
-                    $filtervalues = $_GET['search'];
-                    if($_GET['search'] == ""){
-                        $query = "SELECT * FROM users";
-                    }else{
-                        $query = "SELECT * FROM users WHERE CONCAT(user_type,name,email,student_no,course,year,section) LIKE '%$filtervalues%' ";
-                    }
-                    $query_run = mysqli_query($conn, $query);
+                        $filtervalues = $_GET['search'];
+                        if($_GET['search'] == ""){
+                            $query = "SELECT * FROM users";
+                        }else{
+                            $query = "SELECT * FROM users WHERE CONCAT(user_type,name,email,student_no,course,year,section) LIKE '%$filtervalues%' ";
+                        }
+                        $query_run = mysqli_query($conn, $query);
 
-                    if(mysqli_num_rows($query_run) > 0)
-                    {
-                        foreach($query_run as $items)
+                        if(mysqli_num_rows($query_run) > 0)
+                        {
+                            foreach($query_run as $items)
+                            {
+                                ?>
+                                <tr>
+                                    <td><?= $items['id']; ?></td>
+                                    <td><?= $items['user_type']; ?></td>
+                                    <td><?= $items['name']; ?></td>
+                                    <td><?= $items['birthday']; ?></td>
+                                    <td><?= $items['sex']; ?></td>
+                                    <td><?= $items['email']; ?></td>
+                                    <td><?= $items['student_no']; ?></td>
+                                    <td><?= $items['course']; ?></td>
+                                    <td><?= $items['year']; ?></td>
+                                    <td><?= $items['section']; ?></td>
+                                    <td><?= date('M d, Y', strtotime($items['date_created'])); ?></td>
+                                    <td>
+                                        <a class="update_user_button" href="javascript:void(0)" data_id="<?= $items['id'] ?>" 
+                                        data_user_type="<?= $items['user_type'] ?>" data_name="<?= $items['name'] ?>" data_birthday="<?= $items['birthday'] ?>" 
+                                        data_sex="<?= $items['sex'] ?>" data_email="<?= $items['email'] ?>" 
+                                        data_student_no="<?= $items['student_no'] ?>" data_course="<?= $items['course'] ?>" data_year="<?= $items['year'] ?>" 
+                                        data_section="<?= $items['section'] ?>" data_password="<?= $items['password'] ?>">Update</a>
+                                        <a class="delete_user" href="javascript:void(0)" data-id="<?= $items['id'] ?>">Delete</a>
+                                        <a class="view_profile" href="javascript:void(0)" data-id="<?= $items['id'] ?>">View Profile</a>
+                                    </td>
+                                    
+                                    
+                                    
+                                </tr>
+                                <?php
+                            }
+                        }
+                        else
                         {
                             ?>
-                            <tr>
-                                <td><?= $items['id']; ?></td>
-                                <td><?= $items['user_type']; ?></td>
-                                <td><?= $items['name']; ?></td>
-                                <td><?= $items['birthday']; ?></td>
-                                <td><?= $items['sex']; ?></td>
-                                <td><?= $items['email']; ?></td>
-                                <td><?= $items['student_no']; ?></td>
-                                <td><?= $items['course']; ?></td>
-                                <td><?= $items['year']; ?></td>
-                                <td><?= $items['section']; ?></td>
-                                <td><?= date('M d, Y', strtotime($items['date_created'])); ?></td>
-                                <td>
-                                    <a class="update_user_button" href="javascript:void(0)" data_id="<?= $items['id'] ?>" 
-                                    data_user_type="<?= $items['user_type'] ?>" data_name="<?= $items['name'] ?>" data_birthday="<?= $items['birthday'] ?>" 
-                                    data_sex="<?= $items['sex'] ?>" data_email="<?= $items['email'] ?>" 
-                                    data_student_no="<?= $items['student_no'] ?>" data_course="<?= $items['course'] ?>" data_year="<?= $items['year'] ?>" 
-                                    data_section="<?= $items['section'] ?>" data_password="<?= $items['password'] ?>">Update</a>
-                                    <a class="delete_user" href="javascript:void(0)" data-id="<?= $items['id'] ?>">Delete</a>
-                                    <a class="view_profile" href="javascript:void(0)" data-id="<?= $items['id'] ?>">View Profile</a>
-                                </td>
-                                
-                                
-                                
-                            </tr>
+                                <tr>
+                                    <td>No Record Found</td>
+                                </tr>
                             <?php
                         }
-                    }
-                    else
-                    {
-                        ?>
-                            <tr>
-                                <td>No Record Found</td>
-                            </tr>
-                        <?php
-                    }
-                
-            ?>
-        </tbody>
-    </table>
+                    
+                ?>
+            </tbody>
+        </table>
+    </div>
 </div>
 
 <div id="overlay" onclick="hide_dialog()"></div>
