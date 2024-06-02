@@ -1,7 +1,7 @@
 <head>
     <title>Health Examination Form - PUPClinic</title>
 </head>
-<h2>Health Examination Record</h2>
+<h1 class="record-header">Health Examination Record</h1>
 <?php
 if (isset($_SESSION['id']) && $_SESSION['id'] != ""){
     $id = $_SESSION['id'];
@@ -69,9 +69,10 @@ if (isset($_SESSION['id']) && $_SESSION['id'] != ""){
         <p><label for="for_work_up">For Work-Up:</label><span><?php echo $_SESSION['for_work_up']; ?></span></p>
         <p><label for="referred_to">Referred To:</label><span><?php echo $_SESSION['referred_to']; ?></span></p>
         <p><label for="follow_up_on">Follow-Up On:</label><span><?php echo $_SESSION['follow_up_on']; ?></span></p>
-
-        <button id="retry">Back</button>
-        <button id="save">Save and Exit</button>
+        <div>
+            <button id="retry">Back</button>
+            <button id="save">Save and Exit</button>
+        </div>
     </form>
 
 <?php }else{
