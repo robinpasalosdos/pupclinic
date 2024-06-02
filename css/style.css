@@ -131,17 +131,21 @@ button:hover {
 }
 
 .main_container button {
+    /* height: 15rem;
+    width: 21rem;
+    font-size: 2.5em; */
+    border-radius: 2.5rem;
     font-size: 2rem;
+    grid-area: 1/2/3/3;
 }
 
 .menu_container button {
-    height: 10rem;
-    width: 16rem;
+    height: 9rem;
+    width: 13rem;
+    margin: .5rem;
+    font-size: 1rem;
+    border-radius: 1.5rem;
     padding: 1rem;
-}
-
-.main_container button {
-    grid-area: 1/2/3/3;
 }
 
 .main_container h1 {
@@ -213,7 +217,7 @@ button:hover {
 
 .floating-register h1, 
 .login-form h1 {
-    margin-left: 1.5rem;
+    margin: 3rem 0 1rem 0
 }
 
 .login-form button {
@@ -254,7 +258,7 @@ button:hover {
     background: white;
     height: min-content;
     width: 60vw;
-    min-width: 22rem;
+    min-width: 15rem;
     max-width: 40rem;
     margin: auto;
     margin-bottom: 2rem;
@@ -301,6 +305,7 @@ button:hover {
 .post-metric input {
     width: 7rem!important;
     text-align: center;
+    border-radius: 2rem!important;
 }
 
 .post-metric ~ div {
@@ -360,7 +365,7 @@ button:hover {
 	font-size: 1rem;
     border: none;
 	border-radius: 2rem;
-    margin: .25rem;
+    margin: .5rem;
 	cursor:pointer;
 	color:#dddddd;
     box-shadow: var(--box-shadow);
@@ -451,7 +456,6 @@ button:hover {
     justify-items: center;
     height: min-content;
     width: 92vw;
-    min-width: 25rem;
     position: relative;
     align-content: space-evenly;
     margin: auto;
@@ -470,14 +474,18 @@ button:hover {
     width: 8em;
 }
 
+.records-table div {
+    margin: 1rem 0 0 0;
+    box-shadow: var(--box-shadow);
+    overflow-x: auto;
+}
+
 .records-table table {
     background: var(--def-gradient-form);
     width: 100%;
     height: min-content;
-    margin: 2rem 0 0 0;
     padding: 1.5rem 1rem 3rem 1rem;
     border-radius: 2rem 2rem 0 0;
-    box-shadow: var(--box-shadow);
 }
 
 .records-table input {
@@ -487,8 +495,8 @@ button:hover {
     margin: 0;
     border: none;
     background: #ffffff;
-    border-radius: 1rem;
-    padding: 0 .5rem 0 .5rem;
+    border-radius: 2rem;
+    padding: 0 0 0 1rem;
     transition: var(--def-transition);
     
 }
@@ -846,6 +854,7 @@ button:hover {
     .admin-menu button {
         height: 11rem;
         width: 90%;
+        border-radius: 2rem;
     }
 
     .electronic-health-record {
@@ -855,7 +864,8 @@ button:hover {
     #health-form, #health-record {
         font-size: 0.8rem;
         width: 80vw;
-        padding: 1.5rem 1rem 1rem 1rem;
+        padding: 1rem;
+        border-radius: 1.5rem;
         gap: 0.3rem;
     }
 
@@ -871,6 +881,11 @@ button:hover {
         width: 95%!important;
     }
 
+    .post-metric input {
+        width: 5rem !important;
+        text-align: center;
+    }
+
     .form-header, .record-header {
         margin: 4rem 0 1rem 0;
         font-size: 1.5rem;
@@ -879,12 +894,6 @@ button:hover {
 
 /* ----------- QHD SCREEN ----------- */
 @media (orientation: portrait) and (min-height: 1000px) {
-    .main_container button {
-        height: 15rem;
-        width: 21rem;
-        font-size: 2.5em;
-    	border-radius: 2.5rem;
-    }
 
     .main_container img {
         width: 30rem;
@@ -983,25 +992,22 @@ button:hover {
     }
 }
 
-/* ----------------- FOR TABLE ---------------- */
+/* ----------------- FOR TABLE (MOBILE) ---------------- */
 
-@media (max-width: 800px) {
-    .menu_container button {
-        height: 9rem;
-        width: 13rem;
-        margin: .5rem;
-        font-size: 1rem;
-        border-radius: 1.5rem;
+@media (max-width: 600px) and (orientation: portrait) {
+
+    .records-table {
+        margin-top: 5vh;
     }
 
     .records-table th,
     .records-table td {
-        font-size: 65%;
+        font-size: 50%;
     }
 
     .records-table table {
-        border-radius: 1.5rem 1.5rem 0 0;
-        margin-top: 1.5rem;
+        border-radius: 1rem 1rem 0 0;
+        padding: .75rem .75rem 2.5rem .75rem;
     }
 
     .records-table h1 {
@@ -1010,7 +1016,10 @@ button:hover {
 
     .records-table button,
     .records-table input {
-        font-size: 0.75rem;
+        font-size: 0.5rem;
+        margin: 0 0 0 .2rem!important;
+        width: 30vw;
+        box-shadow: var(--box-shadow);
     }
 
     .records-table form button{
@@ -1024,34 +1033,3 @@ button:hover {
     }
 }
 
-@media (max-width: 550px) {
-    .records-table th,
-    .records-table td {
-        font-size: 50%;
-    }
-
-    .records-table table {
-        border-radius: 1rem .5rem 0 0;
-        margin-top: 1rem;
-    }
-
-    .records-table h1 {
-        font-size: 1rem;
-    }
-    
-    .records-table button,
-    .records-table input {
-        font-size: 0.5rem;
-    }
-
-    .records-table form button{
-        margin-left: 0.5rem;
-    }
-
-}
-@media (max-width: 25rem) {
-    .records-table h1,
-    .records-table input {
-        margin-left: 1rem;
-    }
-}
