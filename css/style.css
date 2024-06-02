@@ -300,6 +300,7 @@ button:hover {
 
 .post-metric input {
     width: 7rem!important;
+    text-align: center;
 }
 
 .post-metric ~ div {
