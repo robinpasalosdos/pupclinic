@@ -12,18 +12,17 @@
 ?>
 <form id="health-record">
     <input type="hidden" name="id" value="<?php echo $id; ?>">
-    <p class="full-width"><label for="name">Name:</label><span><?php echo $record['name']; ?></span></p>
-    <p><label for="date">Date:</label><span><?php echo $record['date']; ?></span></p>
-    <p><label for="college_department">College/Department:</label><span><?php echo $record['college_department']; ?></span></p>
+    <p><label for="name">Name:</label><span><?php echo $record['name']; ?></span></p>
+    <p><label for="address">Date:</label><span><?php echo date("M d, Y",strtotime($record['created_timestamp'])); ?></span></p>
     <p><label for="address">Address:</label><span><?php echo $record['address']; ?></span></p>
     <p><label for="contact">Contact No.:</label><span><?php echo $record['contact']; ?></span></p>
-    <p><label for="emergency_contact">Emergency Contact:</label><span><?php echo $record['emergency_contact']; ?></span></p>
-    <p><label for="sex">Sex:</label><span><?php echo $record['sex']; ?></span></p>
-    <p><label for="civil_status">Civil Status:</label><span><?php echo $record['civil_status']; ?></span></p>
+    <p><label for="college_department">College/Department:</label><span><?php echo $record['college_department']; ?></span></p>
     <p><label for="course_school_year">Course/School Year:</label><span><?php echo $record['course_school_year']; ?></span></p>
+    <p><label for="emergency_contact">Emergency Contact:</label><span><?php echo $record['emergency_contact']; ?></span></p>
     <p><label for="contact_no">Contact No.:</label><span><?php echo $record['contact_no']; ?></span></p>
     <p><label for="age">Age:</label><span><?php echo $record['age']; ?></span></p>
-
+    <p><label for="sex">Sex:</label><span><?php echo $record['sex']; ?></span></p>
+    <p><label for="civil_status">Civil Status:</label><span><?php echo $record['civil_status']; ?></span></p>
     <div class="section-title">Past Medical History</div>
     <p class="full-width"><label for="childhood_illness">Childhood Illness:</label><span><?php echo $record['childhood_illness']; ?></span></p>
     <p><label for="previous_hospitalization">Previous Hospitalization:</label><span><?php echo $record['previous_hospitalization']; ?></span></p>

@@ -812,7 +812,6 @@ Class Action {
 		}
 		$_SESSION['tn'] = $tn;
 		$_SESSION['name'] = $name;
-		$_SESSION['date'] = $date;
 		$_SESSION['sex'] = $sex;
 		$_SESSION['address'] = $address;
 		$_SESSION['contact'] = $contact;
@@ -869,7 +868,6 @@ Class Action {
 		$id = $_SESSION['id'];
 		$tn = $_SESSION['tn'];
 		$name = $_SESSION['name'];
-		$date = $_SESSION['date'];
 		$sex = $_SESSION['sex'];
 		$address = $_SESSION['address'];
 		$contact = $_SESSION['contact'];
@@ -917,8 +915,8 @@ Class Action {
 		$fit = $_SESSION['fit'];
 		$for_work_up = $_SESSION['for_work_up'];
 
-		$sql = "INSERT INTO health_record (transaction_no, name, date, sex, address, contact, emergency_contact, age, civil_status, college_department, course_school_year, contact_no, childhood_illness, previous_hospitalization, operation_surgery, current_medications, allergies, family_history, cigarette_smoking, alcohol_drinking, traveled_abroad, working_impression, vital_signs, height, weight, bmi, bp, hr, rr, temp, head, eyes, ears, throat, chest_lungs, xray_result, breast, heart_murmur, heart_rhythm, abdomen, genito_urinary, extremities, vertebral_column, skin, scars, referred_to, follow_up_on, fit, for_work_up)
-				VALUES ('$tn', '$name', '$date', '$sex', '$address', '$contact', '$emergency', '$age', '$civil_status', '$college_department', '$course_school_year', '$contact_no', '$childhood_illness', '$previous_hospitalization', '$operation_surgery', '$current_medications', '$allergies', '$family_history', '$cigarette_smoking', '$alcohol_drinking', '$traveled_abroad', '$working_impression', '$vital_signs', '$height', '$weight', '$bmi', '$bp', '$hr', '$rr', '$temp', '$head', '$eyes', '$ears', '$throat', '$chest_lungs', '$xray_result', '$breast', '$murmur', '$rhythm', '$abdomen', '$genito_urinary', '$extremities', '$vertebral_column', '$skin', '$scars', '$referred_to', '$follow_up_on', '$fit', '$for_work_up')";
+		$sql = "INSERT INTO health_record (transaction_no, name, sex, address, contact, emergency_contact, age, civil_status, college_department, course_school_year, contact_no, childhood_illness, previous_hospitalization, operation_surgery, current_medications, allergies, family_history, cigarette_smoking, alcohol_drinking, traveled_abroad, working_impression, vital_signs, height, weight, bmi, bp, hr, rr, temp, head, eyes, ears, throat, chest_lungs, xray_result, breast, heart_murmur, heart_rhythm, abdomen, genito_urinary, extremities, vertebral_column, skin, scars, referred_to, follow_up_on, fit, for_work_up)
+				VALUES ('$tn', '$name', '$sex', '$address', '$contact', '$emergency', '$age', '$civil_status', '$college_department', '$course_school_year', '$contact_no', '$childhood_illness', '$previous_hospitalization', '$operation_surgery', '$current_medications', '$allergies', '$family_history', '$cigarette_smoking', '$alcohol_drinking', '$traveled_abroad', '$working_impression', '$vital_signs', '$height', '$weight', '$bmi', '$bp', '$hr', '$rr', '$temp', '$head', '$eyes', '$ears', '$throat', '$chest_lungs', '$xray_result', '$breast', '$murmur', '$rhythm', '$abdomen', '$genito_urinary', '$extremities', '$vertebral_column', '$skin', '$scars', '$referred_to', '$follow_up_on', '$fit', '$for_work_up')";
 		$assessment_status_off = "UPDATE records SET assessment_status = 0 WHERE id = $id;";
 		if ($this->db->query($sql) === TRUE) {
 			$this->db->query($assessment_status_off);

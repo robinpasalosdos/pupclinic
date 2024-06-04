@@ -39,26 +39,11 @@ if (isset($_SESSION['id']) && $_SESSION['id'] != ""){
             <label for="name">Name:</label>
             <input type="text" id="name" name="name" value="<?php echo $name; ?>">
 
-            <label for="date">Date:</label>
-            <input type="date" id="date" name="date" required autocomplete="off" value="<?php echo $_SESSION['date']; ?>">
-
-            <label for="sex">Sex:</label>
-            <input type="text" id="sex" name="sex" value="<?php echo $sex; ?>">
-
             <label for="address">Address:</label>
             <input type="text" id="address" name="address" required autocomplete="off" value="<?php echo $_SESSION['address']; ?>">
 
             <label for="contact">Contact No.:</label>
             <input type="text" id="contact" name="contact" required autocomplete="off" value="<?php echo $_SESSION['contact']; ?>">
-
-            <label for="emergency">Contact Person In Case of Emergency:</label>
-            <input type="text" id="emergency" name="emergency" required autocomplete="off" value="<?php echo $_SESSION['emergency']; ?>">
-
-            <label for="age">Age:</label>
-            <input type="text" id="age" name="age" value="<?php echo $age; ?>">
-
-            <label for="civil-status">Civil Status:</label>
-            <input type="text" id="civil-status" name="civil_status" required autocomplete="off" value="<?php echo $_SESSION['civil_status']; ?>">
 
             <label for="college-department">College / Department:</label>
             <input type="text" id="college-department" name="college_department" required autocomplete="off" value="<?php echo $_SESSION['college_department']; ?>">
@@ -66,8 +51,21 @@ if (isset($_SESSION['id']) && $_SESSION['id'] != ""){
             <label for="course-school-year">Course / School Year:</label>
             <input type="text" id="course-school-year" name="course_school_year" required autocomplete="off" value="<?php echo $_SESSION['course_school_year']; ?>">
 
+            <label for="emergency">Contact Person In Case of Emergency:</label>
+            <input type="text" id="emergency" name="emergency" required autocomplete="off" value="<?php echo $_SESSION['emergency']; ?>">
+
             <label for="contact-no">Contact No.:</label>
             <input type="text" id="contact-no" name="contact_no" required autocomplete="off" value="<?php echo $_SESSION['contact_no']; ?>">
+
+            <label for="age">Age:</label>
+            <input type="text" id="age" name="age" value="<?php echo $age; ?>">
+
+            <label for="sex">Sex:</label>
+            <input type="text" id="sex" name="sex" value="<?php echo $sex; ?>">
+
+            <label for="civil-status">Civil Status:</label>
+            <input type="text" id="civil-status" name="civil_status" required autocomplete="off" value="<?php echo $_SESSION['civil_status']; ?>">
+
 
         <h3>I. Past Medical History</h3>
         <div>

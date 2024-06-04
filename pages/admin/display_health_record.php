@@ -10,17 +10,15 @@ if (isset($_SESSION['id']) && $_SESSION['id'] != ""){
 <form id="health-record">
         <input type="hidden" name="id" value="<?php echo $id; ?>">
         <p class="full-width"><label for="name">Name:</label><span><?php echo $_SESSION['name']; ?></span></p>
-        <p><label for="date">Date:</label><span><?php echo $_SESSION['date']; ?></span></p>
-        <p><label for="college_department">College/Department:</label><span><?php echo $_SESSION['college_department']; ?></span></p>
         <p><label for="address">Address:</label><span><?php echo $_SESSION['address']; ?></span></p>
         <p><label for="contact">Contact No.:</label><span><?php echo $_SESSION['contact']; ?></span></p>
-        <p><label for="emergency">Emergency Contact:</label><span><?php echo $_SESSION['emergency']; ?></span></p>
-        <p><label for="sex">Sex:</label><span><?php echo $_SESSION['sex']; ?></span></p>
-        <p><label for="civil_status">Civil Status:</label><span><?php echo $_SESSION['civil_status']; ?></span></p>
+        <p><label for="college_department">College/Department:</label><span><?php echo $_SESSION['college_department']; ?></span></p>
         <p><label for="course_school_year">Course/School Year:</label><span><?php echo $_SESSION['course_school_year']; ?></span></p>
+        <p><label for="emergency">Emergency Contact:</label><span><?php echo $_SESSION['emergency']; ?></span></p>
         <p><label for="contact_no">Contact No.:</label><span><?php echo $_SESSION['contact_no']; ?></span></p>
         <p><label for="age">Age:</label><span><?php echo $_SESSION['age']; ?></span></p>
-
+        <p><label for="sex">Sex:</label><span><?php echo $_SESSION['sex']; ?></span></p>
+        <p><label for="civil_status">Civil Status:</label><span><?php echo $_SESSION['civil_status']; ?></span></p>
         <div class="section-title">Past Medical History</div>
         <p class="full-width"><label for="childhood_illness">Childhood Illness:</label><span><?php echo $_SESSION['childhood_illness']; ?></span></p>
         <p><label for="previous_hospitalization">Previous Hospitalization:</label><span><?php echo $_SESSION['previous_hospitalization']; ?></span></p>
