@@ -1,7 +1,7 @@
 <div class="measurement-container">
 	<h1>Measuring Height and Weight</h1>
     <div>
-        <h3 id="instruction">Step onto the weighing scale and stand up straight</h3>
+        <h3 id="instruction">Step onto the weighing scale and stand up straight when you hear the buzzer.</h3>
         <img src="assets/height.png">
     </div>
 	<div>

@@ -1,11 +1,11 @@
 <div class="measurement-container">
 	<h1>Measuring Temperature</h1>
     <div>
-	    <h3 id="instruction">Place your forehead on the round opening at the top of the screen and press the button to take your temperature.</h2>
+	    <h3 id="instruction">Place your forehead on the round opening at the top of the screen and press the measure button to take your temperature. Your forehead needs to touch the hole.</h2>
         <img src="assets/temp-c.png">
     </div>
 	<form id="get_temp">
-		<button id="get_temp_button">Measure</button>
+		<button id="get_temp_button" style="display: none;">Measure</button>
 	</form>
 	<div id="temp_con" style="display: none;">
 		<h2>Temperature: </h2>
@@ -15,6 +15,9 @@
 
 <script>
     var params = <?php echo json_encode($_GET)?>;
+	setTimeout(function() {
+		$("#get_temp_button").show();
+	}, 2000);
     $('#get_temp').submit(function(e){
 		e.preventDefault()
 		$("#temp_con").show();

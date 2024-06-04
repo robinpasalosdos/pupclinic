@@ -5,7 +5,7 @@
         <img src="assets/bp-c.png">
     </div>
 	<div>
-		<h2>Blood Pressure:</h2>
+		<h2>BP:</h2>
 		<h2 id="bp">-</h2>
 	</div>
 	<div>

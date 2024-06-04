@@ -1,19 +1,22 @@
 <div class="measurement-container">
-	<h1>Measuring Oxygen Saturation Level</h1>
+	<h1>Measuring Oxygen Level</h1>
     <div>
-        <h3 id="instruction">Please place your middle finger on the pulse oximeter, then press the button to get a reading.</h3>
+        <h3 id="instruction">Please place your middle finger on the pulse oximeter, then press the measure button to get a reading.</h3>
         <img src="assets/oxyen-c.png">
     </div>
 	<form id="get_oxygen">
-		<button id="get_oxygen_button">Measure</button>
+		<button id="get_oxygen_button" style="display: none;">Measure</button>
 	</form>
 	<div id="oxygen_con" style="display: none;">
-		<h2>Oxygen Saturation Level:</h2>
+		<h2>Oxygen:</h2>
 		<h2 id="oxygen">-</h2>
 	</div>
 </div>
 <script>
     var params = <?php echo json_encode($_GET)?>;
+	setTimeout(function() {
+		$("#get_oxygen_button").show();
+	}, 2000);
     $('#get_oxygen').submit(function(e){
 		e.preventDefault()
 		$("#oxygen_con").show();
