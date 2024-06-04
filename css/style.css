@@ -787,6 +787,7 @@ button:hover {
     border-radius: 2rem 2rem 0 0 ;
     justify-items: start;
     align-items: center;
+    justify-content: center;
 }
 
 .card {
@@ -1040,6 +1041,11 @@ button:hover {
     #priority {
         font-size: 80%;
         margin-top: 4rem;
+        width: 76vw;
     }
+    .card {
+        width: 100%;
+    }
+
 }
 
