@@ -50,6 +50,12 @@
 <script>
     $(document).ready(function() {
         var params = <?php echo json_encode($_GET)?>;
+        $('#privacyLink').click(function(e){
+		    $('#dialog').css('display','block');
+        });
+        $('#closeDialog').click(function(e){
+		    $('#dialog').css('display','none');
+        });
         $('.policy-container').submit(function(e){
 		    e.preventDefault()
             location.href ='../pupclinic/index.php?page=registration&user='+params['user'];
