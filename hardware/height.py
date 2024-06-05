@@ -44,7 +44,7 @@ if __name__ == '__main__':
     GPIO.setup(GPIO_ECHO, GPIO.IN)
     ser = serial.Serial('/dev/ttyACM0', 9600)
     ser.flush()
-    time.sleep(2)
+    time.sleep(3)
     ser.write(b'w')
     weight_list = []
     height_list = []

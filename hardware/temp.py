@@ -23,7 +23,7 @@ while len(data) < 40:
 	print(targetTemp)
 	data.append(round(targetTemp,1))
 	time.sleep(.1)
-temp = statistics.mode(data) + 1
+temp = statistics.mode(data) + 1.7
 temp_str = str(temp)
 file = open("/var/www/html/pupclinic/hardware/data.txt", "w")
 file.write(temp_str)

@@ -17,10 +17,11 @@
         </select><br>
         <label for="email">Email</label>
         <input type="text" id="email" name="email" placeholder="Enter your email" required autocomplete="off"><br>
-        <button>Save</button>
+		<button type="submit" id="submit_button">Save</button>
     </form>
 </div>
 <script>
+	$(document).ready(function() {
     $('#register').submit(function(e){
         e.preventDefault()
         $.ajax({
@@ -33,9 +34,14 @@
             },
             success:function(resp){
                 if(resp == 1){
-		    location.href ='dashboard.php?page=landing_page';
+				console.log(resp)
+				location.href ='../pupclinic/dashboard.php?page=landing_page';
+                } else {
+                     alert("Registration failed");
+                     console.log(resp)
                 }
             }
         })
+    })
     })
 </script>
