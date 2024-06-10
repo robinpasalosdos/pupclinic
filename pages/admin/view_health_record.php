@@ -45,7 +45,7 @@
     <p><label for="bmi">BMI:</label><span><?php echo $record['bmi'] . " kg/m²"; ?></span></p>
     <p><label for="bp">Blood Pressure:</label><span><?php echo $record['bp'] . " mmHg"; ?></span></p>
     <p><label for="hr">Heart Rate:</label><span><?php echo $record['hr'] . " bpm"; ?></span></p>
-    <p><label for="rr">Respiratory Rate:</label><span><?php echo $record['rr'] . " %"; ?></span></p>
+    <p><label for="rr">Oxygen:</label><span><?php echo $record['rr'] . " %"; ?></span></p>
     <p><label for="temp">Temperature:</label><span><?php echo $record['temp'] . " °C"; ?></span></p>
 
     <div class="section-title"></div>
