@@ -179,7 +179,7 @@ if (isset($_SESSION['id']) && $_SESSION['id'] != ""){
                 <input type="text" id="hr" name="hr" value="<?php echo $heart_rate; ?>">
             </div>
             <div>
-                <label for="rr">RR:</label>
+                <label for="rr">Oxygen:</label>
                 <input type="text" id="rr" name="rr" value="<?php echo $oxygen; ?>">
             </div>
             <div>
