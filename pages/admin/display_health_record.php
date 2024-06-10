@@ -41,7 +41,7 @@ if (isset($_SESSION['id']) && $_SESSION['id'] != ""){
         <p><label for="bmi">BMI:</label><span><?php echo $_SESSION['bmi'] . " kg/m²"; ?></span></p>
         <p><label for="bp">Blood Pressure:</label><span><?php echo $_SESSION['bp'] . " mmHg"; ?></span></p>
         <p><label for="hr">Heart Rate:</label><span><?php echo $_SESSION['hr'] . " bpm"; ?></span></p>
-        <p><label for="rr">Respiratory Rate:</label><span><?php echo $_SESSION['rr'] . " %"; ?></span></p>
+        <p><label for="rr">Oxygen:</label><span><?php echo $_SESSION['rr'] . " %"; ?></span></p>
         <p><label for="temp">Temperature:</label><span><?php echo $_SESSION['temp'] . " °C"; ?></span></p>
 
         <div class="section-title"></div>
